@@ -8,4 +8,5 @@ Latest reference update: August 26, 2025.
 
 ## External links
 * [Suno](https://suno.com/)
-* [Reference copy on Notion](https://www.notion.so/dev-stayen/Suno-meta-tags-reference-August-26-2025-25b467b155508091958ce43145729df7)
+* [Producer (former Riffusion)](https://producer.ai/)
+* [Reference copy on Notion (no longer updated)](https://dev-stayen.notion.site/Suno-meta-tags-reference-232467b1555080f7b4c7cbc205265635)
