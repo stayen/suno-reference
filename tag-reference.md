@@ -1,6 +1,6 @@
 # Suno meta-tags
 
-Last modified: 2025, August 26.
+Last modified: 2025, September 14.
 
 ## Suno service news (updated: July 18, 2025)
 
@@ -171,6 +171,8 @@ And it works (the model starts with an instrumental intro then brings in vocals)
 
 ## Update for v4.5, v4.5+ and upcoming v4.6 (added: August 25, 2025)
 
+Starting with v4.5, the maximal "Style of Music" field length has been increased from 200 characters to 1000.
+
 ### New/confirmed tags
 
 New tags confirmed:
@@ -221,6 +223,18 @@ The tag **`[end]`** (intended to mark the song’s conclusion) exists, but commu
 **Improved Tag Prompt Parsing** – Suno v4.5 introduced a smarter prompt parser, which affects how tags are interpreted within more natural sentences. Users have noticed that they can **embed tags in a descriptive sentence** and v4.5 still gets it – something v4.0 struggled with. For example: _“The \[chorus\] should explode with \[anthemic\] harmonies and big drums.”_ In v4.0, that may have confused the model or caused it to sing the words, but v4.5 correctly reads those as tags (Chorus section; anthemic style). The outcome is that you don’t have to list tags stiffly on separate lines; you can mix them into a narrative prompt. The model’s better natural-language understanding means **tags can carry more context**. A Reddit user noted that steering the song with style tags _“is a lot better now \[in 4.5\]”_ and you can use more natural phrasing around them. This update doesn’t introduce new tags per se, but it _expands the way existing tags can be used_, allowing for creative prompt-writing that still yields the desired structured result.
 
 **“Control” Meta-Tag Enhancements** – The special `[control: ...]` tag (which sets high-level guidance) gained new community uses in v4.5. It’s not a new tag, but users started leveraging it for things like preventing repetition or encouraging experimental outputs. For example, Suno experts suggest using **`[control: hallucinatory]`** to coax the model into more free-form, improvised vocals/instrumentation (useful for ambient or avant-garde pieces where _“vocal hallucinations”_ and non-lexical vocals are desired). Another trick is **`[control: no-repeat]`**, which some have placed at the top of a prompt to tell v4.5 not to repeat sections or lines excessively. Similarly, values like _“dynamic transitions”_ or _“instrumental”_ can be put in the control tag to influence the overall composition (e.g. `[control: instrumental, no-repeat, dynamic transitions]`). These were not documented in older reference material, but after v4.5 users discovered the model does respond to certain keywords in a control tag. In short, **v4.5 expanded the _impact_ of the `[control:]` tag**, making it a catch-all for high-level directives (from structure handling to creative “weirdness”). This goes hand-in-hand with using descriptive style tags – v4.5’s tolerance for abstract or compound instructions opened up new possibilities to guide the AI with tags like **hallucinatory, surreal, cinematic, no-repeat**, etc., under the `[control]` umbrella.
+
+---
+
+# Style of Music/Lyrics restrictions
+
+Suno would refuse to render a track definition, if it finds, within "Style of Music" strings the service considers a protected trademarks, such as
+
+- "kraftwerk": use "krautrock" / "old school EDM" etc when describing the style/technique
+- "Orbis Mundi"
+- "skank": when defining the guitar play style, use "ska stroke" instead
+
+etc.
 
 ---
 
