@@ -1,6 +1,6 @@
 # Suno track definition templates
 
-Updated: 2025, September 14
+Updated: 2025, September 24
 
 To test:
 
@@ -25,6 +25,8 @@ As required by definition, length:
 
 - no more than 200 characters long for models v4.0 and earlier
 - no more than 1000 characters long for models v4.5 and above
+
+provide both unless requested otherwise.
 
 #### Lyrics
 
@@ -625,3 +627,733 @@ chant-driven rhythm with hypnotic repetition and non-linguistic syllables resemb
 [chant variation: multi-voice chant in stereo layers]
 [outro: all elements fade into a pulse-like cello tone]
 ```
+
+## 3. Background music (BGM) base templates
+
+### 1. Ambient / Drone (cinematic, evolving)
+
+**Makeshift title:** Soft Engine, Far Horizon
+
+#### Style of Music
+- **v5.0 (long):** Evolving cinematic-ambient bed: airy analog pads and granular textures drift in slow harmonic arcs; distant bowed tones and soft sub bloom every 16–32 bars; no hook—just depth, warmth, and movement that stays under dialogue.
+- **v4.x (short):** Evolving cinematic-ambient pads with subtle swells; warm, spacious underscore, no top-line.
+
+#### Lyrics (meta-tags)
+```
+[instrumental]
+[control: instrumental, no-repeat, dynamic transitions]
+[genre: ambient, cinematic-underscore]
+[style: minimal, evolving, wide, textural]
+[mood: calm, warm, contemplative]
+[instruments: analog-pads, granular-drones, bowed-textures, soft-sub, felt-piano-dust]
+[signal-processing: reverb, delay, chorus, saturation]
+[length: 300-360]
+[sequence: intro, bed A, lift, bed B, coda]
+
+[intro: soft fade-in; distant air; pad bloom from low mids]
+[bed A: slow harmonic drift; no lead; occasional granular sparkle]
+[lift: gentle density increase; bowed texture swells + soft-sub bloom]
+[bed B: slightly brighter pad voicings; widen image; keep dynamics restrained]
+[coda: long tail into near-silence; last pad held and thinned]
+[end]
+```
+
+#### Producer.ai (Riffusion / FUZZ-2.0) — Sound prompt
+A cinematic ambient bed of airy analog pads and granular drones; distant bowed textures, soft sub swells, felt-piano dust; evolving every 16–32 bars; no lead; dialog-friendly depth and warmth.  
+**Riffusion meta-controls (optional):**  
+- `influence_prompt: medium`  
+- `influence_lyrics: low` (we’re using tags only as scaffolding)  
+- `structure_hint: intro | bed A | lift | bed B | coda`
+
+#### Canvas loop (Spotify)
+- **Scene:** Slow aerial drift over a sunlit cloud sea.  
+- **Action:** Pads “breathe” as cloud shadows glide beneath.  
+- **FX:** Subtle parallax; faint grain; slow bloom pulses.  
+- **Palette:** Pearl white, soft teal, pale amber.  
+- **Style:** Minimal, meditative cinematography.  
+- **Loop idea:** Start mid-drift → subtle zoom forward → crossfade back to starting frame.
+
+#### First-frame still (cover art prompt)
+Aerial, sunlit cloudscape from above; gentle haze; soft film grain; wide negative space for text; mood: calm, contemplative; colors: pearl white, soft teal, pale amber.
+
+#### Bandcamp/Spotify blurb (poetic/meta)
+A bed that breathes like a distant engine—no destination, only horizons. Pads rise and fall in slow cycles, leaving enough air for memory and voice to carry.
+
+#### Why this fits (notes)
+- Starts with `[instrumental]` and control tags upfront so v5 does not invent vocals; this has higher adherence in v4.5/v5 than earlier versions. fileciteturn2file13L5-L11  
+- `[sequence]` placed right before sections to keep long-form cohesion and better Extend behavior. fileciteturn2file12L38-L41  
+- Uses confirmed tags only; avoids weak/obsolete ones like `[loop]` or `[mix]`. fileciteturn2file12L1-L14
+
+---
+
+### 2. Lo-fi Hip-Hop / Chillhop
+
+**Makeshift title:** Dust Warmth, Soft Steps
+
+#### Style of Music
+- **v5.0 (long):** Dusty chillhop bed with swung soft-kick/snare, low-passed Rhodes chords, nylon-guitar chops, vinyl haze and round sub; occasional muted mallet flourishes; loop-feeling phrases with gentle A/B variation; no hooky top-line.
+- **v4.x (short):** Dusty chillhop: Rhodes, vinyl haze, soft drums; warm, no top-line.
+
+#### Lyrics (meta-tags)
+```
+[instrumental]
+[control: instrumental, laid-back swing]
+[genre: lo-fi-hip-hop, chillhop]
+[style: dusty, warm, cozy]
+[mood: relaxed, nocturnal, mellow]
+[instruments: rhodes, nylon-guitar-chops, sub-bass, soft-kick, brushed-snare, muted-mallets]
+[signal-processing: saturation, light reverb, short delay]
+[length: 210-240]
+[sequence: intro, groove A, groove B, break, groove A2, outro]
+
+[intro: vinyl hiss + filtered rhodes; soft-kick enters late]
+[groove A: rhodes + nylon chops; brushed-snare; round sub; no lead]
+[groove B: add muted mallets + gentle chord extensions for lift]
+[break: drums thin; rhodes solo voicings; brief tape-stop wobble]
+[groove A2: original kit returns with subtle percussion layer and slightly brighter rhodes]
+[outro: filter down; leave vinyl hiss and a final rhodes tail]
+[end]
+```
+
+#### Producer.ai (Riffusion / FUZZ-2.0) — Sound prompt
+Dusty chillhop bed with swung soft-kick/snare, low-passed Rhodes, nylon-guitar chops, round sub, vinyl haze; A/B groove variation; relaxed and nocturnal; **no lead**—kept under voiceover.  
+**Riffusion meta-controls (optional):**  
+- `influence_prompt: medium-high`  
+- `influence_lyrics: low`  
+- `structure_hint: intro | groove A | groove B | break | groove A2 | outro`
+
+#### Canvas loop (Spotify)
+- **Scene:** Turntable close-up in lamplight.  
+- **Action:** Tonearm hovers; dust motes drift; subtle platter spin.  
+- **FX:** Light film grain; occasional tape-wobble.  
+- **Palette:** Sepia, umber, smoked blue.  
+- **Style:** Cozy, analog micro-cinema.  
+- **Loop idea:** Slow push-in to label → micro-wobble → reset to wider shot.
+
+#### First-frame still (cover art prompt)
+Warm desk lamp over a spinning vinyl, soft dust particles in beam; intimate, analogue vibe; shallow depth of field; sepia/umber/smoked-blue palette.
+
+#### Bandcamp/Spotify blurb (poetic/meta)
+A pocket of lamplight where the needle never quite lands—soft drums and Rhodes drift in a slow-swing loop that makes space for thought.
+
+#### Why this fits (notes)
+- Instrumental bed with soft transients and no lead; `[instrumental]` prevents v5 vocal bleed-through. fileciteturn2file13L5-L11  
+- Uses `[signal-processing]` for era feel (saturation/short delay), consistent with your tag reference. fileciteturn2file4L13-L29  
+- Sequence ensures gentle variation without hook repetition. fileciteturn2file12L38-L41
+
+---
+
+### 3. Piano Underscore (neo-classical / felt piano)
+
+**Makeshift title:** Quiet Room, Open Window
+
+#### Style of Music
+- **v5.0 (long):** Intimate felt-piano underscore with soft attack and legato phrasing; slow, breath-like dynamics and gentle pedal ambience; small, repeating motifs that evolve subtly every 16–32 bars; wide room reverb; no melody spotlight—supportive, narrative, voiceover-friendly.
+- **v4.x (short):** Intimate felt-piano bed; soft attack, legato phrasing; subtle motif shifts; supportive, VO-friendly.
+
+#### Lyrics (meta-tags)
+```
+[instrumental]
+[control: instrumental, no-repeat, dynamic transitions]
+[genre: neo-classical, underscore]
+[style: intimate, minimal, spacious]
+[mood: reflective, tender, calm]
+[instruments: felt-piano, soft-sub, room-reverb, subtle-mallets]
+[articulation: legato]
+[attack: soft]
+[length: 210-300]
+[sequence: intro, motif A, motif B, interlude, motif A2, coda]
+
+[intro: single soft notes; pedal ambience; room tone]
+[motif A: 2–4 note figure; slow left-hand underpin; no lead flourish]
+[motif B: slight harmonic color change; +hint of soft-sub for warmth]
+[interlude: thin texture; sparse voicings; hold space for narration]
+[motif A2: return to A with gentle variation (upper extension, lighter velocity)]
+[coda: decay into room; final chord fade; long tail]
+[end]
+```
+
+#### Producer.ai (Riffusion / FUZZ-2.0) — Sound prompt
+Intimate felt-piano underscore with soft attack, legato phrasing, gentle pedal ambience, and wide room reverb; small evolving motifs every 16–32 bars; **no lead spotlight**, voiceover-friendly depth and calm.  
+**Optional meta-controls:**  
+- `influence_prompt: medium-high`  
+- `influence_lyrics: low`  
+- `structure_hint: intro | motif A | motif B | interlude | motif A2 | coda`  
+- `duration: 210–300`
+
+#### Canvas loop (Spotify)
+- **Scene:** Morning light across a piano’s felt hammers.  
+- **Action:** Dust motes drift; keys depress slowly (macro).  
+- **FX:** Gentle bloom; soft grain.  
+- **Palette:** Warm cream, pale gold, muted walnut.  
+- **Loop idea:** Slow push-in to keys → micro-glint → dissolve back.
+
+#### First-frame still (cover art prompt)
+Macro of felt-piano hammers in warm morning light; shallow depth; soft grain; spacious negative area for text.
+
+#### Blurb
+A room that breathes in quarter notes—tiny motifs turning like pages, leaving silence wide enough for stories.
+
+---
+
+### 4. Minimal Piano + Strings (documentary bed)
+
+**Makeshift title:** Lines on the Map
+
+#### Style of Music
+- **v5.0 (long):** Documentary-friendly bed for felt-piano and light chamber strings; con-sordino-like softness, long legato lines, and subtle low percussion swells; gentle A/B texture shifts without a prominent lead; stable harmony with modest lifts; designed to sit under narration.
+- **v4.x (short):** Minimal felt-piano + soft chamber-strings; gentle lifts; no strong lead; documentary bed.
+
+#### Lyrics (meta-tags)
+```
+[instrumental]
+[control: instrumental, no-repeat, dynamic transitions]
+[genre: cinematic-underscore, documentary]
+[style: sparse, supportive, airy]
+[mood: warm, thoughtful, steady]
+[instruments: felt-piano, chamber-strings-con-sordino, warm-bass, soft-brush-kit, airy-pads]
+[articulation: legato]
+[attack: soft]
+[signal-processing: reverb, light saturation]
+[length: 240-330]
+[sequence: intro, bed A, lift, bed B, outro]
+
+[intro: piano + air; strings enter as a soft pad]
+[bed A: steady pulse from piano; strings long lines; no motif lead]
+[lift: add gentle low swell (warm-bass or soft-brush roll); +5–10% density]
+[bed B: same harmony with brighter voicing; maintain restraint]
+[outro: subtractive fade; piano tail + string harmonics]
+[end]
+```
+
+#### Producer.ai (Riffusion / FUZZ-2.0) — Sound prompt
+Minimal felt-piano and soft chamber strings (con-sordino character), gentle brush-kit rolls, warm bass swells; airy, supportive documentary bed with A/B texture shift and restrained lift; **no prominent lead**, narration-first mix.  
+**Optional meta-controls:**  
+- `influence_prompt: medium-high`  
+- `influence_lyrics: low`  
+- `structure_hint: intro | bed A | lift | bed B | outro`  
+- `duration: 240–330`
+
+#### Canvas loop (Spotify)
+- **Scene:** Archival map lines sliding beneath glass.  
+- **Action:** Slow pan; ink lines appear and fade.  
+- **FX:** Paper grain; light bloom.  
+- **Palette:** Bone white, graphite gray, desaturated teal.  
+- **Loop idea:** Pan left → slight zoom → reset to starting quadrant.
+
+#### First-frame still (cover art prompt)
+Archival paper map under soft glass reflection; clean typography space; bone/graphite/teal tones; quiet, factual mood.
+
+#### Blurb
+Measured steps across a page—piano tracing the route, strings holding the weather steady.
+
+---
+
+### 5. Cinematic Underscore (low percussion)
+
+**Makeshift title:** Quiet Faultline
+
+#### Style of Music
+- **v5.0 (long):** Quiet cinematic underscore centered on soft, low percussion pulses (taiko/frame/low-tom) beneath bowed drones and faint string/air textures; restrained, tension-to-release arcs; no thematic lead, only pressure changes, sub-blooms, and space—dialog-friendly and steady over time.
+- **v4.x (short):** Sparse cinematic bed with soft low-percussion pulses, bowed drones, subtle lifts; no lead.
+
+#### Lyrics (meta-tags)
+```
+[instrumental]
+[control: instrumental, no-repeat, dynamic transitions]
+[genre: cinematic-underscore, ambient]
+[style: sparse, atmospheric, restrained]
+[mood: tense, anticipatory, controlled]
+[instruments: low-tom, soft-taiko, frame-drum, sub-boom, bowed-drones, airy-strings, felt-piano-dust]
+[sfx: distant-wind-hum, room-tone]
+[signal-processing: long-reverb, light-saturation]
+[length: 270-330]
+[sequence: intro, bed A, rise, bed B, coda]
+
+[intro: air + bowed-drone; single distant drum pre-echo]
+[bed A: soft pulse (low-tom/frame); no motif; drones shift every 16–32 bars]
+[rise: +1 drum layer (soft-taiko rolls) and subtle sub-boom; keep dynamics under VO]
+[bed B: slightly brighter string voicings; widen image; maintain restraint]
+[coda: subtractive fade; leave air + distant harmonic]
+[end]
+```
+
+#### Producer.ai (Riffusion / FUZZ-2.0) — Sound prompt
+Quiet cinematic underscore of soft low-percussion pulses (taiko/frame/low-tom) under bowed drones and airy strings; restrained tension arcs, occasional sub-boom swells, no lead; dialog-friendly, steady pressure and space.  
+**Optional meta-controls:**  
+- `influence_prompt: medium-high`  
+- `influence_lyrics: low`  
+- `structure_hint: intro | bed A | rise | bed B | coda`  
+- `duration: 270–330`  
+- `seed: set for versioning`
+
+---
+
+### 6. Downtempo / Trip-hop
+
+**Makeshift title:** Smoke in the Halflight
+
+#### Style of Music
+- **v5.0 (long):** Moody downtempo bed with soft-kick + rimshot groove, brushed hats, round sub, filtered e-piano, muted analog synth phrases, and faint tape wobble; A/B texture shifts and a short break; no hooky topline—kept low and smoky for narration.
+- **v4.x (short):** Moody trip-hop bed: soft-kick/rim, filtered e-piano, round sub; A/B textures; no top-line.
+
+#### Lyrics (meta-tags)
+```
+[instrumental]
+[control: instrumental, laid-back swing]
+[genre: downtempo, trip-hop]
+[style: moody, understated, smoky]
+[mood: nocturnal, introspective]
+[instruments: filtered-epiano, muted-synth, round-sub, soft-kick, rimshot, brushed-hats, vinyl-hiss]
+[signal-processing: saturation, short-delay, plate-reverb, tape-wobble]
+[length: 210-270]
+[sequence: intro, groove A, groove B, break, groove A2, outro]
+
+[intro: filtered epiano + hiss; drums enter late]
+[groove A: soft-kick/rim; epiano chords; round sub; no lead]
+[groove B: add muted-synth phrases; tiny percussive garnish; keep level low]
+[break: thin drums; epiano alone with tape-wobble moment]
+[groove A2: original kit; slightly brighter epiano voicings; maintain restraint]
+[outro: filter down; leave hiss + last chord tail]
+[end]
+```
+
+#### Producer.ai (Riffusion / FUZZ-2.0) — Sound prompt
+Moody trip-hop/downtempo bed: soft-kick + rim groove, brushed hats, round sub, filtered e-piano chords, muted analog synth phrases, light tape wobble; A/B texture shift and brief break; **no top-line**, narration-first mix.  
+**Optional meta-controls:**  
+- `influence_prompt: medium-high`  
+- `influence_lyrics: low`  
+- `structure_hint: intro | groove A | groove B | break | groove A2 | outro`  
+- `duration: 210–270`  
+- `seed: set for versioning`
+
+---
+
+### 7. Deep / Chill House
+
+**Makeshift title:** Soft Shore Pulse
+
+#### Style of Music
+- **v5.0 (long):** Uncluttered deep/chill house bed with soft four-on-the-floor kick, airy pads, warm rounded bass, light chord stabs and shakers; gentle A/B textural shifts and a short breakdown; no topline hook—kept understated and voiceover-friendly.
+- **v4.x (short):** Minimal deep/chill house: soft 4-on-the-floor, airy pads, warm bass, light stabs; no topline.
+
+#### Lyrics (meta-tags)
+```
+[instrumental]
+[control: instrumental, no-repeat, dynamic transitions]
+[genre: deep-house, chill-house]
+[style: uncluttered, airy, understated]
+[mood: warm, relaxed, uplifting]
+[instruments: soft-kick-4onfloor, airy-pads, warm-bass, light-chord-stabs, shaker, soft-clap]
+[signal-processing: gentle-sidechain, chorus, delay, light-saturation]
+[length: 240-330]
+[sequence: intro, groove A, groove B, breakdown, groove A2, outro]
+
+[intro: filtered pads + soft noise; kick fades in late]
+[groove A: soft 4-on-the-floor; warm-bass; light chord stabs; no lead]
+[groove B: add airy top pad + subtle percussive sparkle; keep dynamics modest]
+[breakdown: kick drops; pads and bass breathe with sidechain feel; no new motif]
+[groove A2: original groove returns with slightly brighter chords; maintain restraint]
+[outro: gradual filter-down; leave pad tail]
+[end]
+```
+
+#### Producer.ai (Riffusion / FUZZ-2.0) — Sound prompt
+Minimal deep/chill house bed: soft 4-on-the-floor kick, airy pads, warm rounded bass, light chord stabs, gentle shaker and soft clap; short breakdown and A/B texture shift; **no topline**, narration-first mix.  
+**Optional meta-controls:**  
+- `influence_prompt: medium-high`  
+- `influence_lyrics: low`  
+- `structure_hint: intro | groove A | groove B | breakdown | groove A2 | outro`  
+- `duration: 240–330`  
+- `seed: set for versioning`
+
+---
+
+### 8. Liquid DnB (light)
+
+**Makeshift title:** Glass River Run
+
+#### Style of Music
+- **v5.0 (long):** Light, airy liquid DnB bed with soft rolling breaks, warm sub, shimmering pads, and gentle piano/keys washes; optimistic lift without big leads; A/B groove colors and a restrained rise; kept smooth under narration.
+- **v4.x (short):** Light liquid DnB: soft rolling breaks, warm sub, shimmer pads, airy piano; no strong lead.
+
+#### Lyrics (meta-tags)
+```
+[instrumental]
+[control: instrumental, no-repeat, dynamic transitions]
+[genre: liquid-dnb, drum-and-bass]
+[style: rolling, airy, optimistic]
+[mood: buoyant, smooth, spacious]
+[instruments: soft-breaks, warm-sub, shimmer-pads, airy-piano, subtle-arp, brushed-percussion]
+[signal-processing: light-reverb, short-delay, gentle-saturation]
+[length: 210-270]
+[sequence: intro, groove A, lift, groove B, outro]
+
+[intro: shimmer-pad + airy-piano hints; break filters in]
+[groove A: soft rolling break + warm-sub; pads float; no lead]
+[lift: add subtle-arp and slight chord brightness; +5–10% energy only]
+[groove B: keep break consistent; alternate pad voicings; maintain restraint]
+[outro: break filters down; pads linger; soft tail]
+[end]
+```
+
+#### Producer.ai (Riffusion / FUZZ-2.0) — Sound prompt
+Light, airy liquid DnB bed with soft rolling breaks, warm sub, shimmering pads, airy piano washes, and a gentle optimistic lift; A/B color shift; **no strong lead**, narration-friendly dynamics.  
+**Optional meta-controls:**  
+- `influence_prompt: medium-high`  
+- `influence_lyrics: low`  
+- `structure_hint: intro | groove A | lift | groove B | outro`  
+- `duration: 210–270`  
+- `seed: lock for iterations`
+
+---
+
+### 9. Indie-Folk Hush
+
+**Makeshift title:** Pine Needles & Porcelain
+
+#### Style of Music
+- **v5.0 (long):** Whisper-quiet indie-folk bed with delicate nylon/steel plucks, soft brush-kit, upright bass murmur, glockenspiel flickers, and hush-pads; intimate room tone, close-mic detail; subtle A/B texture changes and a modest lift; absolutely no vocal-like top-line—pure narrative support.
+- **v4.x (short):** Delicate indie-folk bed—plucked guitars, brush-kit, upright bass, glockenspiel; no top-line.
+
+#### Lyrics (meta-tags)
+```
+[instrumental]
+[control: instrumental, no-repeat, dynamic transitions]
+[genre: indie-folk, acoustic]
+[style: delicate, narrative, intimate]
+[mood: warm, wistful, calm]
+[instruments: nylon-guitar, light-steel-plucks, brush-kit, upright-bass, glockenspiel, hush-pads]
+[articulation: legato]
+[attack: soft]
+[signal-processing: room-reverb, light-saturation, subtle-tape]
+[length: 210-300]
+[sequence: intro, bed A, lift, bed B, outro]
+
+[intro: finger-noise + room tone; nylon-guitar enters solo]
+[bed A: nylon + brush-kit + upright-bass murmur; no lead; glock chimes sparingly]
+[lift: +hush-pads and gentle double-stop guitar; +5–10% energy only]
+[bed B: same harmony with brighter mic position; tiny percussive garnish]
+[outro: subtractive fade; last harmonic ring + room tail]
+[end]
+```
+
+#### Producer.ai (Riffusion / FUZZ-2.0) — Sound prompt
+Whisper-quiet indie-folk bed: nylon/steel plucks, soft brush-kit, upright bass murmur, sparse glockenspiel, hush pads; subtle A/B textures and a modest lift; **no vocal-like lead**, narration-first mix.  
+**Optional meta-controls:**  
+- `influence_prompt: medium-high`  
+- `influence_lyrics: low`  
+- `structure_hint: intro | bed A | lift | bed B | outro`  
+- `duration: 210–300`  
+- `seed: set for versioning`
+
+---
+
+### 10. Bossa-Lounge / Jazz Café
+
+**Makeshift title:** Quiet Sugar on the Rim
+
+#### Style of Music
+- **v5.0 (long):** Soft bossa-lounge bed with nylon-guitar comping, gentle ride-cymbal, brushed snare, upright bass walk in half-time feel, and warm Rhodes/keys; airy A/B color shift and short breakdown; relaxed, sun-lit, and firmly under narration with no soloistic top-line.
+- **v4.x (short):** Soft bossa-lounge: nylon-guitar, ride, brushes, upright bass, warm keys; no solo lead.
+
+#### Lyrics (meta-tags)
+```
+[instrumental]
+[control: instrumental, no-repeat, dynamic transitions]
+[genre: bossa-lounge, jazz-cafe]
+[style: smooth, understated, airy]
+[mood: relaxed, sunny, cozy]
+[instruments: nylon-guitar, upright-bass, ride-cymbal, brushed-snare, warm-keys, shaker]
+[articulation: legato]
+[attack: soft]
+[signal-processing: plate-reverb, gentle-saturation]
+[length: 240-330]
+[sequence: intro, groove A, groove B, breakdown, groove A2, outro]
+
+[intro: soft keys + shaker; nylon-guitar enters quietly]
+[groove A: nylon comping + upright walk; ride-cymbal light; no melodic lead]
+[groove B: Rhodes/keys add lush voicings; keep level modest]
+[breakdown: drums thin to ride + shaker; bass and guitar breathe]
+[groove A2: original groove returns with slightly brighter chords]
+[outro: plate tail; final nylon chord]
+[end]
+```
+
+#### Producer.ai (Riffusion / FUZZ-2.0) — Sound prompt
+Soft bossa-lounge / jazz café bed: nylon-guitar comping, upright bass, gentle ride + brushes, warm Rhodes/keys, light shaker; A/B texture shift with a short breakdown; **no solo top-line**, narration-first dynamics.  
+**Optional meta-controls:**  
+- `influence_prompt: medium-high`  
+- `influence_lyrics: low`  
+- `structure_hint: intro | groove A | groove B | breakdown | groove A2 | outro`  
+- `duration: 240–330`  
+- `seed: set for iteration control`
+
+---
+
+### 11. Synthwave / Chillwave Pads
+
+**Makeshift title:** Neon Tide Sleep
+
+#### Style of Music
+- **v5.0 (long):** Pad-centric synthwave/chillwave bed: wide chorus-pads, slow analog arps, warm rounded bass, and gentle noise-beds; dreamy, nostalgic drift with micro swells every 16–32 bars; no melodic topline—kept hazy and voiceover-friendly.
+- **v4.x (short):** Pad-led synthwave/chillwave: slow arps, warm bass, wide chorus-pads; no lead.
+
+#### Lyrics (meta-tags)
+```
+[instrumental]
+[control: instrumental, no-repeat, dynamic transitions]
+[genre: synthwave, chillwave]
+[style: nostalgic, dreamy, pad-centric]
+[mood: warm, nocturnal, reflective]
+[instruments: chorus-pads, slow-analog-arps, warm-bass, noise-bed, analog-keys, soft-hats]
+[signal-processing: chorus, delay, tape-saturation, plate-reverb]
+[length: 240-330]
+[sequence: intro, bed A, lift, bed B, outro]
+
+[intro: noise-bed + soft keys; pads fade in wide]
+[bed A: chorus-pads + warm-bass; slow-analog-arp tucked low; no lead]
+[lift: +brightness on pads and a second, slower arp layer; +5–10% density only]
+[bed B: alternate pad voicings; slightly wider image; maintain restraint]
+[outro: filter down; leave tape hiss + pad tail]
+[end]
+```
+
+#### Producer.ai (Riffusion / FUZZ-2.0) — Sound prompt
+Pad-centric synthwave/chillwave bed with wide chorus-pads, slow analog arps, warm rounded bass, and a gentle noise-bed; subtle lifts and A/B color; **no melodic topline**, narration-first dynamics.  
+**Optional meta-controls:**  
+- `influence_prompt: medium-high`  
+- `influence_lyrics: low`  
+- `structure_hint: intro | bed A | lift | bed B | outro`  
+- `duration: 240–330`  
+- `seed: set for consistent iterations`
+
+---
+
+### 12. Post-Rock Light
+
+**Makeshift title:** Lanterns in the Mist
+
+#### Style of Music
+- **v5.0 (long):** Gentle post-rock bed focused on clean guitar arpeggios, shimmer pads, soft tom pulses, and airy strings; gradual build and echo-fall without anthem-style peaks; emotive but restrained, leaving ample space under narration.
+- **v4.x (short):** Light post-rock: clean arpeggios, shimmer pads, soft toms; slow build; no big lead.
+
+#### Lyrics (meta-tags)
+```
+[instrumental]
+[control: instrumental, no-repeat, dynamic transitions]
+[genre: post-rock, cinematic]
+[style: gradual, emotive, restrained]
+[mood: hopeful, spacious, calm]
+[instruments: clean-guitars-arpeggio, shimmer-pads, soft-toms, warm-bass, airy-strings, subtle-mallets]
+[signal-processing: delay, reverb, light-saturation]
+[length: 270-360]
+[sequence: intro, build A, build B, echo-fall, outro]
+
+[intro: single guitar pattern + reverb tail; pads bloom quietly]
+[build A: add soft-toms and warm-bass; no lead; steady motion]
+[build B: +airy-strings and subtle-mallets; widen image; keep ceiling moderate]
+[echo-fall: subtract drums; let delays and pads trail; gentle harmonic afterglow]
+[outro: final guitar harmonics; long reverb tail]
+[end]
+```
+
+#### Producer.ai (Riffusion / FUZZ-2.0) — Sound prompt
+Light post-rock underscore with clean guitar arpeggios, shimmer pads, soft tom pulses, warm bass, and airy strings; gradual dual-stage build and echo-fall; **no anthem lead**, narration-friendly headroom.  
+**Optional meta-controls:**  
+- `influence_prompt: medium-high`  
+- `influence_lyrics: low`  
+- `structure_hint: intro | build A | build B | echo-fall | outro`  
+- `duration: 270–360`  
+- `seed: lock for version exploration`
+
+---
+
+### Template name
+
+#### Style of Music
+
+#### Lyrics
+
+---
+
+# Appendix A1. BGM Tag Kit (paste into `templates.*.md`)
+
+**Usage note:** Start every bed with `[instrumental]`. Keep controls compact; avoid weak/obsolete tags. Place `[sequence]` immediately before any section tags.
+
+### Common controls (safe defaults)
+```
+[instrumental]
+[control: instrumental, no-repeat, dynamic transitions]
+[mood: calm, warm]
+[length: 240-360]
+```
+
+### Safe instrument palettes by style (swap freely)
+- **Ambient/Drone:**  
+  `[instruments: analog-pads, granular-drones, bowed-textures, soft-sub, felt-piano-dust]`  
+  `[signal-processing: reverb, delay, chorus, saturation]`
+
+- **Lo-fi / Chillhop:**  
+  `[instruments: rhodes, nylon-guitar-chops, sub-bass, soft-kick, brushed-snare, muted-mallets]`  
+  `[signal-processing: saturation, light reverb, short delay, vinyl-hiss]`
+
+- **Piano Underscore (felt):**  
+  `[instruments: felt-piano, soft-sub, airy-strings, subtle-mallets]`  
+  `[articulation: legato] [attack: soft]`
+
+- **Minimal Piano + Strings (doc bed):**  
+  `[instruments: felt-piano, chamber-strings, soft-brush-kit, warm-bass]`  
+  `[style: sparse, supportive]`
+
+- **Cinematic Underscore (low percussion):**  
+  `[instruments: low-tom, soft-taiko, bowed-drones, airy-strings, sub-boom]`  
+  `[sfx: distant-wind-hum]`
+
+- **Downtempo / Trip-hop:**  
+  `[instruments: muted-synth, filtered-epiano, round-sub, soft-kick, rimshot, brushed-hats]`  
+  `[style: moody, understated]`
+
+- **Deep/Chill House:**  
+  `[instruments: soft-kick-4onfloor, airy-pads, warm-bass, light-chord-stabs, shaker]`  
+  `[style: uncluttered, no-topline]`
+
+- **Liquid DnB (light):**  
+  `[instruments: soft-breaks, warm-sub, airy-pianos, shimmer-pads]`  
+  `[style: rolling, optimistic]`
+
+- **Indie-Folk Hush:**  
+  `[instruments: nylon-guitar, glockenspiel, brush-kit, upright-bass, hush-pads]`  
+  `[style: delicate, narrative]`
+
+- **Bossa-Lounge / Jazz Café:**  
+  `[instruments: nylon-guitar, ride-cymbal, upright-bass, soft-keys]`  
+  `[articulation: legato]`
+
+- **Synthwave / Chillwave Pads:**  
+  `[instruments: chorus-pads, slow-arps, warm-bass, noise-bed]`  
+  `[signal-processing: chorus, delay, saturation]`
+
+- **Post-Rock Light:**  
+  `[instruments: clean-guitars-arpeggio, airy-strings, soft-toms, shimmer-pads]`  
+  `[style: gradual, emotive]`
+
+### Length ranges (by purpose)
+- Social/short form: `[length: 120-150]`  
+- Standard bed: `[length: 210-300]`  
+- Long ambience: `[length: 300-420]`
+
+### Sectioning scaffolds (pick one and customize)
+- **Simple bed:**  
+  ```
+  [sequence: intro, bed, lift, bed, outro]
+  ```
+- **A/B texture swap:**  
+  ```
+  [sequence: intro, bed A, bed B, bed A2, coda]
+  ```
+- **With break:**  
+  ```
+  [sequence: intro, bed A, break, bed B, outro]
+  ```
+
+---
+
+# Appendix A2. Extend-Safe Structure Cheat-Sheet (long ambiences, v5)
+
+**Goals:** predictable 4–7 min arcs; safe variation without “new song” pivots; dialog-friendly dynamics.
+
+### 1) “Breathing Bed” (gentle rise/fall)
+```
+[length: 300-420]
+[sequence: intro, bed A, lift, bed B, coda]
+
+[intro: soft fade; low-mid pads only]
+[bed A: slow harmonic drift; no lead]
+[lift: +10–15% density; add one new layer (bowed texture / light percussion bloom)]
+[bed B: maintain lift elements; slightly brighter voicings or widened image]
+[coda: subtractive fade; leave tail + noise/air]
+[end]
+```
+**Why it extends well:** one additive “lift” only; B mirrors A with tiny timbre shift; safe for repeated Extend without motif creep.
+
+### 2) “A/B Textures” (color change, same harmony)
+```
+[length: 300-390]
+[sequence: intro, bed A, bed B, bed A2, outro]
+
+[intro: filtered source; establish space]
+[bed A: primary texture set]
+[bed B: swap pad engine (chorus vs granular), keep harmony + rhythm identical]
+[bed A2: return to A with micro-variation (extra shimmer / gentle sub bloom)]
+[outro: long tail; no new content]
+[end]
+```
+**Why it extends well:** alternation provides variety without new themes; A2 signals “return,” aiding coherence.
+
+### 3) “Bed + Break” (brief negative space)
+```
+[length: 300-360]
+[sequence: intro, bed, break, lift, bed, coda]
+
+[break: drums thin OR pads filter down; keep low noise-floor so it doesn’t feel like a cut]
+[lift: re-introduce elements with +1 layer only]
+```
+**Why it extends well:** the break resets ear fatigue; the single-step lift avoids runaway climaxes on repeated Extend.
+
+### General do/don’t for Extend
+- **Do:** one new element per lift, small imaging changes (wider/narrower), filter moves, velocity softening.  
+- **Don’t:** introduce strong leads, hard hits, or new chord vocab after the first minute.  
+- **Keep:** `[control: dynamic transitions]`, and finish each section with a tail so Extend seams hide in reverb.
+
+---
+
+# Appendix B. Producer.ai (Riffusion FUZZ-2.0) Side-by-Side Workflow
+
+### When to prefer **Suno v5.0**
+- You need **strict instrumental control** (no surprise vocals).  
+- You rely on **[sequence]** semantics and long-form cohesion.  
+- Persona/cover workflows (Producer.ai lacks Persona; Suno wins for persona-amplified styles).
+
+**Suno quick spec**
+- Start with `[instrumental]`, place controls first.  
+- `[sequence]` immediately before sections; keep one additive “lift.”  
+- Avoid unsupported/noisy tags (no `[bpm]`, no `[language]`).
+
+### When to prefer **Producer.ai (FUZZ-2.0 / Raw)**
+- You want **fast textural variation** from the same prompt.  
+- You need **phrasal groove** beds (lo-fi, house, dnb) with quick A/B alternates.  
+- You’re doing **dual-service fishing** (generate in both and pick the cleaner bed).
+
+**Producer.ai baseline settings (beds)**
+- **Sound prompt:** (use the same “long” Style-of-Music line you give Suno; explicitly say “no lead / dialog-friendly”).  
+- **Meta-controls (if available):**  
+  - `influence_prompt: medium–high`  
+  - `influence_lyrics/tags: low` (or omit)  
+  - `structure_hint:` mirror your Suno sequence names (`intro | bed A | lift | bed B | coda`)  
+  - `duration:` 180–360 s  
+  - `seed:` set if you’ll version-hunt
+
+### Re-render / pick criteria (A/B selection)
+1) **Noise floor & transients**  
+   - Reject if hiss/crackle overtakes quiet passages (unless intended lo-fi).  
+   - Prefer soft transients (no sudden spikes that fight VO).
+
+2) **Midrange congestion (1–3 kHz)**  
+   - Prefer mixes that leave space for voice; avoid pokey leads or harsh pads.
+
+3) **Section clarity**  
+   - You should “hear” the sequence markers (A → lift → B) without new themes appearing.
+
+4) **Loop/Extend seams**  
+   - Prefer versions with long tails and steady ambiences; seams should hide naturally.
+
+5) **Persona/brand fit**  
+   - If bed carries subtle vocal-like formants, choose Suno for tighter suppression; otherwise Producer.ai can bring nice grit.
+
+### Dual-service recipe (practical)
+- **Step 1:** Draft once (Suno tags + long Style text).  
+- **Step 2:** Render in **Suno v5.0** + **Producer.ai FUZZ-2.0**.  
+- **Step 3:** Rate 1–5 on: *VO space, dynamics smoothness, section clarity, ear-fatigue (5-min listen).*  
+- **Step 4:** If neither passes, **reduce elements** (drop a layer, lower “lift” intensity) and re-render both with the same seed (Producer.ai) or same tags (Suno).  
+- **Step 5:** Archive winner + exact text/controls for reproducibility.

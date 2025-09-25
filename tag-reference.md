@@ -1,8 +1,14 @@
 # Suno meta-tags
 
-Last modified: 2025, September 14.
+Last modified: 2025, September 24.
 
-## Suno service news (updated: July 18, 2025)
+## Suno service news (updated: September 24, 2025): model v5.0
+
+Starting from September, Suno began deploying version 5.0 of their model.
+
+The model is richer in polyphony, in vocals implementations and better implements the in-tag instructions.
+
+## Suno service news (updated: July 18, 2025): model v4.5+
 
 On 18-th of July Suno has released for paid subscriptions, access to a new model, "v4.5+"
 
