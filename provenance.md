@@ -787,17 +787,17 @@ Use case: anyone who got the file from your Bandcamp/site (or who you sent the f
 
 2) **MP3/MP4 (and any container)**: publish a **per-stream hash** computed by FFmpeg so others can verify the audio content independent of container metadata. Two reliable options:
    - **hash/streamhash muxer** (one hash per stream):
-     ```bash
+   ```bash
      # Hash the audio stream (sha256) regardless of container:
      ffmpeg -i video.mp4 -map 0:a:0 -f hash -hash sha256 -
      # or:
      ffmpeg -i track.mp3 -map 0:a:0 -f streamhash -hash sha256 -
-     ```
+   ```
      (Produces one stable hash for that audio stream.)
    - **framemd5** (hash of decoded frames, timestamps ignored), useful when you need “decoded-audio” equality:
-     ```bash
+   ```bash
      ffmpeg -i track.mp3 -map 0:a:0 -f framemd5 -
-     ```
+   ```
      (This outputs many lines—store or re-hash the output if you want a single digest.)
 
 Publish the essence hash(es) on the track’s provenance page; anyone can compute the same from any copy (e.g., a re-muxed MP4) to prove it’s the same audio.
@@ -854,22 +854,18 @@ command -v jq >/dev/null 2>&1 || echo "Note: jq not found; JSON sidecar updates 
 command -v ffprobe >/dev/null 2>&1 || echo "Note: ffprobe not found; encoder tag may be unavailable." >&2
 
 json_put() {
-  # json_put "key.path.like.this" "value"
+  # json_put "dot.path.like.this" "value"
   local key="$1" value="$2"
   [[ -z "$JSON" ]] && return 0
   command -v jq >/dev/null 2>&1 || return 0
   [[ -f "$JSON" ]] || echo '{}' > "$JSON"
-  local tmp
-  tmp="$(mktemp)"
-  # Set nested keys with jq
-  jq --arg v "$value" '
-    def setpathstr($p; $v):
-      ( $p | split(".") ) as $keys
-      | (reduce range(0; $keys|length) as $i
-          (.; if $i < $keys|length-1 then .[$keys[$i]] //= {} else . end))
-      | .[$keys[-1]] = $v
-    ;
-    setpathstr("'"$key"'"; $v)
+  local tmp; tmp="$(mktemp)"
+
+  # Use setpath() with a path-array, and parse JSON values when possible.
+  jq --arg p "$key" --arg v "$value" '
+    def tokeys: split(".");
+    def maybe: (try ($v|fromjson) catch $v);
+    setpath( ($p|tokeys); maybe )
   ' "$JSON" > "$tmp" && mv "$tmp" "$JSON"
 }
 
@@ -1029,3 +1025,150 @@ done
 (Uses **schema.org/MusicRecording** with `isrcCode`; extra details go into `additionalProperty` when there’s no native property.)
 
 ---
+
+## Appendix A. Whatever is left
+
+### What to add (concise)
+
+- **Immutable “golden master” storage.** Keep the final WAV (and canonical MP3/MP4) in **S3 with Object Lock** + versioning (WORM), and note that on the provenance page. Add a short “Storage” subsection that lists the bucket name, retention policy, and object version IDs.
+- **Content-addressed mirrors.** Optionally pin the master(s) to **IPFS** and publish **CIDv1** values on the provenance page (CIDs change if content changes, so they’re self-verifying).
+- **Explicit loudness extraction recipe.** You already write LUFS/LRA/TP into the sidecar via `make-hashes.sh`; add the one-liner of how the numbers are computed (FFmpeg `loudnorm` with `print_format=json`) so others can reproduce.|
+- **Validation tools callouts.** Add a tiny “Validate” box that points to BWF MetaEdit rules (bext/INFO/aXML) and a reminder to run a quick `mediainfo --Output=JSON` on deliverables.
+- **UFID/UMID pointers.** You already mention UMID/FILE_UID and UFID; keep that “unique IDs” line prominent for cross-linking to MusicBrainz later.
+- **Essence-hash recap.** In the “What to checksum” section, add a one-sentence rationale that **per-stream hashes verify audio across remuxes** (e.g., MP3 inside MP4), and keep the CLI you’ve got.
+
+### Step-by-step: from sidecar → deliverables → publish (drop-in checklist)
+
+1) **Fill the sidecar basics** (title, ISRC, version/date, human/AI notes, tools, provenance URL). You already show a clean example. 
+2) **Render the WAV master** and embed BWF:  
+   - `bext.Description` (1-line headline) + **loudness fields** if measured; `Originator`, `OriginatorReference`, date/time; append **CodingHistory**; optional UMID. 
+   - Add **iXML** (NOTE / FILE_UID) and optional **aXML with EBUCore** (human/AI split, tools, rights, provenance locator). 
+3) **Generate MP3** (ID3v2.3 for compatibility) and write credits: TIT2/TPE1/TALB/TSRC/etc., short **COMM**, and **TXXX** for `AI_Involvement`, `Provenance_URL`, `Tools`. Then normalize artwork to a single APIC. (You’ve got commands + the 2-pass eyeD3 fix.) 
+4) **Generate static-art MP4** from MP3 + image as you do; you don’t need extra tags here—stream hashes will prove equivalence.  
+5) **Run the fused script** to populate checksums + loudness + encoder info into the sidecar:  
+ ```bash
+   ./make-hashes.sh --bwf-embed -j track.meta.json track.wav track.mp3 video.mp4
+ ```  
+   (It writes file SHA-256, FFmpeg **streamhash/hash**, **EBU R128** loudness via `loudnorm`, and MP3 encoder tag.) 
+6) **Publish the provenance page** with the **JSON-LD MusicRecording** block and the visible table (you already have both). Include: LUFS/LRA/TP, file hashes, and **audio-stream SHA-256** so others can verify audio across containers. 
+7) **Archive the masters immutably** and **mirror by content**:  
+   - Upload to S3 with **Object Lock** (retention N years). Record **object version IDs** on the page. 
+   - Optionally add an **IPFS CIDv1** line to the page. (Any change ⇒ new CID.) 
+8) **Platform notes (quick copy-blocks):** you already include tight credit snippets for **DistroKid/Spotify, SoundCloud, Bandcamp, YouTube**—keep those as macros in your kit. 
+
+### Small content tweaks I’d apply to your doc
+
+- In the **WAV mapping** bullets, explicitly say “store **audio-data MD5** in bext `<MD5 >` for essence integrity” (you mention it later; restate once near the top). 
+- In **MP3 mapping**, add **TSSE** (encoder/settings) to “often-missed” fields; you already hint at encoder capture in the script. 
+- In the **hashes** section, add a single line: “Decoded-audio equality: `-f framemd5` if you need frame-level proof” (already shown) so readers see the hierarchy: file SHA-256 → stream SHA-256 → frameMD5. 
+- At the end of the **provenance page** section, suggest pasting the **S3 URI + object version** and optional **IPFS CID**. 
+
+### One more mini-section you could add verbatim
+
+**Validate & Reproduce (1 minute)**  
+- **WAV/BWF**: Open in **BWF MetaEdit** → check bext/iXML/aXML + “MD5 stored vs evaluated” passes. (Use the FADGI ruleset.) 
+- **MP3/MP4**: `ffprobe -show_entries format_tags=encoder` to confirm encoder; `ffmpeg -map 0:a:0 -f streamhash -hash sha256 -` should match the stream hash published. 
+- **Loudness**: rerun `loudnorm ... print_format=json` to reproduce LUFS/LRA/TP.
+
+## Appendix B. In more details
+
+### Storage & Immutability (Golden Masters)
+
+**Goal:** keep your final WAV (and canonical MP3/MP4) immutable and independently verifiable.
+
+- **S3 Object Lock (WORM):** store masters in an S3 bucket with Object Lock + versioning enabled; choose **Governance** (easier overrides) or **Compliance** (unalterable until retention expires). Record bucket, retention mode, and *object version IDs* on the provenance page. 
+- **Replicated vault:** optionally enable **S3 Replication** to a second region/bucket that also has Object Lock, so retention metadata travels with objects. 
+- **Content-addressed mirror (optional):** pin the same masters to **IPFS** and publish the **CIDv1** values on the provenance page (any bit change ⇒ new CID). 
+
+> **Publish on the track page:**  
+> - S3 URI + object **VersionID**  
+> - (Optional) IPFS **CIDv1**  
+> - File SHA-256, audio **streamhash** SHA-256 (see “Fixity & Essence”)
+
+---
+
+### Fixity & Essence (What to Hash)
+
+- **File fixity (distribution files):** publish **SHA-256** for your WAV/MP3/MP4 deliverables; this proves the exact file bytes weren’t altered.  
+- **Audio essence (container-agnostic):** publish a **per-stream SHA-256** on the first audio stream using FFmpeg’s `streamhash` muxer—lets anyone verify the audio content even after remuxing (e.g., MP3 → MP4).  
+```
+  # file hashes
+  sha256sum track.wav track.mp3 video.mp4
+
+  # audio-essence hash for an MP3 or MP4 (first audio stream)
+  ffmpeg -v error -i track.mp3 -map 0:a:0 -f streamhash -hash sha256 -
+  ffmpeg -v error -i video.mp4 -map 0:a:0 -f streamhash -hash sha256 -
+```  
+  FFmpeg’s `streamhash` computes a cryptographic hash per stream specifically for equality checks. 
+- **WAV/BWF audio-data MD5:** embed & verify the **<MD5 >** chunk (PCM-only) with BWF MetaEdit; page can note “MD5 stored vs evaluated = OK”. 
+
+---
+
+### Loudness & Encoder Notes (Reproducible)
+
+Add a short “How measured” paragraph to each provenance page and store the numbers in your sidecar.
+
+- **Integrated LUFS, LRA, Max True Peak (dBTP):**
+```bash
+  ffmpeg -hide_banner -i track.wav \
+    -filter:a loudnorm=I=-23:LRA=7:TP=-1.0:print_format=json \
+    -f null - 2>&1 | awk 'BEGIN{p=0}/^{/{p=1} p{print}/}/{if(p){exit}}'
+```
+  Parse `measured_I`, `measured_LRA`, `measured_tp` (or `input_*` on some builds). Values come from FFmpeg’s EBU R128 **loudnorm** filter. 
+- **MP3 encoder note:**
+```bash
+  ffprobe -v error -show_entries format_tags=encoder \
+          -of default=nw=1:nk=1 track.mp3
+```
+  (Typical: `LAME3.100`.) Use this as the base of your `encoder_note`. 
+
+---
+
+### WAV/BWF Embedding (Core Mapping)
+
+- **bext:** `Description`, `Originator`, `OriginatorReference`, `OriginationDate/Time`, append **CodingHistory**, and (optionally) **UMID**; maintain with **BWF MetaEdit**.  
+- **iXML:** put a concise provenance NOTE and a **FILE_UID**;  
+- **aXML (EBUCore):** store structured provenance (human vs AI roles, tools), rights, and a **locator** to your provenance URL.  
+BWF MetaEdit implements FADGI’s embedding/validation guidance and supports bext, iXML, and aXML editing. 
+
+---
+
+### One-Pass Workflow (from sidecar → deliverables → publish)
+
+1) **Complete sidecar basics:** title, version/date, ISRC/UPCs, human/AI disclosure, tools, provenance URL.  
+2) **Master WAV** and embed BWF metadata (bext/INFO + iXML; optional aXML/EBUCore). Use BWF MetaEdit; enable **Evaluate/Embed MD5 for audio data**. 
+3) **Make MP3** and **static-art MP4** (your existing ffmpeg commands).  
+4) **Populate hashes + loudness + encoder** into the sidecar in one step:
+ ```bash
+   ./make-hashes.sh --bwf-embed -j track.meta.json track.wav track.mp3 video.mp4
+ ```
+   (Writes file SHA-256, FFmpeg **streamhash**, **loudnorm** LUFS/LRA/TP, and MP3 encoder.) 
+5) **Publish the provenance page** with:  
+   - LUFS/LRA/TP values and “How measured” note (FFmpeg **loudnorm** JSON). 
+   - File SHA-256 and **audio streamhash** (so others can verify audio across containers). 
+   - S3 **VersionID** and optional IPFS **CIDv1**. 
+
+---
+
+### Validate (60 seconds)
+
+- **WAV/BWF:** open in **BWF MetaEdit**; confirm bext/iXML/aXML fields; “MD5 stored vs evaluated” passes. (FADGI help docs describe these checks.) 
+- **MP3/MP4:**  
+  - Encoder tag: `ffprobe -show_entries format_tags=encoder` (MP3). 
+  - Essence equality: `ffmpeg -map 0:a:0 -f streamhash -hash sha256 -` should match your published value. 
+- **Spot-check loudness:** rerun the **loudnorm** command; numbers should match the page. 
+
+---
+
+### Platform-Facing Credit Snippets (drop-in)
+
+- **Short (universal):**  
+  `Lyrics/vocals: human. AI assistance: arrangement & sound design (no impersonations). Tools: [DAW], [Generators].`
+
+- **Long (Bandcamp/YouTube desc):**  
+  `Human sources: live vocals, hand-played MIDI. AI assistance: drum/pad ideation; re-performed & mixed by [Name]. No voice cloning; no copyrighted samples. Mastering: [tool/engineer]. More: [provenance URL]`
+
+*(These mirror the transparency trend and can later map to formal AI-credit fields.)*
+
+---
+
