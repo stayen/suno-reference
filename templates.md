@@ -1,6 +1,6 @@
 # Suno track definition templates
 
-Updated: 2025, September 24
+Updated: 2025, October 21
 
 To test:
 
@@ -18,6 +18,8 @@ Note: [length: 180] is a generic length (3 minutes), suitable for most situation
 [length: 360] is a good standard for v4.5 large-scale pieces, uch as ambient instrumentals.
 
 For actual songs the length should be set to lesser values to avoid provoking engine to duplicate verses.
+
+For v4.5 and higher, try the following factors first: audio 45% (if any), style 50%, weirdness 55%. Drop weirdness below 4% if the AI produces too chaotic an output.
 
 #### Style of Music
 
@@ -628,6 +630,1294 @@ chant-driven rhythm with hypnotic repetition and non-linguistic syllables resemb
 [outro: all elements fade into a pulse-like cello tone]
 ```
 
+## 2. Vocal + Noisy beats fusions
+
+Typically, highly rich and hallucinogenic results.
+
+# A. Vocal traditions to sample as “source DNA”
+- **Isicathamiya / Mbube (SA Zulu male choirs).** Tight, soft-footed a cappella stacks popularized by Ladysmith Black Mambazo. Great for call-and-response hooks and bass drones.
+- **Georgian polyphony (3-part, regional variants).** Rugged, clustered chords that sit beautifully against sub-bass.
+- **Bulgarian women’s diaphony.** Bright, dissonant, “open-throat” harmonies—instant otherworldly color.
+- **Sardinian “cantu a tenore”.** Four-man circle singing with guttural bass/contra parts—perfect for low drone layers.
+- **Corsican “paghjella”.** Three fixed entries (segonda→bassu→terza); echo-rich, a cappella textures.
+- **Inuit throat singing (katajjaq).** Duo, antiphonal, percussive breaths—works as rhythmic top-line.
+- **Tuvan throat singing (khöömei/kargyraa).** Overtone whistles and subharmonic growls—thick spectral beds.
+- **Sacred Harp / shape-note.** Loud, communal four-part “hollow square”—raw, driven block chords. 
+- **Gregorian/plainchant.** Monophonic, modal, unaccompanied—clean lines that survive heavy processing. 
+- **Kulning (Nordic herding calls).** High-piercing, ornamented shouts that cut through dense mixes. 
+- **Qawwali (Sufi).** Lead + chorus, claps, harmonium/tabla—ecstatic build architecture for drops. 
+
+# B. Grit/engine genres to “carry” or stress the vocal source
+- **Phonk / drift phonk.** Memphis rap sampling, chopped/screwed; drift phonk adds cowbell + fast swing. 
+- **UK Drill.** Sliding 808s, triplet snare science, dark pads. 
+- **Grime (≈140 BPM).** Jagged, syncopated breakbeats; MC-forward, but works instrumental. 
+- **Footwork/Juke (≈160 BPM).** Chopped vox, rapid syncopation—great for “vocal as percussion.” 
+- **Gqom.** Minimal, dark broken-beat house from Durban; hypnotic club churn. 
+- **Amapiano.** Log-drum bass hooks + mellow keys; can host choirs elegantly. 
+- **Industrial / Noise / Breakcore / Gabber.** From metallic rhythm and harsh textures to 160–220 BPM break mayhem and distorted kicks—maximal stress tests for choral timbres. 
+
+---
+
+1) **Isicathamiya × Phonk** (your Urban Zulu baseline)  
+   `[genre: phonk, zulu-choral] [instruments: 808, cowbell, tape-hiss] [vocals: male choir, bass drone, call-response] [tempo: medium-fast drift]`. 
+
+2) **Georgian Polyphony × UK Drill**  
+   Layer triads over sliding-808 patterns; use drone bass as “Kakheti-style” bed.  
+   `[genre: drill, world-choral] [vocals: male trio stacked, close intervals] [mood: grim, heroic]`. 
+
+3) **Bulgarian Diaphony × Grime (140)**  
+   Bright clustered female chords punching through jagged breaks.  
+   `[genre: grime, experimental-choral] [tempo: 140] [vocals: female diaphonic ensemble, sharp]`. 
+
+4) **Sardinian Tenore × Gqom**  
+   Circle-sung bassu/contra as sub-hook over minimal Durban thump.  
+   `[genre: gqom, folk-choral] [vocals: male quartet, guttural bass] [instruments: broken-beat kit, sweep FX]`. 
+
+5) **Corsican Paghjella × Footwork**  
+   Three-voice entries chopped at 160 BPM as rhythmic vox hits.  
+   `[genre: footwork, a-cappella-edits] [tempo: 160] [vocals: male trio, echo chamber]`. 
+
+6) **Inuit Katajjaq × Breakcore**  
+   Breath/percussive duels stutter-granular over Amen edits.  
+   `[genre: breakcore, experimental-vocal] [tempo: 180] [vocals: throat-duet, inhaled/exhaled pulses]`. 
+
+7) **Tuvan Khöömei/Kargyraa × Industrial**  
+   Subharmonic growls as machine-room pedal tones; metal hits on offbeats.  
+   `[genre: industrial, drone-choir] [vocals: overtone + kargyraa] [mood: tectonic]`. 
+
+8) **Sacred Harp (Shape-Note) × Drill**  
+   Blunt four-part shouts as chorus stabs over triplet snares.  
+   `[genre: drill, folk-choral] [vocals: mixed choir, loud, hollow-square] [structure: verse/chorus call-response]`. 
+
+9) **Gregorian Plainchant × Phonk (slowed)**  
+   Monophonic Latin lines through tape saturation & chopped cowbells.  
+   `[genre: phonk, chant] [vocals: unison male chant, melismatic tails] [tempo: slow-mid]`. 
+
+10) **Kulning Calls × Footwork/Juke**  
+   Piercing calls sliced into syncopated vocal riffs at 160.  
+   `[genre: footwork, nordic-folk] [vocals: kulning shouts, ornamented] [tempo: 160]`. 
+
+11) **Qawwali Chorus × Gqom**  
+   Handclaps + harmonium drones into dark, minimal club cycles.  
+   `[genre: gqom, sufi-fusion] [vocals: lead qawwal + response chorus] [instruments: harmonium, tabla one-shots]`. 
+
+12) **Bulgarian Diaphony × Noise**  
+   Sustained clustered chords into feedback & granular haze.  
+   `[genre: noise-ambient, folk-choral] [vocals: dissonant female choir] [effects: granular, feedback beds]`. 
+
+13) **Georgian Polyphony × Gabber**  
+   Stacked male triads punctuating distorted 170+ kicks (drop sparingly).  
+   `[genre: gabber, chant-core] [tempo: 170-190] [vocals: three-part men, bass pedal]`. 
+
+14) **Tenore (bassu/contra) × Amapiano**  
+   Log-drum mirrors bassu; mesu boghe floats with Rhodes chords.  
+   `[genre: amapiano, pastoral-choral] [vocals: male quartet, guttural bass] [instruments: log-drum, keys]`. 
+
+15) **Isicathamiya × Grime**  
+   Whisper-step harmonies over 140 break syncopation; verse MC optional.  
+   `[genre: grime, zulu-choral] [vocals: soft male choir, bass hums]`. 
+
+16) **Plainchant × Industrial**  
+   Free-time chant phrases “reamped” into metallic room impulses.  
+   `[genre: industrial-ambient] [vocals: monophonic chant, long tails] [sfx: factory resonance]`. 
+
+17) **Qawwali × Footwork**  
+   Taans (fast vocal runs) granulated into vocal percussion at 160.  
+   `[genre: footwork, sufi-fusion] [vocals: lead + hamd/naat refrains]`. 
+
+18) **Inuit Katajjaq × Gqom**  
+   Duo breathing games as lead rhythm against Durban broken beat.  
+   `[genre: gqom, arctic-voices] [vocals: percussive throat duet]`. 
+
+### 1. Urban Zulu
+
+isicathamiya + phonk fusion.
+
+With Wilds sisters, Kamaskera Kamadan, Kroot Udnakoe, Alice Payne: 45%+ chance of vocal hallucinations in v4.0, less in 4,.5 and higher, rich vocalization
+
+#### Style of Music
+
+Isicathamiya phonk where male choir and vinyl samples create parallel harmony, Four-part 'close harmony' over 808 bass
+
+#### Lyrics
+
+```
+[control: homorhythmic]
+[mood: urban, spiritual]
+[genre: phonk, isicathamiya]
+[length: 210]
+[compression: light]
+[instruments: male-choir, vinyl-samples, 808-bass]
+[vocals: female ghost vocals, vocal hallucinations]
+[polyphony: four-voice]
+[technique: parallel]
+[sequence: call, response, climax, resolve]
+[call: Tenor lead with 808 kick on strong beats]
+[response: Alto/baritone/bass in parallel 4ths/5ths]
+[climax: Vinyl scratches emulate pennywhistle fills]
+[resolve: Plagal cadence with sub-bass pedal]
+[end]
+```
+
+#### Status
+
+Rendered and tested
+
+---
+
+### 2. Iron Ridge Polyphony
+
+Georgian Polyphony × UK Drill
+
+Note: 50% of vocal hallucinations in v4.5
+
+#### Style of Music (≤200 chars)
+Three-part Georgian male polyphony over sliding-808 UK drill: stacked close intervals, pedal-tone bass, sparse bells, cold pads, triplet hats; tape haze; ghost phrases teased, no literal lyrics; 140 BPM.
+
+#### Style of Music (≤1000 chars)
+Austere UK drill framework fused with rugged three-part Georgian polyphony. Sliding 808 sub anchors a pedal-tone bass while close-interval male harmonies form clustered, heroic blocks. Drums emphasize triplet hat science, woodblock/perc flickers, and low-swing snares at 140 BPM. Pads stay wintry and distant; a few bell stings cue drops. Tape wow/flutter and light granular bloom introduce spectral smearing to encourage soft “unknown-language” vocal emergence without explicit lyrics. Arrangement favors call/answer chords, sustained pedal tones, and clipped motif cues that Suno can reassemble into chant-like hooks. No rap verse needed—voice is “choir-as-lead.”
+
+####  Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: uk drill, world-choral, experimental-hiphop]  
+[mood: grim, stoic, heroic]  
+[tempo: 140bpm]  
+[length: 180-210s]  
+[instruments: 808 sub (sliding), triplet hats, woodblocks, sparse bells, cold pads, tape-hiss]  
+[vocals: male trio georgian-style, close intervals, bass drone pedal, ghost adlibs (non-lexical)]  
+[key: D minor, modal inflections]  
+[time_signature: 4/4]  
+[weirdness: 60]  
+[audio_weight: 45]
+[style_weight: 50]
+
+[sequence: intro, verse, build, drop, verse, break, drop, outro]  
+[intro]  
+[verse]  
+[build]  
+[drop]  
+[verse]  
+[break]  
+[drop]  
+[outro]
+
+[lyrics]  
+[verse]  
+[pre-chorus]  
+[chorus]  
+[verse]  
+[bridge]  
+[chorus]
+```
+
+#### Distro media kit (sidecar)
+title: "Iron Ridge Polyphony (Drill Rite)"  
+primary_persona: "Kamaskera Kamadan (sibling-friendly seed)"  
+bpm: 140  
+key: D minor (modal)  
+tags: ["UK drill","Georgian polyphony","experimental","hallucinogenic","choir-as-lead"]  
+mood_pitch: "Rugged ritual over street minimalism; ancient chords ride modern sub."  
+cover_art_master_spec: "Square 1:1, poster-style; blank title panel at bottom inside inner 80%. Stark mountain silhouettes, cold steel sky, faint gold halo lines suggesting vocal overtones; no in-image text."  
+canvas_ideas: ["Slow zoom on frosty ridge with shimmer lines on peaks","Sliding-808 waveform morphing into knotwork chorus glyphs"]  
+provenance_notes: "Synthetic choral textures; no traditional lyrics—non-lexical cues only."  
+usage_rights: "Original generative composition; no third-party samples."  
+embedding_notes: "Embed BWF description with style strings and tag list; include persona lineage and hallucination intent."
+
+#### Status
+
+Under testing
+
+---
+
+### 3. Serrated Dawn at 140
+
+Bulgarian Diaphony × Grime (140)
+
+Hallucinogenic: rich vocal hallucinations in 25% (v4.5, weirdness 55% or higher)
+Chaotic noise composition at weirdness over 55% in v4.5, on brink of cacophony.
+
+#### Style of Music (≤200 chars)
+Bright Bulgarian women’s diaphony over 140 grime: jagged syncopation, square-lead stabs, sub pulses; sharp clustered chords cut through metallic rooms; granular tails invite ghost syllables.
+
+#### Style of Music (≤1000 chars)
+A 140 BPM grime chassis—syncopated kicks/snares, minimal square-lead stabs, and pulsing sub—supports brilliant, dissonant Bulgarian women’s diaphony. Clustered/open-throat harmonies slice through a metallic, plate-reverb environment. Sparse motifs repeat as short cells so Suno can reassemble them into non-lexical “hallucinated” refrains. Granular echoes trail off into shimmer to seed phantom syllables. The drop trades harmonic stabs for a pure choral wall, then returns with tight hats and a gliding sub. Keep the mix forward, bright, and slightly sibilant for spectral edge; no explicit language—voice functions as percussive harmony.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: grime, experimental-choral, electronic]  
+[mood: cutting, luminous, urban-mystic]  
+[tempo: 140bpm]  
+[length: 180-200s]  
+[instruments: square-lead stabs, sub sine, metallic plates, tight hats, noise risers]  
+[vocals: female ensemble bulgarian-diaphony, clustered chords, sharp vowel holds, non-lexical]  
+[key: A Phrygian feel, modal pivots]  
+[time_signature: 4/4]  
+[weirdness: 62]  
+[audio_weight: 40]
+[style_weight: 55]
+
+[sequence: intro, verse, drop, loop-shift, drop, outro]  
+[intro]  
+[verse]  
+[drop]  
+[loop-shift]  
+[drop]  
+[outro]
+
+[lyrics]  
+[verse]  
+[chorus]  
+[verse]  
+[break]  
+[chorus]
+```
+
+#### Distro media kit (sidecar)
+title: "Serrated Dawn at 140"  
+primary_persona: "New: ‘Verean es an Nemerton – Street Cantus’ branch (seed)"  
+bpm: 140  
+key: A Phrygian (modal pivots)  
+tags: ["grime 140","Bulgarian diaphony","non-lexical choir","experimental"]  
+mood_pitch: "Blade-bright harmonies over urban pulse; spectral hooks without words."  
+cover_art_master_spec: "Square 1:1; poster-style with blank bottom panel. Sunrise over concrete blocks; faceted glass shards forming a choir rosette; keep panel within inner 80% safety."  
+canvas_ideas: ["Faceted rosette rotating into square-lead oscillations","Sub pulse visualizer flickering behind silhouettes of voices"]  
+provenance_notes: "No direct folklore quotations; synthetic homage via interval color only."  
+usage_rights: "Original generative content; no sampled recordings."  
+embedding_notes: "Tag diaphony, 140 grime, non-lexical; mark AI-provenance and no-lyrics policy."
+
+#### Status
+
+Planned
+
+---
+
+### 4. Tenore Over Durban
+
+Sardinian Tenore × Gqom
+
+#### Style of Music (≤200 chars)
+Sardinian tenore quartet (bassu/contra/mesu/oche) over minimal Durban gqom: broken kick grids, air horns, log-drum hints; guttural drones mirror sub; ritual call-and-circle energy; ~125 BPM.
+
+#### Style of Music (≤1000 chars)
+Minimalist gqom propulsion—broken kick patterns, stark claps, and cavernous spaces—supports a Sardinian “cantu a tenore” circle: bassu/contra gutturals as living sub, mesu as mid drone, oche as bright lead. BPM ~125 keeps it hypnotic. Short antiphonal cells present the tenore like rhythm instruments; occasional log-drum-styled hits mirror bassu shapes. The arrangement alternates dry, intimate circle-room moments with club-scale call-and-response drops. Air-horns/sweeps are sparse. Light tape dirt and room-impulse reamping help Suno bloom non-lexical choir behaviors. Voice remains lyrical-free, percussive, and ritual.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: gqom, world-choral, experimental-club]  
+[mood: trance, earthy, ceremonial]  
+[tempo: 124-128bpm]  
+[length: 180-210s]  
+[instruments: broken-beat kit, clap stabs, log-drum hints, air-horn (sparingly), room impulses]  
+[vocals: sardinian tenore quartet (bassu, contra, mesu, oche), antiphonal cells, non-lexical]  
+[key: E minor drone centers]  
+[time_signature: 4/4]  
+[weirdness: 58]  
+[audio_weight: 42]
+[style_weight: 52]
+
+[sequence: intro, phrase-1, antiphon, drop, phrase-2, drop, coda]  
+[intro]  
+[phrase-1]  
+[antiphon]  
+[drop]  
+[phrase-2]  
+[drop]  
+[coda]
+
+[lyrics]  
+[verse]  
+[refrain]  
+[verse]  
+[bridge]  
+[refrain]
+```
+
+#### Distro media kit (sidecar)
+title: "Tenore Over Durban"  
+primary_persona: "Kamaskera Kamadan (ritual club branch)"  
+bpm: 125  
+key: E minor (drone)  
+tags: ["gqom","Sardinian tenore","ritual club","non-lexical"]  
+mood_pitch: "Circle-sung earth over cavernous Durban throb; trance without text."  
+cover_art_master_spec: "Square 1:1; poster-style with blank bottom panel. Nighttime coastal concrete, chalk circle marks, four shadowed figures; warm rim light; keep panel in inner 80%."  
+canvas_ideas: ["Chalk circle lines pulsing with kick grid","Four dots orbiting, syncing to bassu/contra call"]  
+provenance_notes: "Synthetic modeling of tenore parts; no sampled traditional recordings."  
+usage_rights: "Original generative composition; cleared of third-party content."  
+embedding_notes: "Embed gqom/tenore tags, persona lineage, AI-provenance; note non-lyrical approach."
+
+#### Status
+
+Planned
+
+---
+
+### 5. Stone Chapel Footwork
+
+Corsican Paghjella × Footwork
+
+#### Style of Music (≤200 chars)
+Three-voice Corsican paghjella (segonda→bassu→terza) chopped into 160 BPM footwork grids; vocal hits as percussion, sub flickers, clap grids, vinyl haze; non-lexical refrains, sharp room bloom.
+
+#### Style of Music (≤1000 chars)
+Austere footwork chassis at 160 BPM—rapid syncopation, clap grids, micro-kicks—carries Corsican paghjella’s three-voice entry order (segonda, bassu, terza). Short antiphonal phrases are sliced into percussive vox hits; bassu doubles the sub as a call, segonda lays center tone, terza gives bright ornaments. Sparse organ/pad stabs sketch tonality while vinyl/tape haze and short plate reverbs bloom tails to encourage ghost-syllables. No literal lyrics—voices function as rhythmic/harmonic figures. Drops alternate between dry a-cappella cells and hyper-chopped vocal percussion, then resolve into a hovering drone coda.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: footwork, world-choral, electronic]  
+[mood: kinetic, sacred-minimal, bright]  
+[tempo: 160bpm]  
+[length: 180-200s]  
+[instruments: micro-kicks, clap grid, sub flickers, organ stabs, vinyl/tape haze, plate reverb]  
+[vocals: corsican paghjella trio (segonda, bassu, terza), antiphonal cells, non-lexical]  
+[key: G Dorian center, modal pivots]  
+[time_signature: 4/4]  
+[weirdness: 60]  
+[audio_weight: 42]
+[style_weight: 52]
+
+[sequence: intro, phrase-1, drop, loop-shift, drop, coda]  
+[intro]  
+[phrase-1]  
+[drop]  
+[loop-shift]  
+[drop]  
+[coda]
+
+[lyrics]  
+[verse]  
+[chorus]  
+[verse]  
+[bridge]  
+[chorus]
+```
+
+#### Distro media kit (sidecar)
+title: "Stone Chapel Footwork"  
+primary_persona: "New seed (choral-percussive branch)"  
+bpm: 160  
+key: G Dorian (modal)  
+tags: ["footwork 160","paghjella","non-lexical choir","experimental"]  
+mood_pitch: "A-cappella arches sliced into dance-grid sparks."  
+cover_art_master_spec: "Square 1:1; poster layout with blank bottom title panel inside inner 80%. Rough stone apse geometry morphing into step-grid lines; no in-image text."  
+canvas_ideas: ["Three voice dots snapping to a 160 lattice","Stone arch dissolving into clap grid"]  
+provenance_notes: "Synthetic modeling of Corsican entry order; no sampled folklore."  
+usage_rights: "Original generative composition; cleared of third-party content."  
+embedding_notes: "Embed footwork/paghjella tags; mark AI provenance, non-lyrical."
+
+#### Status
+
+Planned
+
+---
+
+### 5a. Stone Chapel Footwork for Kamaskera Kamadan
+
+#### Style of Music (≤200 chars)
+Paghjella trio chopped into 160 footwork; bassu mirrors sub, terza ornaments snap to grid; cowbell ghosts, tape haze, hand-drum blips nod to Kamaskera’s ritual phonk; non-lexical, bright/kinetic.
+
+#### Style of Music (≤1000 chars)
+A 160 BPM footwork lattice—rapid clap grids, micro-kicks, sub flickers—reframed for Kamaskera Kamadan. Corsican paghjella’s entry order (segonda→bassu→terza) is performed as short antiphonal cells, sliced into percussive vocal hits. Bassu doubles the sub as a living drone; segonda anchors the center; terza adds bright ornaments that snap to the step grid. To preserve Kamaskera’s “Urban Zulu / ritual phonk” ancestry without leaving footwork, we thread in cowbell ghost ticks, dusty tape flutter, and low hand-drum blips during drops. Metallic plate tails and brief granular blooms seed soft ghost-syllables (no literal text). The arrangement pivots between dry a-cappella cells, hyper-chopped vocal percussion, and a hovering drone coda that hints at circle-chant energy—hallucination-friendly but club-functional.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly, kamaskera-lineage]  
+[genre: footwork, world-choral, experimental-club]  
+[mood: kinetic, sacred-minimal, urban-ritual]  
+[tempo: 160bpm]  
+[length: 180-200s]  
+[instruments: micro-kicks, clap grid, sub flickers, organ stabs, cowbell ghosts, hand-drum blips, vinyl/tape haze, metallic plate reverb]  
+[vocals: corsican paghjella trio (segonda, bassu, terza), antiphonal cells, non-lexical, distant crowd hums]  
+[key: G Dorian center, modal pivots]  
+[time_signature: 4/4]  
+[weirdness: 62]  
+[audio_weight: 46] [style_weight: 50]
+
+[sequence: intro, phrase-1, drop, loop-shift, ritual-break, drop, coda]  
+[intro]  
+[phrase-1]  
+[drop]  
+[loop-shift]  
+[ritual-break]  
+[drop]  
+[coda]
+
+[lyrics]  
+[verse]  
+[chorus]  
+[verse]  
+[bridge]  
+[chorus]
+```
+
+#### Persona-tuning notes
+- Keep **cowbell ghosts** and **hand-drum blips** below the main grid so they read as lineage “scent,” not genre switch.  
+- Use **vinyl/tape haze + short plates** for spectral smear; avoid long halls (keeps it tight for 160).  
+- For higher hallucination rates, A/B an alt take adding **female ghost pads** quietly under terza in the [ritual-break].
+
+#### Distro media kit (sidecar)
+title: "Stone Chapel Footwork (Kamaskera Cut)"  
+primary_persona: "Kamaskera Kamadan (choral-percussive branch)"  
+bpm: 160  
+key: G Dorian (modal)  
+tags: ["footwork 160","paghjella","Kamaskera lineage","non-lexical choir","experimental club"]  
+mood_pitch: "Circle-chant cut into a dance lattice; ancient calls spark modern steps."  
+cover_art_master_spec: "Square 1:1, poster layout with blank bottom title panel inside inner 80%. Rough stone apse morphs into a luminous 160-step grid; faint cowbell halo dots; no in-image text."  
+canvas_ideas: ["Three glowing voice nodes snapping to a moving 160 grid","Stone arch dissolving into clap-grid particles, sub ripple underneath"]  
+provenance_notes: "Synthetic Corsican-style voicing; no sampled folklore recordings. Non-lexical vocals only."  
+usage_rights: "Original generative composition; cleared of third-party content."  
+embedding_notes: "Embed BWF description with style strings, Kamaskera lineage, AI-provenance, non-lyrics policy."
+
+#### Status
+
+Planned
+
+---
+
+### 5b. Stone Chapel Footwork — Persona Seed
+
+#### Style of Music (≤200 chars)
+Paghjella trio as percussive hits over 160 footwork; tight stone-chapel IRs, close mics, cowbell ghosts, hand-drum blips; bassu=sub drone, terza ornaments; dusty tape flutter; non-lexical, kinetic/ritual.
+
+#### Style of Music (≤1000 chars)
+Persona-oriented capture of Corsican paghjella fused with 160 BPM footwork. Three-voice entry (segonda→bassu→terza) is performed as short antiphonal cells, then micro-sliced into grid-snapped vocal percussion. Bassu doubles the sub to imprint a living drone; segonda centers the mode; terza supplies bright ornamental snaps. To preserve Kamaskera’s ritual lineage without leaving footwork, faint cowbell ghosts and low hand-drum blips sit beneath the lattice, plus light tape flutter. Room modeling uses **tight stone/brick chapel IRs** (early reflections emphasized, fast decay) so Suno learns close, dry timbre first. Metallic plate tails are trimmed; granular blooms are subtle—just enough to seed soft, non-lexical ghost syllables. No words; voice acts as rhythm/harmony. Arrangement alternates dry a-cappella cells, hyper-chopped drops, and a concise drone coda.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly, kamaskera-lineage]  
+[genre: footwork, world-choral, experimental-club]  
+[mood: kinetic, sacred-minimal, urban-ritual]  
+[tempo: 160bpm]  
+[length: 180-200s]  
+[instruments: micro-kicks, clap grid, sub flickers, organ stabs, cowbell ghosts (low), hand-drum blips (low), vinyl/tape flutter, tight stone/brick room IRs, short plate]  
+[vocals: corsican paghjella trio (segonda, bassu, terza), antiphonal cells, non-lexical, close-miked]  
+[key: G Dorian center, modal pivots]  
+[time_signature: 4/4]  
+[weirdness: 58]  
+[audio_weight: 78] [style_weight: 45]
+
+[sequence: intro, phrase-1, drop, loop-shift, ritual-break, drop, coda]  
+[intro]  
+[phrase-1]  
+[drop]  
+[loop-shift]  
+[ritual-break]  
+[drop]  
+[coda]
+
+[lyrics]  
+[verse]  
+[chorus]  
+[verse]  
+[bridge]  
+[chorus]
+```
+
+#### Persona-seeding notes (do first render exactly once):
+- Keep master **attack fast** and **room IRs tight** (RT60 ≈ 0.4–0.6s).  
+- Cowbell/hand-drum layers at **−18 to −24 LUFS relative** to main vox grid—present but subliminal.  
+- If you need more “Kamaskera scent,” add **female ghost pads** at −22 LUFS only in [ritual-break].  
+- Save this render as **Parental/Seed**; subsequent Persona builds can widen rooms and raise weirdness.
+
+---
+
+#### Distro media kit (sidecar)
+title: "Stone Chapel Footwork — Persona Seed"  
+primary_persona: "Kamaskera Kamadan (choral-percussive branch seed)"  
+bpm: 160  
+key: G Dorian (modal)  
+tags: ["footwork 160","paghjella","persona seed","Kamaskera lineage","non-lexical choir","experimental club"]  
+mood_pitch: "Circle-chant cut into a tight dance lattice; ancient calls imprinted close-miked."  
+cover_art_master_spec: "Square 1:1, poster layout with blank bottom title panel inside inner 80%. Rough stone apse in close-up, faint grid lines over masonry; tiny cowbell halo dots; no in-image text."  
+canvas_ideas: ["Three voice nodes snapping to a 160 grid over stone texture","Close-miked stone reflections pulsing with clap grid"]  
+provenance_notes: "Synthetic Corsican-style voicing; no sampled folklore recordings. Non-lexical vocals only."  
+usage_rights: "Original generative composition; cleared of third-party content."  
+embedding_notes: "Embed BWF description with style strings, room IR notes, audio/style weights, Kamaskera lineage, AI-provenance, non-lyrics policy."
+
+#### Status
+
+Planned
+
+---
+
+### 6. Frostbite Amen Duel
+
+Inuit Katajjaq × Breakcore
+
+#### Style of Music (≤200 chars)
+Percussive Inuit katajjaq duet (inhaled/exhaled bursts) over 180–196 BPM breakcore: Amen edits, whiplash fills, bitcrush, granular tails; breath games drive the groove; zero lexical text.
+
+#### Style of Music (≤1000 chars)
+A feral breakcore engine (180–196 BPM) with Amen/Think edits, switch-ups, and gated subs is steered by Inuit katajjaq’s antiphonal breathing games. Short inhale/exhale motifs become rhythmic triggers; stutters, reverse grains, and comb-filter sweeps splinter phrases into phantom syllables. The arrangement alternates tumble-run barrages with “vacuum drops” where only breath percussion remains. Light distortion and bitcrush grit the top; transient shaping keeps throat pops articulate. No words—just pulse, rasp, and call-response. Coda freezes on time-stretched breath into glacial shimmer.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: breakcore, experimental-vocal, electronic]  
+[mood: feral, icy, exhilarating]  
+[tempo: 188bpm]  
+[length: 170-200s]  
+[instruments: amen edits, gated sub, bitcrush, granular reverse, comb-filter sweeps, noise bursts]  
+[vocals: inuit katajjaq duet, inhaled/exhaled pulses, percussive grunts, non-lexical]  
+[key: atonal / drone centers]  
+[time_signature: 4/4 (free breaks permitted)]  
+[weirdness: 68]  
+[audio_weight: 45]
+[style_weight: 50]
+
+[sequence: cold-open, barrage, vacuum-drop, barrage, glitch-bridge, finale-freeze]  
+[cold-open]  
+[barrage]  
+[vacuum-drop]  
+[barrage]  
+[glitch-bridge]  
+[finale-freeze]
+
+[lyrics]  
+[verse]  
+[refrain]  
+[verse]  
+[break]  
+[refrain]
+```
+
+#### Distro media kit (sidecar)
+title: "Frostbite Amen Duel"  
+primary_persona: "New seed (arctic-percussive branch)"  
+bpm: 188  
+key: Atonal/drone  
+tags: ["breakcore","katajjaq","amen edits","non-lexical","granular"]  
+mood_pitch: "Breath becomes drum—glacier speed-runs and vacuum drops."  
+cover_art_master_spec: "Square 1:1; poster layout with blank bottom panel. Frost fractals exploding into waveform shrapnel; keep panel in inner 80%."  
+canvas_ideas: ["Condensed breath puffs synced to snare rushes","Amen waveform turning to ice shards"]  
+provenance_notes: "Synthetic emulation of katajjaq duet behavior; no field recordings used."  
+usage_rights: "Original generative composition."  
+embedding_notes: "Tag breakcore/katajjaq; note non-lexical intent and AI provenance."
+
+#### Status
+
+Planned
+
+---
+
+### 7. Iron Overtone Foundry
+
+Tuvan Khöömei/Kargyraa × Industrial
+
+#### Style of Music (≤200 chars)
+Subharmonic kargyraa + overtone whistles over machine-room industrial: heavy kicks, anvil hits, piston rhythms, turbine drones; re-amped hall tails; ritual tempo 96–104; wordless, tectonic.
+
+#### Style of Music (≤1000 chars)
+A slow-grinding industrial ritual (≈100 BPM) forged from piston rhythms, metallic anvil hits, and turbine drones. Tuvan throat singing layers—kargyraa (subharmonic growl) underpinning khöömei/sygyt overtones—form the lead bed. Re-amped impulse responses (warehouse/ship hull) give iron bloom; side-chain swells pull drones around the kick. Sparse distortion and granular smear seed low-register ghost phonemes without explicit text. Mid sections open to pure drone/overtones before slamming back into machine cadence. Final minute lets overtone whistles ride a receding factory rumble.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: industrial, drone-choral, dark-ambient]  
+[mood: tectonic, mechanical, solemn]  
+[tempo: 100bpm]  
+[length: 190-220s]  
+[instruments: heavy kick, anvil hits, piston rhythm loops, turbine drones, re-amp IRs, granular smear]  
+[vocals: tuvan throat (kargyraa + khöömei/sygyt layers), sustained drones, non-lexical]  
+[key: low D drone center]  
+[time_signature: 4/4]  
+[weirdness: 57]  
+[audio_weight: 44]
+[style_weight: 51]
+
+[sequence: ignition, cadence, drone-vault, cadence, hammer-break, long-fade]  
+[ignition]  
+[cadence]  
+[drone-vault]  
+[cadence]  
+[hammer-break]  
+[long-fade]
+
+[lyrics]  
+[verse]  
+[chorus]  
+[verse]  
+[bridge]  
+[chorus]
+```
+
+#### Distro media kit (sidecar)
+title: "Iron Overtone Foundry"  
+primary_persona: "Kamaskera Kamadan (iron-ritual branch)"  
+bpm: 100  
+key: D low drone  
+tags: ["industrial","tuvan throat","drone","non-lexical","mechanical"]  
+mood_pitch: "Foundry rhythm breathes through overtone hymns."  
+cover_art_master_spec: "Square 1:1; poster layout with blank bottom title panel. Rusted factory hall, glowing iron runes tracing overtone lines; keep panel inside inner 80%."  
+canvas_ideas: ["Slow piston loop with overtone spectrum lines","Molten pour blooming into spectrogram glow"]  
+provenance_notes: "Synthetic Tuvan-style timbres; no sampled traditional vocals."  
+usage_rights: "Original generative composition."  
+embedding_notes: "Embed industrial/throat-sing tags; persona lineage; AI provenance; non-lyrical policy."
+
+#### Status
+
+Planned
+
+---
+
+### 8. Hollow Square Slide
+
+Sacred Harp (Shape-Note) × Drill
+
+#### Style of Music (≤200 chars)
+Shape-note four-part shouts over UK drill: sliding 808s, triplet hats, dark pads; block-chord “hollow square” refrains as chorus stabs; tape haze; non-lexical calls (no worship text), 140 BPM.
+
+#### Style of Music (≤1000 chars)
+A lean UK drill frame (140 BPM) with sliding 808 sub, triplet hat science, and low-swing snares under a Shape-Note “hollow square” choir. Four-part block chords hit like brass stabs; occasional call-and-response swells create chorus-style hooks without words. Keep vowels broad (“ah/oh”) for percussive clarity; let bass lead lines shadow the tonic like a congregational pedal. Pads stay dusky; short plate/room tails encourage faint ghost-syllables. No explicit religious text—this is interval color and crowd power only. Drops thin to sub + handclap before the choir slams back in stacked unisons.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: uk drill, folk-choral, experimental-hiphop]  
+[mood: staunch, gritty, exalted]  
+[tempo: 140bpm]  
+[length: 180-210s]  
+[instruments: 808 (sliding), triplet hats, low-swing snare, dark pads, short plate, tape haze]  
+[vocals: mixed choir shape-note style, block chords, call-and-response, non-lexical]  
+[key: A Aeolian, tonic pedal]  
+[time_signature: 4/4]  
+[weirdness: 60]  
+[audio_weight: 44] [style_weight: 52]
+
+[sequence: intro, verse, build, drop, verse, break, drop, outro]  
+[intro]  
+[verse]  
+[build]  
+[drop]  
+[verse]  
+[break]  
+[drop]  
+[outro]
+
+[lyrics]  
+[verse]  
+[chorus]  
+[verse]  
+[bridge]  
+[chorus]
+```
+
+#### Distro media kit (sidecar)
+title: "Hollow Square Slide"  
+primary_persona: "New seed (Square-Cantus branch)"  
+bpm: 140  
+key: A Aeolian  
+tags: ["UK drill","shape-note","choir-as-lead","non-lexical","experimental"]  
+mood_pitch: "Congregational thunder over sliding sub—exalted without words."  
+cover_art_master_spec: "Square 1:1; poster layout with blank bottom panel (inner 80%). Chalked square on asphalt glowing like a hymn grid; no in-image text."  
+canvas_ideas: ["Hollow-square lines pulsing with 808 slides","Block-chord spectrogram morphing into drill hats"]  
+provenance_notes: "Synthetic shape-note voicing; no quoted hymn lyrics."  
+usage_rights: "Original generative composition."  
+embedding_notes: "Embed drill/shape-note tags, AI-provenance, non-lyrical policy."
+
+#### Status
+
+Planned
+
+---
+
+### 9. Cowbell Cloister (Slow Phonk Chant)
+
+Gregorian Plainchant × Phonk (slowed)
+
+#### Style of Music (≤200 chars)
+Monophonic chant phrases over slowed phonk: cowbell ticks, chopped vox chops, woozy tape, dusty keys; sub-swells, gated room; melismas glide through haze; non-lexical (no Latin text), ~96 BPM.
+
+#### Style of Music (≤1000 chars)
+A slowed-phonk engine (~96 BPM): cowbell ghosts, wood-block echoes, warped tape, and chopped-n-screwed micro-edits. Over it, plainchant-style single-line melodies drift in free-time arcs, printed with close, dry timbre then smeared by gentle wow/flutter and short room. The chant remains lyric-free—pure vowels and melismas—so Suno can hallucinate soft pseudo-syllables at phrase tails. Sub-bass moves in swells rather than slides; dusty electric-piano stabs sketch modal centers. Drops remove drums entirely, leaving tape hiss, cowbell memory, and chant over sub air. It feels devotional yet street-worn.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: phonk (slowed), chant, lofi-hiphop]  
+[mood: woozy, reverent, nocturnal]  
+[tempo: 94-98bpm]  
+[length: 180-210s]  
+[instruments: cowbell ticks, chopped vox one-shots, dusty keys, sub swells, tape wow/flutter, short room, vinyl noise]  
+[vocals: plainchant-style solo, melismatic phrases, non-lexical, close-miked]  
+[key: D Dorian center]  
+[time_signature: free over 4/4 grid]  
+[weirdness: 58]  
+[audio_weight: 46] [style_weight: 50]
+
+[sequence: prelude, phrase-1, drop, phrase-2, loop-shift, hush-drop, coda]  
+[prelude]  
+[phrase-1]  
+[drop]  
+[phrase-2]  
+[loop-shift]  
+[hush-drop]  
+[coda]
+
+[lyrics]  
+[verse]  
+[refrain]  
+[verse]  
+[bridge]  
+[refrain]
+```
+
+#### Distro media kit (sidecar)
+title: "Cowbell Cloister (Slow Phonk Chant)"  
+primary_persona: "Kamaskera-compatible seed (urban-ritual line)"  
+bpm: 96  
+key: D Dorian  
+tags: ["slowed phonk","plainchant","melisma","non-lexical","tape haze"]  
+mood_pitch: "Street-worn devotion: cowbell memory and chant drifting through tape dusk."  
+cover_art_master_spec: "Square 1:1; poster layout with blank bottom panel. Cloister corridor at night, cowbell halo dots, tape scratches; no in-image text."  
+canvas_ideas: ["Cowbell tick ripples through candlelight","Tape shimmer morphs into chant waveform"]  
+provenance_notes: "Synthetic chant timbre; no sacred text quoted."  
+usage_rights: "Original generative composition."  
+embedding_notes: "Tag phonk/chant; mark non-lyrical approach and AI provenance."
+
+#### Status
+
+Planned
+
+---
+
+### 10. Ridge Echo Lattice (160)
+
+Kulning Calls × Footwork/Juke
+
+#### Style of Music (≤200 chars)
+High-piercing kulning herding calls sliced into 160 footwork/juke syncopation; call-and-answer riffs, sub flickers, clap grids; short alpine room; non-lexical, agile and bright.
+
+#### Style of Music (≤1000 chars)
+Footwork/juke at 160 BPM with rapid clap grids, micro-kicks, and agile sub bursts. Kulning—aerial Nordic calls with ornaments and glides—becomes the lead instrument: short calls are sampled into grid-snapped riffs and echo-answers. Keep the room tight (alpine early reflections, fast decay) so pitch bends read cleanly; add brief granular blooms at phrase ends to seed ghost syllables. Occasional triangle or wood chime accents hint at open air. The “loop-shift” reframes call shapes into downward spirals before a final bright reprise. No words—just calls as melody/percussion.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: footwork, juke, nordic-folk-fusion]  
+[mood: bright, agile, windswept]  
+[tempo: 160bpm]  
+[length: 170-200s]  
+[instruments: micro-kicks, clap grid, sub flickers, wood/triangle chimes, tight alpine IRs, granular tails]  
+[vocals: kulning-style solo calls, ornamented glides, antiphonal echoes, non-lexical]  
+[key: A Mixolydian center]  
+[time_signature: 4/4]  
+[weirdness: 61]  
+[audio_weight: 43] [style_weight: 52]
+
+[sequence: call-open, drop, loop-shift, call-variations, drop, bright-coda]  
+[call-open]  
+[drop]  
+[loop-shift]  
+[call-variations]  
+[drop]  
+[bright-coda]
+
+[lyrics]  
+[verse]  
+[chorus]  
+[verse]  
+[bridge]  
+[chorus]
+```
+
+#### Distro media kit (sidecar)
+title: "Ridge Echo Lattice (160)"  
+primary_persona: "New seed (Nordic-Flight branch)"  
+bpm: 160  
+key: A Mixolydian  
+tags: ["footwork/juke","kulning","non-lexical lead","granular tails","alpine room"]  
+mood_pitch: "Sky-bright calls stitched into a dance lattice."  
+cover_art_master_spec: "Square 1:1; poster layout with blank bottom panel. Mountain ridge line, echo rings stepping like a 160 grid; no in-image text."  
+canvas_ideas: ["Call ripples racing across ridges","Voice dot hopping a checker lattice with sub ripples"]  
+provenance_notes: "Synthetic kulning color; no field recordings."  
+usage_rights: "Original generative composition."  
+embedding_notes: "Embed footwork/kulning tags; AI provenance; non-lyrical policy."
+
+#### Status
+
+Planned
+
+---
+
+### 11. Dervish on the Durban Floor
+
+Qawwali Chorus × Gqom
+
+#### Style of Music (≤200 chars)
+Lead qawwal + response chorus over minimalist gqom: broken kick grid, cavern claps, harmonium bed, tabla one-shots; ecstatic swells, long handclap arcs; non-lexical refrains; ~123 BPM.
+
+#### Style of Music (≤1000 chars)
+A sparse gqom chassis (~123 BPM) of broken kicks, cavern claps, and sub air hosts a Qawwali-style layout: lead voice rides a harmonium drone while a small chorus answers in short ecstatic cells. Handclaps stretch into long arcs that cue rises and drops. Tabla one-shots punctuate turnarounds; log-drum hints mirror the drone. Keep text non-lexical (pure vowels + syllabic taans) so Suno can bloom phantom syllables. Use short warehouse IRs for impact, reserving longer plate only on peak swells. The drop strips to drone+claps+lead melisma before the chorus slams back in stacked refrains.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: gqom, sufi-fusion, experimental-club]  
+[mood: ecstatic, hypnotic, earthy]  
+[tempo: 122-124bpm]  
+[length: 180-210s]  
+[instruments: broken-beat kit, cavern claps, harmonium drone, tabla one-shots, log-drum hints, short warehouse IRs, plate (sparse)]  
+[vocals: lead qawwal-style melisma + response chorus, handclap arcs, non-lexical taans]  
+[key: F# Dorian center]  
+[time_signature: 4/4]  
+[weirdness: 58]  
+[audio_weight: 44] [style_weight: 52]
+
+[sequence: invocation, call, drop, antiphon, rise, drop, coda]  
+[invocation]  
+[call]  
+[drop]  
+[antiphon]  
+[rise]  
+[drop]  
+[coda]
+
+[lyrics]  
+[verse]  
+[refrain]  
+[verse]  
+[bridge]  
+[refrain]
+```
+
+#### Distro media kit (sidecar)
+title: "Dervish on the Durban Floor"  
+primary_persona: "New seed (Sufi-Club branch)"  
+bpm: 123  
+key: F# Dorian  
+tags: ["gqom","qawwali chorus","harmonium drone","non-lexical","handclap arcs"]  
+mood_pitch: "Ecstatic call-and-response riding a broken club heartbeat."  
+cover_art_master_spec: "Square 1:1; poster layout with blank bottom panel (inner 80%). Lantern halos over a dark dance floor; subtle rosette motif; no in-image text."  
+canvas_ideas: ["Clap-arc rings expanding into kick hits","Harmonium waveform becoming a glowing rosette"]  
+provenance_notes: "Synthetic Qawwali color; no quoted poetry or samples."  
+usage_rights: "Original generative composition."  
+embedding_notes: "Tag gqom/qawwali, AI provenance, non-lyrical policy."
+
+#### Status
+
+Planned
+
+---
+
+### 12. Glass Choir in Feedback
+
+Bulgarian Diaphony × Noise
+
+#### Style of Music (≤200 chars)
+Bright Bulgarian women’s diaphony sustained into noise-ambient: feedback beds, bowed metal, granular fog, tape howl; clustered chords bloom, dissolve, reappear; wordless, glacial and fierce.
+
+#### Style of Music (≤1000 chars)
+Dissonant/open-throat Bulgarian diaphony is stretched into a noise-ambient sculpture. Sustained cluster chords hang over feedback beds, bowed-metal scrapes, and low tape howl. Granular smearing lets vowel edges shed phantom syllables. Dynamics move from near-silence to burnished glare, then into ash-quietness. No drums—only pressure and release. Short impulses (coin-hits, wire twangs) mark section pivots; distortion rides are restrained to preserve overtone ladders. Absolutely non-lexical; the choir functions as a living oscillator bank. Close-bright timbre at the core; wider plates only for climaxes.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: noise-ambient, experimental-choral]  
+[mood: glacial, incandescent, severe]  
+[tempo: free (target grid 60bpm for automation)]  
+[length: 200-240s]  
+[instruments: feedback loops, bowed metal, contact mic scrapes, granular smear, tape howl, impulse pings]  
+[vocals: female ensemble bulgarian-diaphony, sustained clusters, non-lexical vowels]  
+[key: evolving centers; Lydian/Phrygian color shifts]  
+[time_signature: free]  
+[weirdness: 70]  
+[audio_weight: 42] [style_weight: 54]
+
+[sequence: ember, flare, pressure-plateau, ash, flare-ii, fade]  
+[ember]  
+[flare]  
+[pressure-plateau]  
+[ash]  
+[flare-ii]  
+[fade]
+
+[lyrics]  
+[drone]  
+[antiphon]  
+[drone]  
+[bridge]  
+[coda]
+```
+
+#### Distro media kit (sidecar)
+title: "Glass Choir in Feedback"  
+primary_persona: "New seed (Spectral-Diaphony branch)"  
+bpm: (free / automation at 60)  
+key: shifting modal color  
+tags: ["noise ambient","Bulgarian diaphony","granular","feedback","non-lexical"]  
+mood_pitch: "A bright dissonant choir soldered into a wall of glow."  
+cover_art_master_spec: "Square 1:1; poster layout with blank bottom panel. Shattered-glass rosette suspended in fog; faint feedback rings; no in-image text."  
+canvas_ideas: ["Spectrogram flames rising from a chord","Glass shards drifting as granular grains"]  
+provenance_notes: "Synthetic diaphony intervals; no folk samples."  
+usage_rights: "Original generative composition."  
+embedding_notes: "Tag diaphony/noise; AI provenance; non-lyrics policy."
+
+#### Status
+
+Planned
+
+---
+
+### 13. Iron Choir at 180
+
+Georgian Polyphony × Gabber
+
+#### Style of Music (≤200 chars)
+Three-part Georgian male polyphony punctuating distorted 180 BPM kicks: pedal drones, cluster hits, alarm stabs; sparse breaks; short bunker IRs; non-lexical, martial-ritual energy.
+
+#### Style of Music (≤1000 chars)
+A hard gabber frame (≈175–185 BPM) with distorted four-on-the-floor, offbeat claps, and siren stabs collides with rugged Georgian three-part harmony. Bass pedal drones underpin cluster shouts that act like brass stabs; mid sections thin to drone + tom-rolls before a slam return. Keep vocal material non-lexical (open “ah/oh”) for punch; use short bunker/warehouse IRs to keep clarity over the kick wall. Add rare Amen-slice fills to reset momentum. Granular tails only at cut-points—enough to seed ghost syllables without smearing transients. Ancient block chords meet rave steel.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: gabber, chant-core, industrial-rave]  
+[mood: martial, exultant, relentless]  
+[tempo: 178-182bpm]  
+[length: 170-200s]  
+[instruments: distorted kick wall, offbeat claps, siren/alarm stabs, tom rolls, short bunker IRs, amen slice fills]  
+[vocals: male trio georgian-style, cluster shouts, pedal drones, non-lexical]  
+[key: E minor pedal]  
+[time_signature: 4/4]  
+[weirdness: 63]  
+[audio_weight: 46] [style_weight: 50]
+
+[sequence: ignition, surge, drone-break, surge-ii, hard-stop coda]  
+[ignition]  
+[surge]  
+[drone-break]  
+[surge-ii]  
+[hard-stop coda]
+
+[lyrics]  
+[verse]  
+[refrain]  
+[verse]  
+[bridge]  
+[refrain]
+```
+
+#### Distro media kit (sidecar)
+title: "Iron Choir at 180"  
+primary_persona: "New seed (Ritual-Rave branch)"  
+bpm: 180  
+key: E minor pedal  
+tags: ["gabber","Georgian polyphony","cluster shouts","non-lexical","industrial rave"]  
+mood_pitch: "Mountain-forged chords hammered to a 180 BPM anvil."  
+cover_art_master_spec: "Square 1:1; poster layout with blank bottom panel. Bunker doorway glowing with chord-shaped light bars; no in-image text."  
+canvas_ideas: ["Kick wall turning into mountain contour lines","Three chord bars slamming with claps"]  
+provenance_notes: "Synthetic Georgian-style voicing; no folk samples."  
+usage_rights: "Original generative composition."  
+embedding_notes: "Tag gabber/polyphony; AI provenance; non-lyrical policy."
+
+#### Status
+
+Planned
+
+---
+
+### 14. Log-Drum Tenore (Coastal Glow)
+
+Tenore (bassu/contra) × Amapiano
+
+#### Style of Music (≤200 chars)
+Sardinian tenore (bassu/contra/mesu/oche) over warm amapiano: log-drum hooks, dusty keys, shaker roll; bassu mirrors log-drum; antiphonal cells, non-lexical; airy room, 113 BPM.
+
+#### Style of Music (≤1000 chars)
+A gently rolling amapiano frame (~113 BPM) of log-drum bass hooks, mellow Rhodes, and shaker/hat ladders supports a Sardinian tenore circle. Bassu and contra provide a living sub that doubles the log-drum figure; mesu sustains mid drone; oche carries bright calls. Short antiphonal phrases are presented as rhythmic cells rather than lyrics, inviting soft ghost-syllables at phrase tails. Keep claps sparse, pads silky, and room IRs airy (small coastal hall) so the choir remains intimate. Occasional marimba or kalimba taps echo the log-drum shapes. Drops thin to Rhodes + bassu drone before the circle re-enters with an easy sway.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: amapiano, world-choral, deep-house]  
+[mood: warm, coastal, trance-gentle]  
+[tempo: 112-115bpm]  
+[length: 190-210s]  
+[instruments: log-drum bass, mellow rhodes, shaker/hat ladder, soft clap, kalimba/marimba taps, airy room IRs, tape hush]  
+[vocals: sardinian tenore quartet (bassu, contra, mesu, oche), antiphonal cells, non-lexical]  
+[key: F# minor / Dorian color]  
+[time_signature: 4/4]  
+[weirdness: 55]  
+[audio_weight: 44] [style_weight: 52]
+
+[sequence: intro, phrase-1, drop, antiphon, pocket-groove, drop, coda]  
+[intro]  
+[phrase-1]  
+[drop]  
+[antiphon]  
+[pocket-groove]  
+[drop]  
+[coda]
+
+[lyrics]  
+[verse]  
+[refrain]  
+[verse]  
+[bridge]  
+[refrain]
+```
+
+#### Distro media kit (sidecar)
+title: "Log-Drum Tenore (Coastal Glow)"  
+primary_persona: "New seed (Pastoral-Piano branch)"  
+bpm: 113  
+key: F# minor (Dorian color)  
+tags: ["amapiano","tenore","log-drum","non-lexical choir","deep house"]  
+mood_pitch: "Circle-sung earth on a sun-warmed floor—swaying log-drum and soft keys."  
+cover_art_master_spec: "Square 1:1; poster layout with blank bottom title panel inside inner 80%. Coastal dusk, faint chalk circle in sand, glowing log-drum wavelets; no in-image text."  
+canvas_ideas: ["Four dots orbiting a log-drum waveform","Rhodes chords breathing with bassu pulses"]  
+provenance_notes: "Synthetic tenore modeling; no traditional samples."  
+usage_rights: "Original generative composition."  
+embedding_notes: "Embed amapiano/tenore tags; mark AI provenance; non-lyrics policy."
+
+#### Status
+
+Planned
+
+---
+
+### 15. Soft-Foot Grime
+
+Isicathamiya × Grime
+
+#### Style of Music (≤200 chars)
+Isicathamiya male choir (soft-step stacks, bass hum) over 140 grime: jagged breaks, square-lead nicks, sliding sub; call-and-response refrains, non-lexical; short room, tape haze.
+
+#### Style of Music (≤1000 chars)
+A 140 BPM grime chassis—syncopated kicks/snares, triplet hats, square-lead nicks, and a gliding sub—hosts isicathamiya’s soft-footed male choir. Close-voiced blocks and gentle bass hums become chorus stabs; brief call-and-response swells act as hooks without words. Keep vowels broad (“ah/oh/um”) for percussive clarity; bass hum rides the tonic like a pedal. Use short, tight rooms and mild tape flutter so consonants stay airy but present. Drops thin to sub + clap while the choir whispers a stacked unison, then the square-lead and triplet hats return for the slam. Entirely non-lexical; voice is rhythm and harmony.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: grime, zulu-choral, experimental-hiphop]  
+[mood: urban-solemn, resilient, stealth-bright]  
+[tempo: 140bpm]  
+[length: 180-200s]  
+[instruments: gliding 808/sub, triplet hats, jagged kick/snare, square-lead stabs, short room IRs, tape flutter]  
+[vocals: male isicathamiya ensemble, soft-step blocks, bass hum pedal, non-lexical call/response]  
+[key: G# Aeolian center]  
+[time_signature: 4/4]  
+[weirdness: 60]  
+[audio_weight: 45] [style_weight: 51]
+
+[sequence: alley-intro, verse, build, drop, verse, break, drop, outro]  
+[alley-intro]  
+[verse]  
+[build]  
+[drop]  
+[verse]  
+[break]  
+[drop]  
+[outro]
+
+[lyrics]  
+[verse]  
+[chorus]  
+[verse]  
+[bridge]  
+[chorus]
+```
+
+#### Distro media kit (sidecar)
+title: "Soft-Foot Grime"  
+primary_persona: "New seed (Urban Zulu × 140 branch)"  
+bpm: 140  
+key: G# Aeolian  
+tags: ["grime 140","isicathamiya","non-lexical choir","sliding sub","experimental"]  
+mood_pitch: "Quiet, close harmonies walk the night over jagged streets."  
+cover_art_master_spec: "Square 1:1; poster layout with blank bottom panel. Night street chalk-footprints forming a rosette; sub ripples; no in-image text."  
+canvas_ideas: ["Soft footfalls lighting a 140 grid","Square-lead spikes rising behind stacked hums"]  
+provenance_notes: "Synthetic isicathamiya color; no archival samples."  
+usage_rights: "Original generative composition."  
+embedding_notes: "Tag grime/isicathamiya; AI provenance; non-lyrics policy."
+
+#### Status
+
+Planned
+
+---
+
+### 16. Foundry Cantus (100)
+
+Plainchant × Industrial
+
+#### Style of Music (≤200 chars)
+Monophonic chant lines re-amped in metal spaces over slow industrial: piston rhythms, anvil hits, turbine drones; short bunker IRs, granular bloom; wordless melismas; ~100 BPM.
+
+#### Style of Music (≤1000 chars)
+A slow, machine-room ritual (~100 BPM): piston rhythms, heavy kick, anvil hits, and low turbine drones. A plainchant-style solo line (no sacred text) moves in free-time arcs above the grid, captured close, then re-amped through short bunker/ship-hull IRs for iron bloom. Granular tails and light wow/flutter seed ghost phonemes at phrase endings without smearing transients. Mid sections open into drone vaults where the chant threads alone before the cadence slams back. Keep the palette austere—metallic, oil-dark, reverberant but tight—so the vocal remains the torch in the factory haze.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: industrial, chant-ambient, dark-electronic]  
+[mood: solemn, tectonic, reverent-mechanical]  
+[tempo: 98-104bpm]  
+[length: 190-220s]  
+[instruments: heavy kick, piston loops, anvil hits, turbine drones, short bunker/ship IRs, granular tails, tape wow]  
+[vocals: plainchant-style solo, melismatic phrases, non-lexical, close-miked then re-amped]  
+[key: D Dorian drone]  
+[time_signature: free over 4/4 grid]  
+[weirdness: 57]  
+[audio_weight: 46] [style_weight: 50]
+
+[sequence: ignition, cadence, drone-vault, cadence-ii, hammer-break, long-fade]  
+[ignition]  
+[cadence]  
+[drone-vault]  
+[cadence-ii]  
+[hammer-break]  
+[long-fade]
+
+[lyrics]  
+[verse]  
+[refrain]  
+[verse]  
+[bridge]  
+[refrain]
+```
+
+#### Distro media kit (sidecar)**  
+title: "Foundry Cantus (100)"  
+primary_persona: "New seed (Iron-Cantus branch)"  
+bpm: 100  
+key: D Dorian drone  
+tags: ["industrial","plainchant","metal room","non-lexical","granular bloom"]  
+mood_pitch: "A solitary torch of melody through a breathing machine hall."  
+cover_art_master_spec: "Square 1:1; poster layout with blank bottom panel. Rusted factory nave, chant waveforms etched as glowing rails; no in-image text."  
+canvas_ideas: ["Piston loop visual with overtone lines","Anvil sparks syncing to chant melismas"]  
+provenance_notes: "Synthetic chant timbre; no quoted sacred text or samples."  
+usage_rights: "Original generative composition."  
+embedding_notes: "Tag industrial/chant; AI provenance; non-lyrics policy."
+
+#### Status
+
+Planned
+
+---
+
+### 17. Whirling Lattice (160)
+
+Qawwali × Footwork
+
+#### Style of Music (≤200 chars)
+Lead qawwal + small chorus over 160 footwork: clap grids, sub flickers, harmonium drone, tabla one-shots; ecstatic call/response sliced into vocal riffs; tight room, non-lexical taans.
+
+#### Style of Music (≤1000 chars)
+A 160 BPM footwork lattice—rapid clap grids, micro-kicks, agile sub bursts—hosts a Qawwali-style layout. Lead voice rides a harmonium drone; a small chorus answers in short ecstatic cells. Those cells are sliced into grid-snapped vocal riffs (non-lexical taans and vowels) so the choir/lead become both melody and percussion. Tabla one-shots mark turnarounds; occasional handclap arcs cue rises and drops. Keep room IRs tight (small courtyard/stone) to preserve rapid articulation; add brief granular blooms at phrase ends to seed ghost syllables. Mid drop strips to harmonium + claps + lead melisma before the chorus re-enters, stacked and bright. Devotional energy, club agility—no quoted poetry.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: footwork, sufi-fusion, electronic]  
+[mood: ecstatic, agile, luminous]  
+[tempo: 160bpm]  
+[length: 170-200s]  
+[instruments: micro-kicks, clap grid, sub flickers, harmonium drone, tabla one-shots, tight stone/courtyard IRs, granular tails]  
+[vocals: lead qawwal-style + response chorus, taans (non-lexical), handclap arcs]  
+[key: E Dorian center]  
+[time_signature: 4/4]  
+[weirdness: 60]  
+[audio_weight: 43] [style_weight: 52]
+
+[sequence: call-open, drop, antiphon, loop-shift, drop, bright-coda]  
+[call-open]  
+[drop]  
+[antiphon]  
+[loop-shift]  
+[drop]  
+[bright-coda]
+
+[lyrics]  
+[verse]  
+[refrain]  
+[verse]  
+[bridge]  
+[refrain]
+```
+
+#### Distro media kit (sidecar)
+title: "Whirling Lattice (160)"  
+primary_persona: "New seed (Sufi-Step branch)"  
+bpm: 160  
+key: E Dorian  
+tags: ["footwork 160","Qawwali chorus","harmonium drone","non-lexical","granular tails"]  
+mood_pitch: "Ecstatic call-and-response stitched into a 160 dance lattice."  
+cover_art_master_spec: "Square 1:1; poster layout with blank bottom title panel (inner 80%). Lantern ring rosette snapping into square footwork grid; no in-image text."  
+canvas_ideas: ["Clap-arc rings quantizing into a 160 checker","Harmonium waveform braided with chorus glyphs"]  
+provenance_notes: "Synthetic Qawwali color; no quoted poetry or field samples."  
+usage_rights: "Original generative composition."  
+embedding_notes: "Tag footwork/qawwali; AI provenance; non-lyrics policy."
+
+#### Status
+
+Planned
+
+---
+
+### 18. Breath on the Floor (Gqom)
+
+Inuit Katajjaq × Gqom
+
+#### Style of Music (≤200 chars)
+Percussive katajjaq duet (inhaled/exhaled bursts) over minimalist gqom: broken kick grid, cavern claps, gated sub; breath games become lead rhythm; tight warehouse IRs; non-lexical.
+
+#### Style of Music (≤1000 chars)
+Minimalist Durban gqom (~123–126 BPM): broken kick patterns, cavern claps, and gated sub air become the stage for an Inuit katajjaq duet. Short inhale/exhale motifs and percussive grunts are presented as antiphonal “breath riffs” that drive the groove—voice as drum. Occasional reverse grains and comb-filter sweeps at phrase ends seed phantom syllables without obscuring the percussive edge. Keep IRs tight (small warehouse/cinderblock) for punch; deploy air-horn/sweep FX sparingly. The first drop reduces to breath percussion + sub shadow, then the grid slams back with widened claps. Entirely non-lexical and body-forward.
+
+#### Lyrics
+```
+[control: experimental, persona-seed, hallucination-friendly]  
+[genre: gqom, experimental-vocal, club]  
+[mood: feral, hypnotic, subterranean]  
+[tempo: 124-126bpm]  
+[length: 180-210s]  
+[instruments: broken-beat kit, cavern claps, gated sub, reverse grains, comb-filter sweeps, sparse air-horn]  
+[vocals: inuit katajjaq duet, inhaled/exhaled pulses, antiphonal breath riffs, non-lexical]  
+[key: percussive/drone center]  
+[time_signature: 4/4]  
+[weirdness: 62]  
+[audio_weight: 44] [style_weight: 51]
+
+[sequence: cold-room, pulse, drop, breath-duel, drop, dusk-coda]  
+[cold-room]  
+[pulse]  
+[drop]  
+[breath-duel]  
+[drop]  
+[dusk-coda]
+
+[lyrics]  
+[verse]  
+[refrain]  
+[verse]  
+[bridge]  
+[refrain]
+```
+
+#### Distro media kit (sidecar)
+title: "Breath on the Floor (Gqom)"  
+primary_persona: "New seed (Arctic-Club branch)"  
+bpm: 125  
+key: (percussive/drone)  
+tags: ["gqom","katajjaq","breath percussion","non-lexical","minimalist club"]  
+mood_pitch: "A dance floor carved from breath and broken kicks."  
+cover_art_master_spec: "Square 1:1; poster layout with blank bottom panel. Condensed breath rings on cold concrete forming a gqom grid; no in-image text."  
+canvas_ideas: ["Breath puffs syncing to kick grid","Reverse-grain ripples racing across the floor"]  
+provenance_notes: "Synthetic katajjaq behavior; no field recordings."  
+usage_rights: "Original generative composition."  
+embedding_notes: "Tag gqom/katajjaq; AI provenance; non-lyrics policy."
+
+#### Status
+
+Planned
+
+---
+
 ## 3. Background music (BGM) base templates
 
 ### 1. Ambient / Drone (cinematic, evolving)
@@ -680,9 +1970,9 @@ Aerial, sunlit cloudscape from above; gentle haze; soft film grain; wide negativ
 A bed that breathes like a distant engine—no destination, only horizons. Pads rise and fall in slow cycles, leaving enough air for memory and voice to carry.
 
 #### Why this fits (notes)
-- Starts with `[instrumental]` and control tags upfront so v5 does not invent vocals; this has higher adherence in v4.5/v5 than earlier versions. fileciteturn2file13L5-L11  
-- `[sequence]` placed right before sections to keep long-form cohesion and better Extend behavior. fileciteturn2file12L38-L41  
-- Uses confirmed tags only; avoids weak/obsolete ones like `[loop]` or `[mix]`. fileciteturn2file12L1-L14
+- Starts with `[instrumental]` and control tags upfront so v5 does not invent vocals; this has higher adherence in v4.5/v5 than earlier versions. 
+- `[sequence]` placed right before sections to keep long-form cohesion and better Extend behavior. 
+- Uses confirmed tags only; avoids weak/obsolete ones like `[loop]` or `[mix]`. 
 
 ---
 
@@ -737,9 +2027,9 @@ Warm desk lamp over a spinning vinyl, soft dust particles in beam; intimate, ana
 A pocket of lamplight where the needle never quite lands—soft drums and Rhodes drift in a slow-swing loop that makes space for thought.
 
 #### Why this fits (notes)
-- Instrumental bed with soft transients and no lead; `[instrumental]` prevents v5 vocal bleed-through. fileciteturn2file13L5-L11  
-- Uses `[signal-processing]` for era feel (saturation/short delay), consistent with your tag reference. fileciteturn2file4L13-L29  
-- Sequence ensures gentle variation without hook repetition. fileciteturn2file12L38-L41
+- Instrumental bed with soft transients and no lead; `[instrumental]` prevents v5 vocal bleed-through. 
+- Uses `[signal-processing]` for era feel (saturation/short delay), consistent with your tag reference. 
+- Sequence ensures gentle variation without hook repetition. 
 
 ---
 
@@ -1177,7 +2467,7 @@ Light post-rock underscore with clean guitar arpeggios, shimmer pads, soft tom p
 
 ---
 
-# Appendix A1. BGM Tag Kit (paste into `templates.*.md`)
+# Appendix A1. BGM Tag Kit
 
 **Usage note:** Start every bed with `[instrumental]`. Keep controls compact; avoid weak/obsolete tags. Place `[sequence]` immediately before any section tags.
 

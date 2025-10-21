@@ -8,7 +8,7 @@ NEW: DDEX compliance (provenance data) creation: [Provenance](provenance.md) fil
 
 The meta-tags reference is compiled by studying Suno users' public posts and comments, related to the currently supported meta-tags (used in Lyrics field).
 
-Latest reference update: October 20, 2025.
+Latest reference update: October 21, 2025, updated the templates list.
 
 Latest news: Suno, model v5.0
 
