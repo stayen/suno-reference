@@ -554,7 +554,14 @@ fi
 
 JSON="$1"
 IN="$2"
-OUT="${3:-$2}"   # in-place by default
+OUT="${3:-$2}"
+
+if [[ "x$OUT" == "x" ]]; then
+    OUT="${IN}.saved"
+fi
+if [[ "x$OUT" == "x$IN" ]]; then
+    OUT="${IN}.saved"
+fi
 
 command -v "$JQ" >/dev/null || { echo "jq not found"; exit 1; }
 command -v "$BWF" >/dev/null || { echo "bwfmetaedit not found"; exit 1; }
@@ -630,20 +637,22 @@ fi
 
 # If OUT different from IN, copy audio first (safe write)
 if [[ "$OUT" != "$IN" ]]; then
-  cp -p "$IN" "$OUT"
+  cp -p "$IN" "${OUT}"
 fi
 
 # Import CORE into WAV and save.
 # (BWF MetaEdit supports import/export of CORE CSV/XML and saving changes;
 # exact CLI flag names vary by build/package, but commonly accept an import of a CORE doc then Save.)
-"$BWF" --import-core "$CORECSV" --save "$OUT"
+# At 25.04.1 version of bwfmetaedit, no such option exists
+## "$BWF" --import-core "$CORECSV" --save "$OUT"
 
 # Inject iXML/aXML if provided (many builds allow XML chunk import via CLI; if not, you can paste via GUI)
 if [[ -s "$IXML" ]]; then
-  "$BWF" --import-ixml "$IXML" --save "$OUT" || true
+  "$BWF" --in-iXML="$IXML" "$IN" || true
 fi
+cp -pf $OUT $IN
 if [[ -s "$AXML" ]]; then
-  "$BWF" --import-axml "$AXML" --save "$OUT" || true
+  "$BWF" --in-aXML="$AXML" "$IN" || true
 fi
 
 echo "WAV metadata embedded -> $OUT"
