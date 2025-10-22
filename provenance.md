@@ -540,122 +540,116 @@ This script:
 
 ```bash
 #!/usr/bin/env bash
-# json-to-wav.sh
-# Usage: json-to-wav.sh <json_sidecar> <in.wav> [out.wav]
 set -euo pipefail
 
-JQ=${JQ:-jq}
-BWF=${BWF:-bwfmetaedit}
+# json-to-wav.sh — WAV/BWF metadata ops (CLI-safe)
+# - Copies input WAV to output (if provided)
+# - Embeds & evaluates BWF audio-data MD5 (<MD5 > chunk) via BWF MetaEdit
+# - Guards: "CORE CSV/XML import" is GUI-only in BWF MetaEdit 25.04.x
 
-if [[ $# -lt 2 ]]; then
-  echo "Usage: $0 <json_sidecar> <in.wav> [out.wav]" >&2
-  exit 1
+usage() {
+  cat <<'USAGE'
+Usage:
+  json-to-wav.sh <sidecar.json> <in.wav> [out.wav]
+Options:
+  --core-csv PATH     (Info) If provided, script will check CLI support and
+                      stop with guidance (CORE import is GUI-only in 25.04.x).
+  --core-xml PATH     Same as --core-csv, but XML.
+  --no-md5            Skip embedding/evaluating the <MD5 > chunk.
+Notes:
+  * BWF MetaEdit CLI supports audio-data MD5 Embed/Evaluate, but CORE import
+    (bext+LIST-INFO via CSV/XML) is a GUI workflow per official docs.
+USAGE
+}
+
+# --- parse args ---
+CORE_DOC=""
+DO_MD5=1
+ARGS=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --core-csv|--core-xml) CORE_DOC="$2"; shift 2;;
+    --no-md5) DO_MD5=0; shift;;
+    -h|--help) usage; exit 0;;
+    --) shift; break;;
+    -*) echo "Unknown option: $1" >&2; usage; exit 1;;
+    *) ARGS+=("$1"); shift;;
+  esac
+done
+
+[[ ${#ARGS[@]} -lt 2 ]] && { usage; exit 1; }
+
+JSON="${ARGS[0]}"
+IN="${ARGS[1]}"
+OUT="${ARGS[2]:-$IN}"
+
+# --- deps ---
+need() { command -v "$1" >/dev/null 2>&1 || { echo "Missing: $1" >&2; exit 1; }; }
+need bwfmetaedit
+
+[[ -f "$JSON" ]] || { echo "Sidecar not found: $JSON" >&2; exit 1; }
+[[ -f "$IN" ]]   || { echo "Input WAV not found: $IN" >&2; exit 1; }
+
+# --- guard: CORE import flags are NOT available in 25.04.x CLI ---
+if [[ -n "$CORE_DOC" ]]; then
+  if bwfmetaedit --help 2>/dev/null | grep -qiE -- '--import-core|core.*import'; then
+    # If a future version ever adds it, you could wire it here.
+    echo "Detected a potential CORE import flag in this BWF MetaEdit build." >&2
+    echo "This script does not automate it yet. Please import CORE in GUI and Save." >&2
+    exit 2
+  else
+    echo "GUI REQUIRED: BWF MetaEdit CORE (CSV/XML) import has no CLI flag in this version." >&2
+    echo "Do this instead:" >&2
+    echo "  1) Open BWF MetaEdit (GUI)" >&2
+    echo "  2) Load your WAV(s)" >&2
+    echo "  3) Import the CORE CSV/XML (${CORE_DOC})" >&2
+    echo "  4) Review & Save Modified Files" >&2
+    echo "Docs: https://mediaarea.net/BWFMetaEdit/workflows  (\"Import the CSV into BWF MetaEdit\")" >&2
+    exit 2
+  fi
 fi
+# (Official docs: CORE import/export is supported, but described as a GUI workflow.) 
+# Ref: Sample Workflows + CORE Document help. 
+# - Workflows: “Import the CSV into BWF MetaEdit … Save …” :contentReference[oaicite:3]{index=3}
+# - CORE help: “can import and export CORE Documents as XML or CSV … embedded into audio files” :contentReference[oaicite:4]{index=4}
 
-JSON="$1"
-IN="$2"
-OUT="${3:-$2}"
-
-if [[ "x$OUT" == "x" ]]; then
-    OUT="${IN}.saved"
-fi
-if [[ "x$OUT" == "x$IN" ]]; then
-    OUT="${IN}.saved"
-fi
-
-command -v "$JQ" >/dev/null || { echo "jq not found"; exit 1; }
-command -v "$BWF" >/dev/null || { echo "bwfmetaedit not found"; exit 1; }
-
-# temp files
-TMPDIR="$(mktemp -d)"
-CORECSV="$TMPDIR/core.csv"
-IXML="$TMPDIR/ixml.xml"
-AXML="$TMPDIR/axml.xml"
-
-cleanup() { rm -rf "$TMPDIR"; }
-trap cleanup EXIT
-
-# Pull BEXT fields from JSON
-DESC=$($JQ -r '.bwf.bext.Description // empty' "$JSON")
-ORIG=$($JQ -r '.bwf.bext.Originator // empty' "$JSON")
-ORIGREF=$($JQ -r '.bwf.bext.OriginatorReference // empty' "$JSON")
-ODATE=$($JQ -r '.bwf.bext.OriginationDate // empty' "$JSON")
-OTIME=$($JQ -r '.bwf.bext.OriginationTime // empty' "$JSON")
-CHIST=$($JQ -r '.bwf.bext.CodingHistory // [] | join("\n")' "$JSON")
-
-# INFO fields
-TITLE=$($JQ -r '.title // empty' "$JSON")
-ARTIST=$($JQ -r '.participants.artist // empty' "$JSON")
-ALBUM=$($JQ -r '.participants.album // empty' "$JSON")
-CREATED=$($JQ -r '.date_created_utc // empty' "$JSON")
-
-# Build CORE CSV (headers accepted by BWF MetaEdit for bext/INFO)
-# Columns include FileName so import knows which file to target.
-{
-  echo "FileName,Description,Originator,OriginatorReference,OriginationDate,OriginationTime,CodingHistory,INAM,IART,IPRD,ICRD"
-  echo "\"$OUT\",\"$DESC\",\"$ORIG\",\"$ORIGREF\",\"$ODATE\",\"$OTIME\",\"$CHIST\",\"$TITLE\",\"$ARTIST\",\"$ALBUM\",\"$CREATED\""
-} > "$CORECSV"
-
-# Optional iXML note
-IXML_NOTE=$($JQ -r '.bwf.iXML_note // empty' "$JSON")
-if [[ -n "$IXML_NOTE" ]]; then
-  cat > "$IXML" <<XML
-<?xml version="1.0" encoding="UTF-8"?>
-<iXML_VERSION xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">1.5</iXML_VERSION>
-<NOTE>$IXML_NOTE</NOTE>
-XML
-fi
-
-# Optional EBUCore aXML (use your earlier aXML; minimal one here)
-EMBED_AXML=$($JQ -r '.bwf.ebucore_axml // empty' "$JSON")
-if [[ "$EMBED_AXML" == "embed" ]]; then
-  TITLE_ESC=$(printf "%s" "$TITLE" | sed 's/&/&amp;/g; s/</&lt;/g; s/>/&gt;/g')
-  ISRC=$($JQ -r '.ids.isrc // empty' "$JSON")
-  DATE=$($JQ -r '.date_created_utc // empty' "$JSON")
-  SUMM=$($JQ -r '.provenance.summary // empty' "$JSON")
-  TOOLS=$($JQ -r '.provenance.tools | join("; ") // empty' "$JSON")
-  PURL=$($JQ -r '.provenance.provenance_url // empty' "$JSON")
-  RCOPY=$($JQ -r '.rights.copyright // empty' "$JSON")
-
-  cat > "$AXML" <<XML
-<?xml version="1.0" encoding="UTF-8"?>
-<ebucore:ebuCoreMain xmlns:ebucore="urn:ebu:metadata-schema:ebucore" xml:lang="en">
-  <ebucore:coreMetadata>
-    <ebucore:title>$TITLE_ESC</ebucore:title>
-    <ebucore:identifier typeLabel="ISRC">$ISRC</ebucore:identifier>
-    <ebucore:dateCreated>$DATE</ebucore:dateCreated>
-    <ebucore:description typeLabel="Provenance">$SUMM</ebucore:description>
-    <ebucore:comment typeLabel="Tools">$TOOLS</ebucore:comment>
-    <ebucore:rights>
-      <ebucore:rightsSummary>$RCOPY</ebucore:rightsSummary>
-    </ebucore:rights>
-    <ebucore:locator href="$PURL" typeLabel="Provenance URL"/>
-  </ebucore:coreMetadata>
-</ebucore:ebuCoreMain>
-XML
-fi
-
-# If OUT different from IN, copy audio first (safe write)
+# --- copy if OUT differs ---
 if [[ "$OUT" != "$IN" ]]; then
-  cp -p "$IN" "${OUT}"
+  cp -p -- "$IN" "$OUT"
+else
+  OUT="$IN"
 fi
 
-# Import CORE into WAV and save.
-# (BWF MetaEdit supports import/export of CORE CSV/XML and saving changes;
-# exact CLI flag names vary by build/package, but commonly accept an import of a CORE doc then Save.)
-# At 25.04.1 version of bwfmetaedit, no such option exists
-## "$BWF" --import-core "$CORECSV" --save "$OUT"
-
-# Inject iXML/aXML if provided (many builds allow XML chunk import via CLI; if not, you can paste via GUI)
-if [[ -s "$IXML" ]]; then
-  "$BWF" --in-iXML="$IXML" "$IN" || true
+# --- safe CLI operation: embed/evaluate audio-data MD5 ---
+if [[ $DO_MD5 -eq 1 ]]; then
+  # Embed the essence MD5 (<MD5 > chunk) if missing; then evaluate.
+  # These are documented CLI options and widely used in preservation workflows. :contentReference[oaicite:5]{index=5}
+  if bwfmetaedit --MD5-Embed --reject-overwrite "$OUT" >/dev/null 2>&1; then
+    echo "[bwfmetaedit] Embedded audio-data MD5 (<MD5 >) into: $OUT"
+  else
+    echo "[bwfmetaedit] Note: MD5 may already be present (or embedding rejected)." >&2
+  fi
+  if bwfmetaedit --MD5-Evaluate "$OUT" >/dev/null 2>&1; then
+    echo "[bwfmetaedit] Evaluated audio-data MD5 successfully."
+  else
+    echo "[bwfmetaedit] WARNING: could not evaluate MD5 (check file/logs)." >&2
+  fi
+else
+  echo "Skipping MD5 embed/evaluate (--no-md5)."
 fi
-cp -pf $OUT $IN
-if [[ -s "$AXML" ]]; then
-  "$BWF" --in-aXML="$AXML" "$IN" || true
-fi
 
-echo "WAV metadata embedded -> $OUT"
+echo "WAV processing complete -> $OUT"
+
+cat <<'TIP'
+
+Tip:
+- To write/modify bext & LIST-INFO fields (Description, Originator, etc.) in batch,
+  use BWF MetaEdit GUI with CORE CSV/XML import, then Save.
+- ExifTool can READ RIFF/LIST-INFO from WAV but does NOT currently write RIFF WAVE;
+  don’t rely on it for WAV writing. See:
+    * https://exiftool.org/TagNames/RIFF.html  (notes about write support)  :contentReference[oaicite:6]{index=6}
+    * Example error: “Can't currently write RIFF WAVE files”                 :contentReference[oaicite:7]{index=7}
+TIP
 ```
 
 ### `json-to-mp3.sh` — embed into MP3 (ID3 v2.3 + cover art)
