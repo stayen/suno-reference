@@ -884,20 +884,22 @@ exit $rc
 
 Like this: `./embed-art-to-mp3.sh newart.jpg in.mp3 out.mp3`
 
-### A.5
+### A.5 Put master + derivations into **S3 Object Lock** (record **VersionIDs**); optionally pin to **IPFS** and record the **CID**
 
-5) Put master + derivations into **S3 Object Lock** (record **VersionIDs**); optionally pin to **IPFS** and record the **CID**. 
+For any future inquiries, it's a good idea to keep the original files (mastered and normalized .wav and the derived tracks, such as .mp3 and .mp4) into an immutable and reliable storage, such as S3 Object Lock  buckets, or IPFS.
 
-### A.6
+Detailed instructions on that are still to be written. It's a good idea to also keep a backup copy of all the media files, art and projects created by Audacity or your audio editor of choice, as well.
 
-6) Update your **provenance page** (JSON-LD + human section).  
+### A.6 Update your **provenance page** (JSON-LD + human section)
 
-### A.7
+Creating a provenance page template for your favorite CMS can be a challenge, this set of topics to be covered later.
 
-7) Upload to **Bandcamp/SoundCloud** (playground, feedback) and to distributor (Spotify/Apple/YouTube Music). Include **plain-English AI disclosure** in descriptions. 
+An example of real-life provenance page: [Wilds Collection - Gravel Of Time](https://kamaskera.com/tracks/2570/).
 
-### A.8
+### A.7 Upload to distribution services and similar platforms.
 
-8) After publish: check platform pages, screenshots, archive distributor IDs, and add the entry to your **provenance index**.
+Upload to **Bandcamp/SoundCloud** (playground, feedback) and to distributor (Spotify/Apple/YouTube Music). Include **plain-English AI disclosure** in descriptions. 
 
-#### END
+### A.8 Post-publishing
+
+Check platform pages, screenshots, archive distributor IDs, and add the entry to your **provenance index** (you do keep one, don't you?).
