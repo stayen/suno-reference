@@ -98,9 +98,9 @@ Know your terms when doing this additional mastering.
 
 Typical values, Spotify-friendly, are: LUFS -14, TP -1.0dB, LRA 11 (LRA defines dynamic range; 15 is the widest - say, for classical pieces; 4-7 mean very narrow range; choose depending on the track type and mood)
 
-#### Using ffmpeg-normalize
+#### A.1.1 Using ffmpeg-normalize
 
-##### Denoising: Pick one of these **pre-filter** chains for `-prf`:
+##### A.1.1.1 Denoising: Pick one of these **pre-filter** chains for `-prf`:
 
 *   **General broadband noise (fast):** FFT denoise  
     `-prf "highpass=60,lowpass=16000,afftdn=nr=12:nf=-45"`  
@@ -114,42 +114,93 @@ Typical values, Spotify-friendly, are: LUFS -14, TP -1.0dB, LRA 11 (LRA defines 
 
 > Tip: You can chain filters with commas. Keep the HP/LP filters gentle to avoid tonal damage. [openwebsite.github.io](https://openwebsite.github.io/ffmpeg/ffmpeg-filters.html)
 
-#### Using custom 'loudnorm-two-pass.sh' script
+##### A.1.1.2 Normalize toward −14 / −1.0 / ≤11
 
-The script:
+“Hit LUFS, keep musical LRA (soft-lock), accept lower TP + denoise”
+
+This favors LUFS and lets true peak float **below** −1 dBTP (which is fine), while **not** forcing LRA under your target.
+
+```bash
+ffmpeg-normalize "in.wav" \
+  -nt ebu -t -14 -tp -1.0 -lrt 11 --keep-lra-above-loudness-range-target \
+  -prf "highpass=60,lowpass=16000,afftdn=nr=12:nf=-45" \
+  -c:a pcm_s24le -p -o "out.wav"
+```
+
+Why this set?
+
+*   `-t -14` is the LUFS goal; `-tp -1.0` is a ceiling (ending at −2.5 dBTP etc. is _okay_).
+*   `--keep-lra-above-loudness-range-target` avoids squashing dynamics below **11 LU** unless truly needed.
+
+**Note**: TP is the cap, not the goal; if it's absolutely required, you could have to use several runs using different parameters.
+
+##### A.1.1.3 Keep LRA locked (strict), still favor LUFS
+
+If you want LRA **held ~at your target** (or the input if already > target), use:
+
+```bash
+ffmpeg-normalize "in.wav" \
+  -nt ebu -t -14 -tp -1.0 -lrt 11 --keep-loudness-range-target \
+  -prf "anlmdn=s=0.0003" \
+  -c:a pcm_s24le -p -o "out.wav"
+```
+
+*   `--keep-loudness-range-target` tells the tool to preserve the **LRA target** so linear (two-pass) normalization is preferred; it won’t aggressively compress LRA. If the exact LUFS/TP/LRA triangle can’t be satisfied linearly, the tool may switch strategy, but this flag biases it to **keep LRA**. [SLHCK](https://slhck.info/ffmpeg-normalize/usage/options/)
+
+##### A.1.1.4 Batch a folder
+
+```bash
+ffmpeg-normalize *.wav -of normalized -ext wav \
+  -nt ebu -t -14 -tp -1.0 -lrt 11 --keep-lra-above-loudness-range-target \
+  -prf "highpass=60,lowpass=16000,afftdn=nr=10" \
+  -c:a pcm_s24le -p
+```
+
+Creates `normalized/` with processed files.
+
+---
+
+#### A.1.2 Using custom 'loudnorm-two-pass.sh' script
+
+The script `loudnorm-two-pass.sh`:
 
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Loudness normalize WAV (or any audio) to target LUFS and True Peak using FFmpeg loudnorm (two-pass).
-# Requirements: ffmpeg, jq
-# Example:
-#   ./loudnorm-two-pass.sh -i in.wav -o out.wav -I -14 -T -1.0 -L 11
+# FFmpeg two-pass EBU R128 normalization with optional convergence loop.
+# Requires: ffmpeg, jq
+#
+# Why iterate? In linear mode TP is a ceiling, not a target; dynamic mode can land LUFS slightly off.
+# We trust verify JSON (pass 3) and nudge by target_offset until LUFS is on point. TP stays ≤ target.
+#
+# Refs: Two-pass loudnorm & measured_* fields; TP acts as a ceiling. 
+# (See docs/guides cited in your notes.)
 
 usage() {
   cat <<'USAGE'
 Usage:
-  loudnorm-two-pass.sh -i INPUT -o OUTPUT [-I LUFS] [-T dBTP] [-L LRA] [--linear true|false] [--dualmono true|false]
+  loudnorm-two-pass.sh -i INPUT -o OUTPUT [options]
 
 Options (defaults in brackets):
-  -i, --input     Input audio file (wav/mp3/flac/m4a etc.)
-  -o, --output    Output WAV file (pcm_s24le by default)
-  -I, --lufs      Target integrated loudness LUFS         [-14]
-  -T, --tp        Target true peak (dBTP)                 [-1.0]
-  -L, --lra       Target loudness range (LU)              [11]
-      --linear    Linear normalization mode               [true]
-      --dualmono  Dual-mono correction                    [false]
-      --codec     Output audio codec (e.g. pcm_s24le)     [pcm_s24le]
-      --verify    After pass 2, run a verify measurement  [on]
-
-Notes:
-- Two-pass loudnorm requires measured_* values from pass 1 to be fed into pass 2. (FFmpeg docs)
-- Target LRA should not be lower than the source LRA; if constraints are violated, filter may revert to dynamic mode. (FFmpeg docs)
+  -I, --lufs LUFS        Target integrated loudness [ -14 ]
+  -T, --tp DBTP          Target true peak (ceiling) [ -1.0 ]
+  -L, --lra LU           Target loudness range      [ 11 ]
+      --linear true|false   Prefer linear mode when possible [ true ]
+      --dualmono true|false Dual-mono correction             [ false ]
+      --codec CODEC         Output codec (WAV)               [ pcm_s24le ]
+      --verify              Print verify JSON after pass 2   [ on ]
+      --converge            Iterate until LUFS within tol    [ off ]
+      --tol-lufs N          LUFS tolerance (abs)             [ 0.2 ]
+      --max-iters N         Max convergence iterations       [ 4 ]
+      --lock-lra            Use source LRA (rounded) instead of -L
+      --nudge-tp            If TP ≪ target, relax to -0.8 once
+  -i, --input  PATH
+  -o, --output PATH
 USAGE
 }
 
-# --- defaults ---
+# defaults
 I_TARGET="-14"
 TP_TARGET="-1.0"
 LRA_TARGET="11"
@@ -157,9 +208,15 @@ LINEAR="true"
 DUALMONO="false"
 CODEC="pcm_s24le"
 VERIFY=1
+CONVERGE=0
+TOL_LUFS="0.2"
+MAX_ITERS=4
+LOCK_LRA=0
+NUDGE_TP=0
 
-# --- parse args ---
 IN="" ; OUT=""
+
+# parse args
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -i|--input)   IN="$2"; shift 2;;
@@ -171,76 +228,311 @@ while [[ $# -gt 0 ]]; do
     --dualmono)   DUALMONO="$2"; shift 2;;
     --codec)      CODEC="$2"; shift 2;;
     --verify)     VERIFY=1; shift;;
+    --converge)   CONVERGE=1; shift;;
+    --tol-lufs)   TOL_LUFS="$2"; shift 2;;
+    --max-iters)  MAX_ITERS="$2"; shift 2;;
+    --lock-lra)   LOCK_LRA=1; shift;;
+    --nudge-tp)   NUDGE_TP=1; shift;;
     -h|--help)    usage; exit 0;;
     *) echo "Unknown arg: $1" >&2; usage; exit 1;;
   esac
 done
 
-[[ -n "$IN" && -n "$OUT" ]] || { usage; exit 1; }
 command -v ffmpeg >/dev/null || { echo "Missing: ffmpeg" >&2; exit 1; }
 command -v jq >/dev/null     || { echo "Missing: jq" >&2; exit 1; }
-[[ -f "$IN" ]] || { echo "Input not found: $IN" >&2; exit 1; }
+[[ -f "${IN:-}" ]] || { usage; echo "Input not found." >&2; exit 1; }
+[[ -n "${OUT:-}" ]] || { usage; echo "Output path required." >&2; exit 1; }
 
-# --- PASS 1: measure ---
-echo "[1/3] Measuring loudness on: $IN"
-PASS1_LOG="$(mktemp)"
-# We capture the JSON block from stderr and keep only the JSON object.
-ffmpeg -hide_banner -nostdin -i "$IN" \
-  -af "loudnorm=I=${I_TARGET}:TP=${TP_TARGET}:LRA=${LRA_TARGET}:print_format=json" \
-  -f null - 2> "$PASS1_LOG" || true
-
-# Extract first JSON object from the log (loudnorm prints one).
-MEASURE_JSON="$(awk 'BEGIN{p=0} /^\s*\{/{p=1} p{print} /^\s*\}/{if(p){exit}}' "$PASS1_LOG")"
-if [[ -z "$MEASURE_JSON" ]]; then
-  echo "ERROR: Could not capture loudnorm JSON from pass 1." >&2
-  exit 2
-fi
-
-# --- parse pass-1 JSON safely ---
-meas_I=$(echo "$MEASURE_JSON"      | jq -r '.measured_I // .input_i')
-meas_LRA=$(echo "$MEASURE_JSON"    | jq -r '.measured_LRA // .input_lra')
-# FFmpeg prints measured_TP (capital TP); some builds show measured_tp/input_tp
-meas_TP=$(echo "$MEASURE_JSON"     | jq -r '.measured_TP // .measured_tp // .input_tp')
-meas_thresh=$(echo "$MEASURE_JSON" | jq -r '.measured_thresh // .input_thresh // empty')
-meas_offset=$(echo "$MEASURE_JSON" | jq -r '.target_offset // .offset // empty')
-
-echo "  measured_I=$meas_I, measured_LRA=$meas_LRA, measured_TP=$meas_TP, measured_thresh=${meas_thresh:-<none>}, offset=${meas_offset:-<none>}"
-
-# If measured_thresh is missing, dynamic mode is safer than forcing linear=true
-EFFECTIVE_LINEAR="$LINEAR"
-if [[ -z "$meas_thresh" && "$LINEAR" == "true" ]]; then
-  echo "  note: measured_thresh is missing; falling back to linear=false for pass 2."
-  EFFECTIVE_LINEAR="false"
-fi
-
-# --- build pass-2 filter string (only include present keys) ---
-FILTER="loudnorm=I=${I_TARGET}:TP=${TP_TARGET}:LRA=${LRA_TARGET}:linear=${EFFECTIVE_LINEAR}:dual_mono=${DUALMONO}"
-FILTER="${FILTER}:measured_I=${meas_I}:measured_LRA=${meas_LRA}:measured_TP=${meas_TP}"
-[[ -n "$meas_thresh" ]] && FILTER="${FILTER}:measured_thresh=${meas_thresh}"
-[[ -n "$meas_offset" ]] && FILTER="${FILTER}:offset=${meas_offset}"
-FILTER="${FILTER}:print_format=summary"
-
-echo "[2/3] Applying normalization to: $OUT"
-ffmpeg -hide_banner -y -nostdin -i "$IN" -c:a "$CODEC" -af "$FILTER" "$OUT"
-
-# --- PASS 3: verify (optional) ---
-if [[ $VERIFY -eq 1 ]]; then
-  echo "[3/3] Verifying result:"
-  ffmpeg -hide_banner -nostdin -i "$OUT" \
+# helpers
+measure_once() { # prints compact JSON from pass 1 or verify run
+  local src="$1"
+  ffmpeg -hide_banner -nostdin -i "$src" \
     -af "loudnorm=I=${I_TARGET}:TP=${TP_TARGET}:LRA=${LRA_TARGET}:print_format=json" \
     -f null - 2>&1 \
     | awk 'BEGIN{p=0} /^\s*\{/{p=1} p{print} /^\s*\}/{if(p){exit}}'
-fi
+}
 
-rm -f "$PASS1_LOG"
+build_and_apply() {
+  local src="$1" dst="$2" mI="$3" mLRA="$4" mTP="$5" mTH="$6" mOFF="$7" linear="$8" lra_run="$9"
+  local FILTER="loudnorm=I=${I_TARGET}:TP=${TP_TARGET}:LRA=${lra_run}:linear=${linear}:dual_mono=${DUALMONO}"
+  FILTER="${FILTER}:measured_I=${mI}:measured_LRA=${mLRA}:measured_TP=${mTP}"
+  [[ -n "$mTH"  ]] && FILTER="${FILTER}:measured_thresh=${mTH}"
+  [[ -n "$mOFF" ]] && FILTER="${FILTER}:offset=${mOFF}"
+  FILTER="${FILTER}:print_format=summary"
+  ffmpeg -hide_banner -y -nostdin -i "$src" -c:a "$CODEC" -af "$FILTER" "$dst"
+}
+
+abs() { awk -v x="$1" 'BEGIN{x=(x<0?-x:x); printf("%.6f",x)}'; }
+floatle() { awk -v a="$1" -v b="$2" 'BEGIN{exit !(a<=b)}'; }
+
+# PASS 1: measure
+echo "[1/3] Measuring: $IN"
+P1="$(measure_once "$IN")"
+[[ -n "$P1" ]] || { echo "Could not capture pass-1 JSON." >&2; exit 2; }
+
+meas_I=$(echo "$P1"      | jq -r '.measured_I // .input_i')
+meas_LRA=$(echo "$P1"    | jq -r '.measured_LRA // .input_lra')
+meas_TP=$(echo "$P1"     | jq -r '.measured_TP // .measured_tp // .input_tp')
+meas_TH=$(echo "$P1"     | jq -r '.measured_thresh // .input_thresh // empty')
+meas_OFF=$(echo "$P1"    | jq -r '.target_offset // .offset // empty')
+
+echo "  pass1: measured_I=$meas_I, LRA=$meas_LRA, TP=$meas_TP, thresh=${meas_TH:-<none>}, offset=${meas_OFF:-<none>}"
+
+# choose mode + LRA
+EFFECTIVE_LINEAR="$LINEAR"
+[[ -n "$meas_TH" ]] || EFFECTIVE_LINEAR="false"
+LRA_RUN="$LRA_TARGET"
+[[ $LOCK_LRA -eq 1 && -n "$meas_LRA" ]] && LRA_RUN="$(printf '%.0f\n' "$meas_LRA")"
+
+# PASS 2: apply (first attempt)
+echo "[2/3] Applying: I=$I_TARGET TP=$TP_TARGET LRA=$LRA_RUN linear=$EFFECTIVE_LINEAR"
+build_and_apply "$IN" "$OUT" "$meas_I" "$meas_LRA" "$meas_TP" "$meas_TH" "$meas_OFF" "$EFFECTIVE_LINEAR" "$LRA_RUN"
+
+# VERIFY & optional convergence
+iter=0
+while :; do
+  echo "[3/3] Verifying ($((iter+1)))…"
+  V="$(measure_once "$OUT")"
+  echo "$V"
+  out_I=$(echo "$V"  | jq -r '.output_i // .input_i')
+  out_TP=$(echo "$V" | jq -r '.output_TP // .output_tp // .input_tp')
+  t_off=$(echo "$V"  | jq -r '.target_offset // "0"')
+  # stop if within tolerance or no convergence requested
+  diff_I=$(awk -v a="$out_I" -v b="$I_TARGET" 'BEGIN{print a-b}')
+  [[ $CONVERGE -eq 0 ]] && break
+  [[ $(abs "$diff_I") = $(abs "$diff_I") ]] # ensure numeric
+
+  if floatle "$(abs "$diff_I")" "$TOL_LUFS"; then
+    break
+  fi
+
+  # optional TP nudge: if measured TP << target, relax once to -0.8
+  if [[ $NUDGE_TP -eq 1 ]]; then
+    tp_gap=$(awk -v a="$TP_TARGET" -v b="$out_TP" 'BEGIN{print a - b}') # negative if out_TP < target
+    # If TP is more than ~0.7 dB below target and we haven't nudged yet, relax to -0.8
+    if awk 'BEGIN{exit !('$tp_gap' > 0.7)}'; then
+      echo "  note: output TP well below ceiling; relaxing TP target to -0.8 dBTP once."
+      TP_TARGET="-0.8"
+    fi
+  fi
+
+  # adjust LUFS target by reported target_offset (usually negative when too hot)
+  new_I=$(awk -v I="$I_TARGET" -v off="$t_off" 'BEGIN{printf("%.2f", I + off)}')
+  echo "  converge: I_target $I_TARGET -> $new_I  (offset $t_off)"
+  I_TARGET="$new_I"
+
+  # re-run pass 2 with updated I (& possibly TP)
+  echo "[2/3] Re-applying: I=$I_TARGET TP=$TP_TARGET LRA=$LRA_RUN linear=$EFFECTIVE_LINEAR"
+  build_and_apply "$IN" "$OUT" "$meas_I" "$meas_LRA" "$meas_TP" "$meas_TH" "$meas_OFF" "$EFFECTIVE_LINEAR" "$LRA_RUN"
+
+  iter=$((iter+1))
+  [[ $iter -ge $MAX_ITERS ]] && { echo "Reached max iterations ($MAX_ITERS)."; break; }
+done
+
 echo "Done."
 ```
 
-1) Run **`loudnorm-two-pass.sh`** to hit **I=−14 LUFS, TP≤−1 dBTP**; verify JSON; if LUFS off, iterate by `target_offset`. Save the verify JSON. citeturn0search3  
-2) **Render & commit the master** (48k/24 WAV). Export MP3/MP4 from it.  
+Typical usage:
+`./loudnorm-two-pass.sh -i in.wav -o out.wav -I -14.9 -T -1.0 -L 11`
+
+Pay attention to the final values of the loudness parameters, i.e. those printed like:
+```
+Input Integrated:    -10.4 LUFS
+Input True Peak:      -0.2 dBTP
+Input LRA:             3.7 LU
+Input Threshold:     -20.4 LUFS
+
+Output Integrated:   -13.9 LUFS
+Output True Peak:     -3.8 dBTP
+Output LRA:            3.8 LU
+Output Threshold:    -24.0 LUFS
+```
+
+Most probably "Output True Peak" may be lower if LRA and LUFS are to be met. Use "--converge" for an iterative approach on meeting the target values.
+
 3) Generate **file SHA-256** and **audio stream hash**; write both into the sidecar + page.  
-4) Put master + derivations into **S3 Object Lock** (record **VersionIDs**); optionally pin to **IPFS** and record the **CID**. citeturn0search0turn0search1  
+4) Put master + derivations into **S3 Object Lock** (record **VersionIDs**); optionally pin to **IPFS** and record the **CID**. 
 5) Fill the **sidecar**: identities (ISRC/opus), credits, AI disclosure, loudness, hashes, storage IDs.  
 6) Update your **provenance page** (JSON-LD + human section).  
-7) Upload to **Bandcamp/SoundCloud** (playground, feedback) and to distributor (Spotify/Apple/YouTube Music). Include **plain-English AI disclosure** in descriptions. citeturn1search5turn1search2  
+7) Upload to **Bandcamp/SoundCloud** (playground, feedback) and to distributor (Spotify/Apple/YouTube Music). Include **plain-English AI disclosure** in descriptions. 
 8) After publish: check platform pages, screenshots, archive distributor IDs, and add the entry to your **provenance index**.
+
+---
+
+### A.2 Generate .mp3 and .mp4
+
+Use the `convert.sh` script below:
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+#
+# Converts .wav to .mp3 and .mp4 with an image used as track art (.mp3) and static background (.m4)
+#
+
+if [[ "p$3" == "p" ]]; then
+    echo "$0 src_wav dst_prefix image_file"
+    exit 0
+fi
+export SRC_WAV="$1"
+export DST_PREFIX="$2"
+export IMG_SRC="$3"
+
+if [[ ! -e "$SRC_WAV" || ! -e "$IMG_SRC" ]]; then
+    echo "$0: either source WAV ($SRC_WAV) or image file ($IMG_SRC) can't be accessed"
+    exit 1
+fi
+
+rm -f output.mp3
+ffmpeg -i "$SRC_WAV" -vn -ar 44100 -ac 2 -q:a 2 output.mp3
+ffmpeg -i output.mp3 -i "$IMG_SRC" -map_metadata 0 -map 0 -map 1 -acodec copy "${DST_PREFIX}.mp3"
+rm -f output.mp3
+ffmpeg -loop 1 -i "$IMG_SRC" -i "${DST_PREFIX}.mp3" -c:a copy -c:v libx264 -shortest "${DST_PREFIX}.mp4"
+```
+
+Where image file should be a square image file, at least 1024x1024 (see also "embed.sh" below). The script produces .mp3 with embedded track art, and a video .mp4 with static background (suitable for YouTube).
+
+### A.3 Generate **file SHA-256** and **audio stream hash**
+
+At this point, prepare a JSON metadata (will be fully filled in further steps), sample `track.meta.json` below.
+
+```json
+{
+  "title": "Famous Me",
+  "version": "v1.0",
+  "date_created_utc": "2025-09-29T16:52:41Z",
+  "ids": {
+    "isrc": "QT3F52558856",
+    "upc": "199741081383",
+    "musicbrainz_recording_id": ""
+  },
+  "participants": {
+    "artist": "John Doe",
+    "album_artist": "John Doe",
+    "album": "Famous Me",
+    "composer": "Firstname Lastname",
+    "lyricist": "Firstname Lastname",
+    "producer": "Firstname Lastname",
+    "label": "Josh Magnificent"
+  },
+  "provenance": {
+    "summary": "Human-written lyrics; AI assisted vocals derived from human-recorded vocals. AI assisted music generation. No impersonations; no third-party samples.",
+    "ai_involvement": {
+      "lyrics": "human",
+      "vocals": "AI assisted, based upon human vocals records",
+      "composition_arrangement": "ai_assisted",
+      "sound_design": "ai_assisted",
+      "mix_master": "human"
+    },
+    "tools": [
+      "Suno v5.0",
+      "Producer FUZZ-2.0",
+      "Audacity 3.4.2",
+      "ffmpeg"
+    ],
+    "provenance_url": "https://example.com/tracks/XTZ/"
+  },
+  "rights": {
+    "copyright": "© 2025 John Doe",
+    "rights_summary": "All rights reserved. No model training without consent.",
+    "publisher": "Josh Magnificent"
+  },
+  "tech": {
+    "genre": "Epic Rock, Aria",
+    "track_number": "1",
+    "disc_number": "1",
+    "duration_iso": "PT3M14S",
+    "loudness": {
+      "integrated_lufs": -14.0,
+      "lra": 11,
+      "max_true_peak_db": -1.0,
+      "wav": {
+        "integrated_lufs": 0.0,
+        "lra": 0.00,
+        "max_true_peak_db": 0.0
+      },
+      "mp3": {
+        "integrated_lufs": 0.0,
+        "lra": 0.00,
+        "max_true_peak_db": 0.0
+      },
+      "mp4": {
+        "integrated_lufs": 0.0,
+        "lra": 0.00,
+        "max_true_peak_db": 0.0
+      }
+    },
+    "encoder_note": "Lavf60.16.100"
+  },
+  "artwork": {
+    "path": "https://media.kamaskera.com/tracks/XTZ-512.jpg",
+    "type": "front",
+    "mime": "image/jpeg",
+    "pixels": "512x512"
+  },
+  "bwf": {
+    "bext": {
+      "Description": "Ghost-pop/Indie rap v1.0, AI assisted vocals derived from human vocals records; AI-assisted instrumental",
+      "Originator": "Josh Magnificent",
+      "OriginatorReference": "XTZ",
+      "OriginationDate": "2025-09-29",
+      "OriginationTime": "16:52:41",
+      "CodingHistory": [
+        "A=PCM,F=48000,W=24,M=stereo,T=Audacity print",
+        "Edit=arrangement polish; Suno/Producer ideation; re-performed",
+        "Master=Limiter ceiling -1.0 dBTP"
+      ],
+      "UMID": ""
+    },
+    "iXML_note": "Human-written lyrics; AI assisted vocals derived from human-recorded vocals. AI assisted music generation. No impersonations; no third-party samples.",
+    "ebucore_axml": "embed"
+  },
+  "id3": {
+    "prefer_version": "2.3",
+    "urls": {
+      "work_page": "https://example.com/tracks/XTZ/",
+      "artist_page": "https://example.com/"
+    },
+    "comments": [
+      "Provenance: human lyrics; AI assisted vocals derived from human vocals records; AI-assisted instrumentals; no impersonations."
+    ],
+    "custom_txxx": {
+      "AI_Involvement": "Lyrics human; Arrangement/Sound design AI-assisted; Tools: Suno v5.0, Producer FUZZ-2.0, Audacity 3.4.2",
+      "Provenance_URL": "https://example.com/tracks/XTZ/",
+      "Tools": "Suno v5.0; Producer FUZZ-2.0; Audacity 3.4.2; ffmpeg"
+    },
+    "sort_fields": {
+      "TSOP": "Josh Magnificent",
+      "TSOA": "The Bliss",
+      "TSOT": "Famous Me"
+    }
+  },
+  "checksums": {
+    "file_sha256": {
+      "wav": "",
+      "mp3": "",
+      "mp4": ""
+    },
+    "audio_stream_sha256": {
+      "wav": "",
+      "mp3": "",
+      "mp4": ""
+    },
+    "audio_hash_sha256": {
+      "wav": "",
+      "mp3": "",
+      "mp4": ""
+    }
+  },
+  "media" : {
+    "versionid": {
+      "wav": "",
+      "mp3": "",
+      "mp4": ""
+    }
+  }
+}
+```
+
+#### END
