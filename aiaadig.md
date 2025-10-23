@@ -350,13 +350,6 @@ Output Threshold:    -24.0 LUFS
 
 Most probably "Output True Peak" may be lower if LRA and LUFS are to be met. Use "--converge" for an iterative approach on meeting the target values.
 
-3) Generate **file SHA-256** and **audio stream hash**; write both into the sidecar + page.  
-4) Put master + derivations into **S3 Object Lock** (record **VersionIDs**); optionally pin to **IPFS** and record the **CID**. 
-5) Fill the **sidecar**: identities (ISRC/opus), credits, AI disclosure, loudness, hashes, storage IDs.  
-6) Update your **provenance page** (JSON-LD + human section).  
-7) Upload to **Bandcamp/SoundCloud** (playground, feedback) and to distributor (Spotify/Apple/YouTube Music). Include **plain-English AI disclosure** in descriptions. 
-8) After publish: check platform pages, screenshots, archive distributor IDs, and add the entry to your **provenance index**.
-
 ---
 
 ### A.2 Generate .mp3 and .mp4
@@ -403,8 +396,8 @@ At this point, prepare a JSON metadata (will be fully filled in further steps), 
   "version": "v1.0",
   "date_created_utc": "2025-09-29T16:52:41Z",
   "ids": {
-    "isrc": "QT3F52558856",
-    "upc": "199741081383",
+    "isrc": "QT-XX-VV-RR-12345",
+    "upc": "NONE-SO-FAR",
     "musicbrainz_recording_id": ""
   },
   "participants": {
@@ -534,5 +527,377 @@ At this point, prepare a JSON metadata (will be fully filled in further steps), 
   }
 }
 ```
+
+Enter the AI assistance comments (see above for the sample). Store the above "sidecar file" for further use.
+
+Now use the below `make-hashes.sh` script to store the media files checksums into the sidecar. Note: the streaming hash is related to the actual audio stream. It is usually not changed if the file changes metadata (unlike the hash checksum for the entire media file).
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Fuses: file SHA-256 + FFmpeg audio essence hashes + EBU R128 loudness +
+# encoder note (MP3). Optionally embeds BWF audio-data MD5 in WAV.
+
+usage() {
+  cat <<'USAGE'
+Usage:
+  make-hashes.sh [options] FILE [FILE2 ...]
+Options:
+  -j, --json PATH     Update (or create) sidecar JSON with results
+  -I, --lufs          Expected integrated loudness LUFS   [-14]
+  -T, --tp            Expected true peak (dBTP)           [-1.0]
+  -L, --lra           Expected loudness range (LU)        [11]
+  --bwf-embed         For .wav: embed BWF audio-data MD5 (<MD5 > chunk)
+  -q, --quiet         Less console output
+  -h, --help          This help
+
+Examples:
+  make-hashes.sh track.wav track.mp3 video.mp4
+  make-hashes.sh -j track.meta.json track.wav track.mp3 video.mp4
+  make-hashes.sh --bwf-embed -j track.meta.json track.wav
+USAGE
+}
+
+JSON=""
+BWF_EMBED=0
+QUIET=0
+I_TARGET="-14"
+TP_TARGET="-1.0"
+LRA_TARGET="11"
+
+ARGS=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -j|--json) JSON="$2"; shift 2;;
+    -I|--lufs) I_TARGET="$2"; shift 2;;
+    -T|--tp)   TP_TARGET="$2"; shift 2;;
+    -L|--lra)  LRA_TARGET="$2"; shift 2;;
+    --bwf-embed) BWF_EMBED=1; shift;;
+    -q|--quiet) QUIET=1; shift;;
+    -h|--help) usage; exit 0;;
+    --) shift; break;;
+    -*) echo "Unknown option: $1" >&2; usage; exit 1;;
+    *) ARGS+=("$1"); shift;;
+  esac
+done
+FILES=("${ARGS[@]}")
+[[ ${#FILES[@]} -eq 0 ]] && { usage; exit 1; }
+
+need() { command -v "$1" >/dev/null 2>&1 || { echo "Missing: $1" >&2; exit 1; }; }
+need sha256sum
+need ffmpeg
+command -v jq >/dev/null 2>&1 || echo "Note: jq not found; JSON sidecar updates will be disabled." >&2
+command -v ffprobe >/dev/null 2>&1 || echo "Note: ffprobe not found; encoder tag may be unavailable." >&2
+
+json_put() {
+  # json_put "dot.path.like.this" "value"
+  local key="$1" value="$2"
+  [[ -z "$JSON" ]] && return 0
+  command -v jq >/dev/null 2>&1 || return 0
+  [[ -f "$JSON" ]] || echo '{}' > "$JSON"
+  local tmp; tmp="$(mktemp)"
+
+  # Use setpath() with a path-array, and parse JSON values when possible.
+  jq --arg p "$key" --arg v "$value" '
+    def tokeys: split(".");
+    def maybe: (try ($v|fromjson) catch $v);
+    setpath( ($p|tokeys); maybe )
+  ' "$JSON" > "$tmp" && mv "$tmp" "$JSON"
+}
+
+extract_hash_value() { sed -E 's/.*=([0-9A-Fa-f]+).*/\1/'; }
+extract_streamhash_value() { awk -F= '{print $NF}' | tr -d '\r\n'; }
+
+get_loudness_json() {
+  # Prints a compact JSON with integrated_lufs, lra, max_true_peak_db
+  local f="$1"
+  # Run loudnorm once; capture the JSON block from stderr
+  local block
+  block="$( ffmpeg -hide_banner -i "$f" \
+            -filter:a loudnorm=I=${I_TARGET}:LRA=${LRA_TARGET}:TP=${TP_TARGET}:print_format=json \
+            -f null - 2>&1 \
+            | awk 'BEGIN{p=0} /^ *\{/{p=1} {if(p)print} /^ *\}/{if(p){exit}}' )" || true
+  if [[ -n "$block" ]]; then
+    # loudnorm outputs measured_* OR input_* fields depending on pass; prefer measured_*
+    echo "$block" | jq -c '{
+      integrated_lufs: ( .measured_I // .input_i ) | tonumber,
+      lra:             ( .measured_LRA // .input_lra ) | tonumber,
+      max_true_peak_db:( .measured_tp // .input_tp ) | tonumber
+    }' 2>/dev/null || true
+  fi
+}
+
+get_encoder_tag() {
+  local f="$1"
+  local enc=""
+  if command -v ffprobe >/dev/null 2>&1; then
+    enc="$( ffprobe -v error -show_entries format_tags=encoder \
+            -of default=nw=1:nk=1 "$f" 2>/dev/null || true )"
+  fi
+  if [[ -z "$enc" ]] && command -v mediainfo >/dev/null 2>&1; then
+    enc="$( mediainfo --Inform="General;%Encoded_Library%" "$f" 2>/dev/null || true )"
+    [[ -z "$enc" ]] && enc="$( mediainfo --Inform="Audio;%Encoded_Library%" "$f" 2>/dev/null || true )"
+  fi
+  echo "$enc"
+}
+
+if [[ $BWF_EMBED -eq 1 ]]; then
+  need bwfmetaedit
+fi
+
+for f in "${FILES[@]}"; do
+  [[ -f "$f" ]] || { echo "Not a file: $f" >&2; continue; }
+  base="$(basename "$f")"; ext="${f##*.}"; ext="${ext,,}"
+
+  # A) File-level SHA-256
+  sha256="$(sha256sum "$f" | awk '{print $1}')"
+  (( QUIET == 0 )) && echo "[${base}] file_sha256: $sha256"
+  case "$ext" in
+    wav) json_put "checksums.file_sha256.wav" "$sha256" ;;
+    mp3) json_put "checksums.file_sha256.mp3" "$sha256" ;;
+    mp4|m4v|mov) json_put "checksums.file_sha256.mp4" "$sha256" ;;
+    *)   json_put "checksums.file_sha256.$ext" "$sha256" ;;
+  esac
+
+  # B) Audio-essence hashes (per-stream + combined)
+  stream_sha256="$(
+    ffmpeg -v error -i "$f" -map 0:a:0 -f streamhash -hash sha256 - 2>/dev/null \
+      | tail -n1 | extract_streamhash_value
+  )"
+  if [[ -n "$stream_sha256" ]]; then
+    (( QUIET == 0 )) && echo "[${base}] audio_stream_sha256: $stream_sha256"
+    json_put "checksums.audio_stream_sha256.$ext" "$stream_sha256"
+  fi
+
+  combined="$(
+    ffmpeg -v error -i "$f" -map 0:a:0 -f hash -hash sha256 - 2>/dev/null \
+      | tail -n1 | extract_hash_value
+  )"
+  if [[ -n "$combined" ]]; then
+    (( QUIET == 0 )) && echo "[${base}] audio_hash_sha256:   $combined"
+    json_put "checksums.audio_hash_sha256.$ext" "$combined"
+  fi
+
+  # C) Optional BWF audio-data MD5 embed (WAV only)
+  if [[ $BWF_EMBED -eq 1 && "$ext" == "wav" ]]; then
+    if bwfmetaedit --MD5-Embed --reject-overwrite "$f" >/dev/null 2>&1; then
+      (( QUIET == 0 )) && echo "[${base}] BWF MD5 embedded (<MD5 > chunk)"
+      json_put "checksums.bwf_audio_md5.note" "Embedded in WAV <MD5 > chunk (view via BWF MetaEdit Tech export)."
+    else
+      echo "[${base}] WARN: Could not embed BWF MD5" >&2
+    fi
+  fi
+
+  # D) Loudness (Integrated LUFS, LRA, Max True Peak)
+  if [[ "$ext" == "wav" || "$ext" == "mp3" || "$ext" == "flac" || "$ext" == "mp4" || "$ext" == "m4a" ]]; then
+    lj="$( get_loudness_json "$f" )"
+    if [[ -n "$lj" ]]; then
+      (( QUIET == 0 )) && echo "[${base}] loudness: $lj"
+      # Write under tech.loudness.<ext> in the sidecar
+      json_put "tech.loudness.$ext" "$lj"
+    fi
+  fi
+
+  # E) Encoder note (MP3 focus)
+  if [[ "$ext" == "mp3" ]]; then
+    enc="$( get_encoder_tag "$f" )"
+    if [[ -n "$enc" ]]; then
+      note="$enc"
+      # If you keep a fixed ceiling in mastering, append it here or downstream.
+      json_put "tech.encoder_note" "$note"
+      (( QUIET == 0 )) && echo "[${base}] encoder_note: $note"
+    fi
+  fi
+
+done
+
+[[ -n "$JSON" && $QUIET -eq 0 ]] && echo "Updated sidecar JSON: $JSON"
+```
+
+Like this: `./make-hashes.sh -j track.meta.json track.wav track.mp3 video.mp4`
+
+### A.4 Conclude filling the sidecar AND embed metadata into audio files
+
+Check the sidecar file; if there are still missing records, fill them properly.
+
+Use `json-to-mp3.sh` script below to embed the .mp3 with metadata, including provenance records.
+
+```bash
+#!/usr/bin/env bash
+# json-to-mp3.sh
+# Usage: json-to-mp3.sh <json_sidecar> <in.mp3> [out.mp3]
+set -euo pipefail
+
+JQ=${JQ:-jq}
+FFMPEG=${FFMPEG:-ffmpeg}
+EYED3=${EYED3:-eyeD3}
+
+if [[ $# -lt 2 ]]; then
+  echo "Usage: $0 <json_sidecar> <in.mp3> [out.mp3]" >&2
+  exit 1
+fi
+
+JSON="$1"
+IN="$2"
+OUT="${3:-$2}"
+
+command -v "$JQ" >/dev/null || { echo "jq not found"; exit 1; }
+command -v "$FFMPEG" >/dev/null || { echo "ffmpeg not found"; exit 1; }
+command -v "$EYED3" >/dev/null || { echo "eyeD3 not found"; exit 1; }
+
+TITLE=$($JQ -r '.title // empty' "$JSON")
+ARTIST=$($JQ -r '.participants.artist // empty' "$JSON")
+ALBUM_ARTIST=$($JQ -r '.participants.album_artist // empty' "$JSON")
+ALBUM=$($JQ -r '.participants.album // empty' "$JSON")
+GENRE=$($JQ -r '.tech.genre // empty' "$JSON")
+DATE=$($JQ -r '.date_created_utc // empty' "$JSON")
+COMPOSER=$($JQ -r '.participants.composer // empty' "$JSON")
+LYRICIST=$($JQ -r '.participants.lyricist // empty' "$JSON")
+PUBLISHER=$($JQ -r '.rights.publisher // empty' "$JSON")
+COPYRIGHT=$($JQ -r '.rights.copyright // empty' "$JSON")
+ISRC=$($JQ -r '.ids.isrc // empty' "$JSON")
+
+COMM=$($JQ -r '.id3.comments[0] // empty' "$JSON")
+URL_WORK=$($JQ -r '.id3.urls.work_page // empty' "$JSON")
+URL_ARTIST=$($JQ -r '.id3.urls.artist_page // empty' "$JSON")
+
+TXXX_AI=$($JQ -r '.id3.custom_txxx.AI_Involvement // empty' "$JSON")
+TXXX_URL=$($JQ -r '.id3.custom_txxx.Provenance_URL // empty' "$JSON")
+TXXX_TOOLS=$($JQ -r '.id3.custom_txxx.Tools // empty' "$JSON")
+
+TSOP=$($JQ -r '.id3.sort_fields.TSOP // empty' "$JSON")
+TSOA=$($JQ -r '.id3.sort_fields.TSOA // empty' "$JSON")
+TSOT=$($JQ -r '.id3.sort_fields.TSOT // empty' "$JSON")
+
+ART_PATH=$($JQ -r '.artwork.path // empty' "$JSON")
+
+# If OUT differs, start from a fresh copy
+if [[ "$OUT" != "$IN" ]]; then
+  cp -p "$IN" "$OUT"
+fi
+
+# First pass: ffmpeg writes standard frames (v2.3)
+TMP="$OUT.tmp.mp3"
+$FFMPEG -y -i "$OUT" -id3v2_version 3 -codec copy \
+  -metadata title="$TITLE" \
+  -metadata artist="$ARTIST" \
+  -metadata album_artist="$ALBUM_ARTIST" \
+  -metadata album="$ALBUM" \
+  -metadata genre="$GENRE" \
+  -metadata date="$DATE" \
+  -metadata composer="$COMPOSER" \
+  -metadata lyricist="$LYRICIST" \
+  -metadata publisher="$PUBLISHER" \
+  -metadata copyright="$COPYRIGHT" \
+  -metadata TSRC="$ISRC" \
+  -metadata AI_Involvement="$TXXX_AI" \
+  -metadata Provenance_URL="$TXXX_URL" \
+  -metadata Tools="$TXXX_TOOLS" \
+  -metadata TSOP="$TSOP" \
+  -metadata TSOA="$TSOA" \
+  -metadata TSOT="$TSOT" \
+  "$TMP"
+
+mv "$TMP" "$OUT"
+
+# Second pass: ensure COMM and v2.3; clean/add art in a single APIC
+# Remove any existing images (avoid multiple APICs)
+$EYED3 --remove-all-images "$OUT" >/dev/null
+
+# Add Front Cover if provided
+if [[ -n "$ART_PATH" && -f "$ART_PATH" ]]; then
+  $EYED3 --add-image "$ART_PATH:FRONT_COVER" "$OUT" >/dev/null
+fi
+
+# Add comment explicitly as COMM
+if [[ -n "$COMM" ]]; then
+  $EYED3 --comment "$COMM" "$OUT" >/dev/null
+fi
+
+# Force ID3 v2.3 final tag flavor for broad compatibility
+$EYED3 --to-v2.3 "$OUT" >/dev/null
+
+echo "MP3 metadata embedded -> $OUT"
+```
+
+Like this: `./json-to-mp3 .sh track.meta.json in.mp3 out.mp3`
+
+In case the art is greater than 600x600px, it can have issues when the track is played on legacy devices; use the below script to  embed a lesser image than a typical track art.
+
+The script `embed-art-to-mp3.sh`:
+
+```bash
+#!/usr/bin/env bash
+# embed-art-mp3.sh
+# Cleanly (re)embed a single Front Cover image into MP3 files as ID3v2.3.
+
+set -euo pipefail
+
+if ! command -v eyeD3 >/dev/null 2>&1; then
+  echo "Error: eyeD3 not found." >&2
+  exit 1
+fi
+
+if [[ $# -lt 2 ]]; then
+  cat <<USAGE
+Usage: $0 <cover.jpg> <file-or-glob.mp3> [more.mp3 ...]
+Tips:
+  - Use a baseline 500–600px JPEG for best car/tablet compatibility.
+  - Example: $0 cover_600.jpg *.mp3
+USAGE
+  exit 1
+fi
+
+cover="$1"; shift
+if [[ ! -f "$cover" ]]; then
+  echo "Error: cover image not found: $cover" >&2
+  exit 1
+fi
+
+rc=0
+for f in "$@"; do
+  if [[ ! -f "$f" ]]; then
+    echo "Skip (not a file): $f" >&2
+    rc=1
+    continue
+  fi
+
+  echo ">> Processing: $f"
+  # Remove all existing images / APIC frames (avoid duplicate/secondary types).
+  eyeD3 --remove-all-images "$f" >/dev/null
+
+  # Ensure ID3v2 tag exists (some files might be missing it).
+  eyeD3 --v2 "$f" >/dev/null
+
+  # Add exactly one Front Cover. (APIC type: FRONT_COVER)
+  eyeD3 --add-image "$cover:FRONT_COVER" "$f" >/dev/null
+
+  # Convert tag flavor to v2.3 for older devices.
+  eyeD3 --to-v2.3 "$f" >/dev/null
+
+  echo "   OK: embedded Front Cover (ID3v2.3)"
+done
+
+exit $rc
+```
+
+Like this: `./embed-art-to-mp3.sh newart.jpg in.mp3 out.mp3`
+
+### A.5
+
+5) Put master + derivations into **S3 Object Lock** (record **VersionIDs**); optionally pin to **IPFS** and record the **CID**. 
+
+### A.6
+
+6) Update your **provenance page** (JSON-LD + human section).  
+
+### A.7
+
+7) Upload to **Bandcamp/SoundCloud** (playground, feedback) and to distributor (Spotify/Apple/YouTube Music). Include **plain-English AI disclosure** in descriptions. 
+
+### A.8
+
+8) After publish: check platform pages, screenshots, archive distributor IDs, and add the entry to your **provenance index**.
 
 #### END
