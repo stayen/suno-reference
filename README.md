@@ -4,11 +4,13 @@ Suno music generation service meta-tags reference is placed into the [Tag refere
 
 Some interesting track definitions are listed in [Templates reference](templates.md) file in this repository.
 
-NEW: DDEX compliance (provenance data) creation: [Provenance](provenance.md) file in this repository.
+DDEX compliance (provenance data) creation: [Provenance](provenance.md) file in this repository.
+
+AI assisted audio distribution guideline: [AIAADiG](aiaadig.md) file in this repository.
 
 The meta-tags reference is compiled by studying Suno users' public posts and comments, related to the currently supported meta-tags (used in Lyrics field).
 
-Latest reference update: October 21, 2025, updated the templates list.
+Latest reference update: October 23, 2025, updated the AIAADiG document.
 
 Latest news: Suno, model v5.0
 
