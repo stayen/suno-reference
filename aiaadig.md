@@ -1,8 +1,8 @@
-= AI-assisted Audio Distribution Guideline
+# AI-assisted Audio Distribution Guideline
 
 The below doc contains strategy (long-term) proposals and cut-n-paste instructions to make your AI-assisted audio (AiAA) future-proof, as DDEX proposals on labeling AI-assisted media can help to avoid adverse effects on your AI-assisted audio distributed over streaming or similar services.
 
-== 1. Reference media strategy
+## 1. Reference media strategy
 
 **What to keep (and name):**
 - A single **master WAV** (48 kHz/24-bit or 44.1/24) as the *source of truth*.  
@@ -19,7 +19,7 @@ The below doc contains strategy (long-term) proposals and cut-n-paste instructio
 
 ---
 
-== 2. Pre-publication processing (loudness, denoise, QA)
+## 2. Pre-publication processing (loudness, denoise, QA)
 
 **Targets that travel well:** For mainstream DSPs, **−14 LUFS integrated** with **≤ −1.0 dBTP** (true-peak ceiling) works safely. Platforms differ, but this is the common “does no harm” zone. EBU R128/BS.1770 are the underlying standards. 
 
@@ -35,7 +35,7 @@ The below doc contains strategy (long-term) proposals and cut-n-paste instructio
 
 ---
 
-== 3. AI disclosure and provenance
+## 3. AI disclosure and provenance
 
 **Where the ecosystem is going (and what you can do now):**
 - **Spotify (Sept 25, 2025)** announced AI protections (impersonation, spam filtering) and said it’s **supporting DDEX-based AI disclosures** in credits—e.g., noting which parts used AI (vocals, composition, production, mixing/mastering). Multiple outlets reported ~75M spam removals and the new disclosure push. 
@@ -48,7 +48,7 @@ The below doc contains strategy (long-term) proposals and cut-n-paste instructio
 
 ---
 
-== 4. Post-publication & "stay safe" guidance for AIAA
+## 4. Post-publication & "stay safe" guidance for AIAA
 
 **Platform realities (2025):**
 - **Spotify** normalizes playback around **−14 LUFS**, fights spam, and is rolling out **AI-use disclosures**. Quiet tracks can be turned up at playback within headroom (they consider peaks to avoid encoder overs). Keep **≤ −1 dBTP** to stay safe. 
@@ -68,6 +68,6 @@ The below doc contains strategy (long-term) proposals and cut-n-paste instructio
 
 ---
 
-== Appendix A. Step by step guide
+## Appendix A. Step by step guide
 
 IN PROGRESS
