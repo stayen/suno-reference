@@ -4,47 +4,80 @@ The below doc contains strategy (long-term) proposals and cut-n-paste instructio
 
 ## 1. Reference media strategy
 
-**What to keep (and name):**
-- A single **master WAV** (48 kHz/24-bit or 44.1/24) as the *source of truth*.  
-- **Derived assets**: streaming WAV (if different), MP3 (320k), promo MP4 (static art), stems (optional).  
-- **Identifiers** in filenames and sidecar: your **opus number** (internal), **ISRC** (if assigned), catalog/UPC, and version tags (e.g., `_master`, `_mp3`, `_promo`).  
-- **Checks**: file SHA-256 **and** an **audio stream hash** (FFmpeg `-f streamhash -hash sha256`) so you can prove “same audio” across containers.
+**Keep and name:**
+- One **golden master WAV** (44.1/48 kHz, 24-bit). Derive everything (MP3, promo MP4, streaming WAV) from this master.
+- File names: include your internal **opus number** (e.g., `opus_2570`), plus `_master`, `_mp3`, `_promo`, and external IDs (ISRC/UPC) when assigned.
+- Publish both a **file hash** and an **audio-stream hash** (verifies “same audio across containers”).
 
-**Immutable storage you can point to:**
-- **S3 Object Lock** (Compliance or Governance mode) to make the master **undeletable/unchangeable** for a set retention period (proves non-tampering).
-- **IPFS** for public, content-addressed references (publish the **CID v1**; any change yields a new CID).
+```bash
+# file SHA-256
+sha256sum master.wav
 
-**What to publish on the provenance page:**
-- Links (or opaque IDs) to **S3 Object Lock** object/version, the **IPFS CID** (if used), file/stream hashes, and your internal **opus number**. That gives third parties a verifiable chain later (S3 retention + content addressing).
+# audio-stream hash (content of the first audio stream only)
+ffmpeg -v error -nostdin -i master.wav -f streamhash -hash sha256 -
+```
+
+**Immutable references:**
+- Store masters in **S3 with Object Lock** (WORM) and record each object’s **VersionID** on your provenance page; Object Lock prevents overwrite/delete for a set retention period. 
+- Optionally mirror to **IPFS** and publish the **CID (v1)** (content-addressed; any content change = new CID). 
 
 ---
 
 ## 2. Pre-publication processing (loudness, denoise, QA)
 
-**Targets that travel well:** For mainstream DSPs, **−14 LUFS integrated** with **≤ −1.0 dBTP** (true-peak ceiling) works safely. Platforms differ, but this is the common “does no harm” zone. EBU R128/BS.1770 are the underlying standards. 
+**Targets that travel well:** deliver around **−14 LUFS (integrated)** and **≤ −1.0 dBTP (true-peak ceiling)** — common, safe “do-no-harm” targets aligned with EBU R128/BS.1770 metering used by modern pipelines. 
 
-**Your scripts (fast path):**
-- Use your `loudnorm-two-pass.sh` with **two-pass** `loudnorm` (feeds measured values into pass 2). If verify shows LUFS off by ~x LU, re-run with `I = I + target_offset`; if TP ends ≪ −1 dB, optionally relax to **−0.8 dBTP**. This is standard FFmpeg two-pass practice. 
-- For batch jobs, **ffmpeg-normalize** wraps the same two-pass method. 
+**Two-pass loudness (deterministic, reproducible):**  
+Use your `loudnorm-two-pass.sh` (or `ffmpeg-normalize`) to **measure → apply with measured_* → verify**. The FFmpeg `loudnorm` filter’s recommended two-pass flow feeds back **measured_I/LRA/TP/threshold/offset** from pass-1 into pass-2; **TP acts as a ceiling** (the filter won’t “aim” for −1 dBTP if you’re already below it). 
 
-**Why TP may be “much lower” than your ceiling:** `loudnorm` treats **TP as a ceiling**, not a target; it won’t raise peaks to “hit” −1.0 dBTP. Trust the verify pass; it’s normal to end up at −14 LUFS with TP lower than −1 dB when limiting isn’t needed. 
+```bash
+# example (yours): converge near I=-14 LUFS, TP ceiling -1.0 dBTP
+./loudnorm-two-pass.sh -i master_in.wav -o master_out.wav -I -14 -T -1.0 --lock-lra --converge
+# tip: if verify shows LUFS off by ~x LU, rerun with I += target_offset (script can do this)
+```
 
-**Optional polish:**
-- **Denoise** (light) *before* loudness (e.g., `afftdn`), then two-pass normalize.  
-- Re-measure LUFS/LRA/TP and **embed** numbers + hashes in your sidecar and page.
+**Batch option:** `ffmpeg-normalize` wraps the same two-pass method and writes back the normalized file. 
+
+**Light cleanup (optional):** do denoise *before* loudness; then re-measure LUFS/LRA/TP and record the numbers for provenance.
 
 ---
 
 ## 3. AI disclosure and provenance
 
-**Where the ecosystem is going (and what you can do now):**
-- **Spotify (Sept 25, 2025)** announced AI protections (impersonation, spam filtering) and said it’s **supporting DDEX-based AI disclosures** in credits—e.g., noting which parts used AI (vocals, composition, production, mixing/mastering). Multiple outlets reported ~75M spam removals and the new disclosure push. 
-- **YouTube** requires creators to **disclose “altered or synthetic media”**; labels are shown to viewers (especially on sensitive topics). For music uploads, put a plain-English disclosure in the description, too. 
-- **DDEX**: today’s working specs (ERN/RIN/MEAD/etc.) already carry rich credits/technical metadata; DDEX has active working/ad-hoc groups evolving the standards. Use your sidecar as a **bridge** until ingest pipelines widely accept AI fields. 
-- **C2PA Content Credentials**: if/when audio tools support it, C2PA lets you **cryptographically bind provenance** assertions to assets (or via an external manifest). Track-art already benefits; audio support is emerging. Keep an eye on this and be ready to attach manifests to cover art and (when feasible) audio. 
+**What platforms expect (2025 highlights):**
+- **YouTube / YouTube Music** requires creators to **disclose “meaningfully altered or synthetic” content** when it appears realistic; labels are shown to viewers. Add a short disclosure in the description linking your provenance URL. 
+- **Spotify (Sept 25, 2025)**: new AI safeguards (anti-impersonation, spam filtering) and **support for DDEX-based AI disclosures in credits**; the company disclosed **~75M spammy tracks removed** in the past year. Your plain-English disclosure + structured fields keeps you onside. 
 
-**What to publish now:**
-- Your **plain-English AI disclosure** (e.g., “Human lyrics; AI-assisted vocals derived from my voice; AI-assisted instrumentals; no impersonations”), plus **checksums**, **audio stream hash**, **S3 VersionID**, **IPFS CID** (if any), **opus number**, and **absolute provenance URL** in **JSON-LD** (`MusicRecording`) as you’ve done. This aligns with current platform transparency pushes and is future-proof for DDEX/C2PA ingestion. 
+**Sidecar → page → JSON-LD:**
+- Keep a **JSON sidecar** per track (opus number, ISRC/UPC, creators/roles, tools, hashes, streamhash, S3 VersionIDs, optional IPFS CID, loudness metrics, AI disclosure).
+- Publish a **provenance page** per opus with a **JSON-LD `MusicRecording`** block for discoverability (include your internal opus number in `identifier`, and add `additionalProperty` for checksums and storage IDs).
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "MusicRecording",
+  "name": "Gravel of Time",
+  "identifier": "opus 2570",
+  "byArtist": {"@type": "MusicGroup", "name": "Daniel Kamaskera"},
+  "url": "https://kamaskera.com/tracks/2570/",
+  "datePublished": "2025-09-29",
+  "isrcCode": "QT3F52558856",
+  "inAlbum": {"@type": "MusicAlbum", "name": "Wilds Collection"},
+  "genre": "Ghost Pop / Indie",
+  "duration": "PT2M59S",
+  "image": "https://media.kamaskera.com/tracks/2/5/2570/gravel-of-time-512.jpg",
+  "additionalProperty": [
+    {"@type":"PropertyValue","name":"AIDisclosure","value":"Human lyrics; AI-assisted vocals from my recordings; AI-assisted instrumentals; no impersonations."},
+    {"@type":"PropertyValue","name":"SHA256_WAV","value":"<file sha256>"},
+    {"@type":"PropertyValue","name":"AudioStream_SHA256","value":"<streamhash sha256>"},
+    {"@type":"PropertyValue","name":"S3_VersionID_WAV","value":"<version-id>"},
+    {"@type":"PropertyValue","name":"IPFS_CID_v1","value":"<cid-if-used>"}
+  ]
+}
+```
+
+**Copy block — short disclosure (paste into descriptions/credits):**  
+“Lyrics/vocals: human. AI assistance: arrangement & sound design (no impersonations). Full provenance, hashes, and loudness metrics: <your provenance URL>.”
 
 ---
 
@@ -55,6 +88,7 @@ The below doc contains strategy (long-term) proposals and cut-n-paste instructio
 - **YouTube/YouTube Music**: disclosure labels for synthetic/altered content; normalization primarily **reduces** loud items (don’t count on a boost). Add a human-readable disclosure + provenance link in descriptions. 
 - **Bandcamp**: **no LUFS target / no normalization**; they say uploads are **unchanged** (site player is just quieter by default). Master for the sound you want; what you upload is what people hear. 
 - **SoundCloud**: public guidance is inconsistent; historically **no consistent loudness normalization**. Either way, assume your uploaded master’s loudness is what listeners hear (subject to transcoding). 
+- Anti-spam hygiene: avoid mass low-effort uploads; keep session credits, hashes, and provenance visible—those are strong “real artist” signals that align with current enforcement. 
 
 **Risk controls, given the spam crackdown:**
 - Avoid **ultra-short, repetitive, or mass-duplicative** uploads; these are flagged by new spam filters. Maintain human-readable notes, **session credits**, and consistent metadata—signals of genuine authorship. 
@@ -65,6 +99,22 @@ The below doc contains strategy (long-term) proposals and cut-n-paste instructio
 - Archive the exact **delivered assets** (and their hashes) alongside any distributor **ingest receipts/IDs**.  
 - Add the track to your **provenance index** (opus number → URL, ISRC, S3 VersionID, IPFS CID).  
 - For YouTube, pin a comment with **credits + provenance link**; for SoundCloud/Bandcamp, mirror the disclosure in the description.
+
+### Summary
+
+**Spotify:** applies **loudness normalization** around ~−14 LUFS at playback (adds/subtracts gain while respecting headroom), and is actively filtering spam + supporting AI disclosures in credits; keeping **TP ≤ −1.0 dBTP** helps avoid encoder overs. Publish a clear disclosure. 
+**YouTube / YouTube Music:** disclosure labels for synthetic/altered media are rolling out; include your human-readable disclosure and provenance link in the description. Don’t count on the platform to “boost” quieter masters; master to how you want it heard. 
+**Bandcamp / SoundCloud:** public, stable loudness policies are sparse; assume **what you upload is what listeners hear** subject to their transcodes. Keep your disclosure in descriptions and point to the provenance URL.
+**Anti-spam hygiene:** avoid mass low-effort uploads and near-duplicates; keep **session credits**, hashes, and provenance public — these are strong “real-artist” signals aligned with current enforcement. 
+
+## 5. 90-seconds check (do that every time)
+
+1) **Render master** (44.1/48 kHz, 24-bit WAV).  
+2) **Normalize (two-pass)** to **I≈−14 LUFS / TP≤−1 dBTP**; verify and save the JSON results. (Use your `loudnorm-two-pass.sh` or `ffmpeg-normalize`.) 
+3) Compute **SHA-256** (file) + **AudioStream SHA-256**; record both.  
+4) Store master + derivations in **S3 Object Lock**; record **VersionIDs**. Optionally pin to **IPFS** (record **CID v1**). 
+5) Fill sidecar (IDs/credits/disclosure/loudness/hashes/storage IDs) and publish/update the **provenance page** with `MusicRecording` JSON-LD.  
+6) When uploading (Spotify via distributor / YouTube / Bandcamp / SoundCloud), paste the **short disclosure** and **provenance link** into descriptions.
 
 ---
 
