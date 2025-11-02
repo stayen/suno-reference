@@ -1,9 +1,10 @@
 # Suno track definition templates
 
-Updated: 2025, October 21
+Updated: 2025, November 02
+
+## On the footnotes
 
 To test:
-
 guaracha club fire
 indie folk hush ("talking instruments")
 Outlaw country grit
@@ -23,12 +24,10 @@ For v4.5 and higher, try the following factors first: audio 45% (if any), style 
 
 #### Style of Music
 
-As required by definition, length:
+As required by definition, provide typically 2 versions:
 
-- no more than 200 characters long for models v4.0 and earlier
-- no more than 1000 characters long for models v4.5 and above
-
-provide both unless requested otherwise.
+- For versions prior to v4.5: 200 or less characters long
+- 1000 or less characters long for models v4.5 and above
 
 #### Lyrics
 
@@ -49,9 +48,9 @@ provide both unless requested otherwise.
 [end: ...]
 ```
 
-## 2. Special templates types
+## 2. Hallucinogenic definitions
 
-The below templates exhibit high probability of geneating vpcal hallucinations ("songs in unknown language").
+The below templates exhibit high probability of generating rich vocal hallucinations ("songs in unknown language").
 
 ### 1. Waltz of Wires
 
@@ -630,11 +629,43 @@ chant-driven rhythm with hypnotic repetition and non-linguistic syllables resemb
 [outro: all elements fade into a pulse-like cello tone]
 ```
 
-## 2. Vocal + Noisy beats fusions
+### 19. Veles Night (Meet the Elk)
+
+With Wilds sisters: 90%+ chance of rich vocal hallucinations in v4.5
+
+#### Style of Music
+
+Slow ritual-techno × Slavic frame-drum rites; low drones, willow-dark strings, bone rattles; half-time toms, trance pulses, white-voice calls, river/wind beds; dusk-to-dawn arc; solemn yet luminous; female ghost vocals, vocal hallucinations
+
+#### Lyrics
+
+```
+[control: ritual-techno, processional, persona-agnostic, cinematic-ambient]
+[genre: ritual-techno, slavic-folk-fusion, dark-ambient]
+[mood: chthonic, reverent, ancestral, luminous-under-shadow]
+[tempo: slow half-time pulse ~70–92, processional swing]
+[length: 210]
+[instruments: frame-drum(buben/tupan), low toms, gusli, bowed-metals, sub-drones, willow shaker, zhaleika/sopilka, mossy pads, bell-chimes]
+[vocals: white-voice calls, low male drone, breathy chorus pads, female ghost vocals, vocal hallucinations]
+[fx: cavern-reverb, thunder-ir, hydrophone-water, forest-wind, distant-owl]
+[sequence: intro, verse, pre-chorus, chorus, verse, bridge, chorus, outro]
+
+[intro: River-bed drones, willow-shaker rustle, distant frame-drum heartbeat; faint bell-chimes suggest cattle wealth]
+[verse: Low toms + buben step; gusli ostinato enters; white-voice solo phrases (wordless) answer by soft male drone]
+[pre-chorus: Sub-drones rise; bowed metal swells; toms double—anticipation before the solar lift]
+[chorus: Procession opens—brighter pads, bell triads, wider white-voice harmonies; rhythm remains slow but radiant]
+[verse: Motif returns earthward—tighter drums, quieter pads; zhaleika/sopilka serpentine line]
+[bridge: Storm-myth chase—thunder IR hits, call-and-response between white-voice and tom triplets; brief silence breath]
+[chorus: Final luminous pass—layered harmonies, gentle bell cycles; equilibrium of sky-fire and root-water]
+[outro: Water/forest beds reclaim; frame-drum recedes; a last bell and owl call fade]
+[end]
+```
+
+## 3. Vocal + Noisy beats fusions
 
 Typically, highly rich and hallucinogenic results.
 
-# A. Vocal traditions to sample as “source DNA”
+A. Vocal traditions to sample as “source DNA”
 - **Isicathamiya / Mbube (SA Zulu male choirs).** Tight, soft-footed a cappella stacks popularized by Ladysmith Black Mambazo. Great for call-and-response hooks and bass drones.
 - **Georgian polyphony (3-part, regional variants).** Rugged, clustered chords that sit beautifully against sub-bass.
 - **Bulgarian women’s diaphony.** Bright, dissonant, “open-throat” harmonies—instant otherworldly color.
@@ -647,7 +678,7 @@ Typically, highly rich and hallucinogenic results.
 - **Kulning (Nordic herding calls).** High-piercing, ornamented shouts that cut through dense mixes. 
 - **Qawwali (Sufi).** Lead + chorus, claps, harmonium/tabla—ecstatic build architecture for drops. 
 
-# B. Grit/engine genres to “carry” or stress the vocal source
+B. Grit/engine genres to “carry” or stress the vocal source
 - **Phonk / drift phonk.** Memphis rap sampling, chopped/screwed; drift phonk adds cowbell + fast swing. 
 - **UK Drill.** Sliding 808s, triplet snare science, dark pads. 
 - **Grime (≈140 BPM).** Jagged, syncopated breakbeats; MC-forward, but works instrumental. 
@@ -1918,7 +1949,7 @@ Planned
 
 ---
 
-## 3. Background music (BGM) base templates
+## 4. Background music (BGM) base templates
 
 ### 1. Ambient / Drone (cinematic, evolving)
 
@@ -1973,6 +2004,10 @@ A bed that breathes like a distant engine—no destination, only horizons. Pads 
 - Starts with `[instrumental]` and control tags upfront so v5 does not invent vocals; this has higher adherence in v4.5/v5 than earlier versions. 
 - `[sequence]` placed right before sections to keep long-form cohesion and better Extend behavior. 
 - Uses confirmed tags only; avoids weak/obsolete ones like `[loop]` or `[mix]`. 
+
+#### Status
+
+Unknown
 
 ---
 
@@ -2031,6 +2066,10 @@ A pocket of lamplight where the needle never quite lands—soft drums and Rhodes
 - Uses `[signal-processing]` for era feel (saturation/short delay), consistent with your tag reference. 
 - Sequence ensures gentle variation without hook repetition. 
 
+#### Status
+
+Unknown
+
 ---
 
 ### 3. Piano Underscore (neo-classical / felt piano)
@@ -2083,6 +2122,10 @@ Macro of felt-piano hammers in warm morning light; shallow depth; soft grain; sp
 
 #### Blurb
 A room that breathes in quarter notes—tiny motifs turning like pages, leaving silence wide enough for stories.
+
+#### Status
+
+Unknown
 
 ---
 
@@ -2137,6 +2180,10 @@ Archival paper map under soft glass reflection; clean typography space; bone/gra
 #### Blurb
 Measured steps across a page—piano tracing the route, strings holding the weather steady.
 
+#### Status
+
+Unknown
+
 ---
 
 ### 5. Cinematic Underscore (low percussion)
@@ -2176,6 +2223,10 @@ Quiet cinematic underscore of soft low-percussion pulses (taiko/frame/low-tom) u
 - `structure_hint: intro | bed A | rise | bed B | coda`  
 - `duration: 270–330`  
 - `seed: set for versioning`
+
+#### Status
+
+Unknown
 
 ---
 
@@ -2217,6 +2268,10 @@ Moody trip-hop/downtempo bed: soft-kick + rim groove, brushed hats, round sub, f
 - `duration: 210–270`  
 - `seed: set for versioning`
 
+#### Status
+
+Unknown
+
 ---
 
 ### 7. Deep / Chill House
@@ -2257,6 +2312,10 @@ Minimal deep/chill house bed: soft 4-on-the-floor kick, airy pads, warm rounded 
 - `duration: 240–330`  
 - `seed: set for versioning`
 
+#### Status
+
+Unknown
+
 ---
 
 ### 8. Liquid DnB (light)
@@ -2295,6 +2354,10 @@ Light, airy liquid DnB bed with soft rolling breaks, warm sub, shimmering pads, 
 - `structure_hint: intro | groove A | lift | groove B | outro`  
 - `duration: 210–270`  
 - `seed: lock for iterations`
+
+#### Status
+
+Unknown
 
 ---
 
@@ -2336,6 +2399,10 @@ Whisper-quiet indie-folk bed: nylon/steel plucks, soft brush-kit, upright bass m
 - `structure_hint: intro | bed A | lift | bed B | outro`  
 - `duration: 210–300`  
 - `seed: set for versioning`
+
+#### Status
+
+Unknown
 
 ---
 
@@ -2379,6 +2446,10 @@ Soft bossa-lounge / jazz café bed: nylon-guitar comping, upright bass, gentle r
 - `duration: 240–330`  
 - `seed: set for iteration control`
 
+#### Status
+
+Unknown
+
 ---
 
 ### 11. Synthwave / Chillwave Pads
@@ -2418,6 +2489,10 @@ Pad-centric synthwave/chillwave bed with wide chorus-pads, slow analog arps, war
 - `duration: 240–330`  
 - `seed: set for consistent iterations`
 
+#### Status
+
+Unknown
+
 ---
 
 ### 12. Post-Rock Light
@@ -2456,6 +2531,729 @@ Light post-rock underscore with clean guitar arpeggios, shimmer pads, soft tom p
 - `structure_hint: intro | build A | build B | echo-fall | outro`  
 - `duration: 270–360`  
 - `seed: lock for version exploration`
+
+#### Status
+
+Unknown
+
+## 5. Veles Night templates (Slavic festival akin to Halloween)
+
+Veles brings underworld, water/forest, cattle/wealth, shapeshifting serpent-bear-wolf vibes, plus patronage of music/poetry and a storm-myth rivalry with Perun. That points to earthy/low-register timbres, ritual pulse, drone, “white-voice” folk polyphony, and liminal field-recordings (water, marsh, wind in trees).
+
+### 1. Ash of the Threshold
+
+Ritual ambient × Slavic white-voice choir
+
+#### Style of Music
+
+Ritual-ambient with white-voice choir; low drones, frame-drum pulse, bell triads, cavern IR; wordless calls in open-throat style; dusk-to-dawn arc
+
+#### Lyrics
+
+```
+[control: ritual-ambient, processional, cinematic-choral]
+[genre: ritual-ambient, slavic-folk-choir]
+[mood: chthonic, reverent, liminal, luminous-under-shadow]
+[tempo: free to very-slow 48–60]
+[length: 220]
+[instruments: sub-drones, harmonium/pedal-tone, frame-drum(buben), bells, bowed-metals, gusli accents]
+[vocals: white-voice polyphony, low-male drone, airy overtones]
+[fx: cavern-reverb, subtle-thunder-IR, forest-wind]
+[sequence: intro, verse, pre-chorus, chorus, verse, bridge, chorus, outro]
+
+[intro: Low pedal drone, one bell in distance; breathy wind, faint bowed-metal bloom]
+[verse: Solo white-voice phrase answered by low male drone; frame-drum heartbeats]
+[pre-chorus: Drones widen; bells outline minor triad; air thickens]
+[chorus: Full white-voice cluster swells; ritual pulse steady; luminous halo]
+[verse: Return to narrower harmonies; gusli glints; drum thins]
+[bridge: Bowed-metal surge + thunder IR; short silence pocket]
+[chorus: Final choral lift; bells orbit slowly; equilibrium holds]
+[outro: Pedal drone dissolves; last bell; wind fades]
+[end]
+```
+
+#### Why these materials
+
+White-voice: the bright, open-throat Eastern European technique suits powerful wordless calls for ritual sections. 
+
+Ritual ambient palette (drone, frame-drum pulse, cavernous space) aligns with documented ritual/dark-ambient practices in contemporary releases. 
+
+#### Producer.ai prompts
+
+“white-voice choir over sub-drones, frame-drum, cavern reverb, distant bells, very slow swell”
+
+“bowed-metal bloom, thunder IR wash, breathy wind, ritual pulse returning”
+
+“low male drone with bright open-throat calls, harmonium pedal, luminous halo”
+
+#### Status
+
+Planned
+
+---
+
+### 2. Gravel Choir Descent
+
+Dark folk × Drone doom (low-tuned acoustic + bowed metals)
+
+#### Style of Music
+
+Dark-folk lament fused with drone-doom weight; low-tuned acoustics, bowed-metals, cello drones, sparse toms; cavern reverb; solemn, glacial lift
+
+#### Lyrics
+
+```
+[control: dark-folk, drone-doom, acoustic-heavy, cinematic-ambient]
+[genre: dark-folk, drone-doom]
+[mood: solemn, subterranean, elegiac]
+[tempo: very-slow 4/4, sustained]
+[length: 215]
+[instruments: baritone-acoustic-guitar, nylon-guitar, cello/pedal-drones, bowed-metals, harmonium, floor-toms, bell-chimes, tape-hiss]
+[vocals: low-male-chant, white-voice-pads, distant-harmonies (optional)]
+[fx: cavern-reverb, analog-warmth, gentle-saturation]
+[sequence: intro, verse, pre-chorus, chorus, verse, bridge, chorus, outro]
+
+[intro: Tape hiss + low pedal drone; single bowed-metal bloom; bell far away]
+[verse: Baritone acoustic plays slow dyads; cello sustains root; hush floor-toms]
+[pre-chorus: Bowed-metals swell; harmonium breath opens air above the root]
+[chorus: Drone deepens; white-voice pad thins then widens; subtle bell triad]
+[verse: Guitar darkens; toms recede; cello doubles a 5th below]
+[bridge: Held feedback-like overtone (bowed metal); tom triplets rise and fall]
+[chorus: Final, heavier swell—drones thick; chant may enter as vowel tones]
+[outro: Instruments release to pedal; last bell and hiss fade]
+[end]
+```
+
+#### Why these materials
+
+Drone doom traits—slow tempos, long-duration tones, minimal grooves, low-tuned weight—guide the pacing and drone layering. 
+
+Dark/neo-folk angle adds acoustic intimacy (baritone/nylon guitars, chant/white-voice pads) and nature/ritual thematics. 
+
+Bowed-metals are a standard dark-ambient/experimental technique for sustained, spectral overtones—perfect to “bridge” sections without drums. 
+
+#### Producer.ai prompts
+
+Sound prompt: “low-tuned acoustic drone with bowed-metal overtones, very slow toms, cavern reverb, tape hiss”
+
+Sound prompt: “baritone acoustic dyads + cello pedal, harmonium breath, solemn bell triad, subterranean weight”
+
+Sound prompt: “bridge swell—bowed cymbal feedback, tom triplets, sustained root drone, fading to hush”
+
+Sound prompt: “white-voice pad behind low male chant, slow 4/4, analog warmth”
+
+#### Status
+
+Planned
+
+---
+
+### 3. Ashen Hex Processional
+
+Neo-pagan folk × Witch-house
+
+#### Style of Music
+
+Neo-pagan-folk chant over witch-house half-time; chopped/pitched vox, gloomy pads, 808 throb; zhaleika/telynka wisps; heavy reverb & occult hush
+
+#### Lyrics
+
+```
+[control: neo-pagan-folk, witch-house, half-time, ritual-club]
+[genre: neo-pagan-folk, witch-house]
+[mood: mystical, nocturnal, hypnotic]
+[tempo: slow half-time 60–72]
+[length: 205]
+[instruments: 808-kick/sub, trap-hats, detuned-saw, haunted-pads, zhaleika/telynka, frame-drum (light), bass-chorus]
+[vocals: chopped-and-screwed-vox, pitched-down whispers, white-voice call-responses]
+[fx: heavy-reverb, long-delays, vinyl-crackle, occult-noise-beds]
+[sequence: intro, verse, pre-chorus, chorus, verse, bridge, chorus, outro]
+
+[intro: Haunted pad swells; slowed breath-vox texture; distant frame-drum]
+[verse: Half-time 808 + hat ghosts; soft zhaleika/telynka phrases weave]
+[pre-chorus: Vox chops stutter; noise bed opens; sub rises gently]
+[chorus: Drag-weight drop—pitched-down chant, wide pad, sidechained throb]
+[verse: Folk motif returns—wooden flute gliss + minimal 808]
+[bridge: Deeper chop-and-screw; whispered counters; brief reverb-wash mute]
+[chorus: Final hook—occult pads bloom; white-voice response sits behind lead]
+[outro: Sub decays; pad trails; one whispered syllable lingers]
+[end]
+```
+
+#### Why these materials
+
+Witch-house DNA: chopped-and-screwed vocal processing, slowed half-time beats, dense reverb, occult/gothic aesthetics. 
+
+Neo/“pagan folk” merges acoustic folk timbres with post-industrial/ambient atmospheres—here voiced as zhaleika/telynka lines and light frame-drum inside an electronic shell. 
+
+#### Producer.ai prompts
+
+Sound prompt: “witch-house half-time 808 with chopped/pitched vocals, haunted pads, occult reverb, slow drag”
+
+Sound prompt: “folk hornpipe (zhaleika/telynka) over dark pads, minimal trap hats, ritual hush”
+
+Sound prompt: “bridge with extreme chop-and-screw vox, vinyl crackle, sub swells then mute wash”
+
+Sound prompt: “final chorus—pitched-down chant + white-voice responses, slow heavy pulse, wide reverb”
+
+#### Status
+
+Planned
+
+---
+
+### 4. Novgorod Lanterns
+
+Dungeon synth × Gusli/gudok
+
+#### Style of Music
+
+Lo-fi dungeon-synth with medieval Slavic strings; cassette-warm pads, gusli plucks, gudok drone, bell ostinato; misty keep ambience
+
+#### Lyrics
+
+```
+[control: dungeon-synth, medieval-folk-fusion, lo-fi]
+[genre: dungeon-synth, medieval-folk]
+[mood: mythic, earthy, nostalgic]
+[tempo: slow-moderate 60–84]
+[length: 205]
+[instruments: gusli, gudok(drone+fifth), cassette-keys, choir-pad, hand-bells, soft frame-drum]
+[vocals: wordless-choir-pad (optional), breath-accents]
+[fx: tape-hiss, stone-room-IR]
+[sequence: intro, verse, pre-chorus, chorus, verse, bridge, chorus, outro]
+
+[intro: Tape-hiss + bell ostinato; soft pad chord; gudok low drone enters]
+[verse: Gusli arpeggios sketch motif; pad doubles; gentle frame-drum]
+[pre-chorus: Choir-pad swells; bell line climbs; subtle fifth on gudok]
+[chorus: Theme in full—pads + gusli unison; hand-bells widen stereo]
+[verse: Motif variation; countermelody on gusli]
+[bridge: Gudok overtone scrape; brief hush; pad modulates]
+[chorus: Return of theme with thicker pad; soft choir-pad shadows]
+[outro: Drone holds; bells and hiss fade]
+[end]
+```
+
+#### Why these materials
+
+Dungeon synth: ambient/keyboard-based, medieval/fantasy-evoking offshoot of early black-metal scenes—perfect for lo-fi, quest-like pads. 
+
+Gusli (plucked Slavic zither) and gudok (reconstructed bowed folk fiddle with drone tuning) supply authentic East-Slavic color for the melodic/drone roles. 
+
+#### Producer.ai prompts
+
+“lo-fi cassette keys with medieval pad, gusli plucks, bell ostinato, stone room”
+
+“gudok low drone with fifth, gusli motif, gentle frame-drum, misty ambience”
+
+“bridge scrape and hush, pad modulation, return to theme with soft choir-pad”
+
+#### Status
+
+Planned
+
+---
+
+### 5. Below the Willow Gate
+
+Deep dark ambient × Hydrophone sound art
+
+#### Style of Music
+
+Sub-aqueous dark-ambient ritual; hydrophone textures, abyssal drones, bowed metals, willow-wind, distant bells; very slow, tidal swells; cavern IR; wordless choirs, nocturnal wildlife beds
+
+#### Lyrics
+
+```
+[control: deep-dark-ambient, hydrophone-sound-art, processional]
+[genre: dark-ambient, sound-art, ritual-ambient]
+[mood: abyssal, liminal, reverent, aqueous]
+[tempo: fluid-slow, meterless to 48–60 bpm swells]
+[length: 240]
+[instruments: hydrophone-beds, sub-drones, bowed-metals, low-cello/pedal-tone, bell-chimes, willow-shaker, zhaleika-distant, mossy-pads]
+[vocals: wordless-choir-low, breath-accents, owl-calls]
+[fx: cavern-reverb, thunder-IR, granular-water, forest-wind]
+[sequence: intro, verse, chorus, verse, bridge, chorus, outro]
+
+[intro: Hydrophone textures (bubbles, creaks, distant clicks) bloom under sub-drones; faint willow-wind and one bell chime]
+[verse: Pedal-tone celli with bowed-metal swells; intermittent water-knocks; low wordless choir enters and recedes]
+[chorus: Tidal swell—drones widen, soft bell triplet motif; shimmer of granular-water; calm, luminous undertone]
+[verse: Return to darker strata—hydrophone crackle, distant zhaleika phrase like a serpent thread; owl far away]
+[bridge: Storm-IR impulse; brief silence pocket; rising metallic overtones suggest sky-fire meeting root-water]
+[chorus: Second swell—choir a shade brighter, bells orbit slowly; equilibrium holds, pressure settles]
+[outro: Drones thin; hydrophone hush remains; wind through willow; last bell vanishes into Nav-like quiet]
+[end]
+```
+
+#### Why these materials
+
+Hydrophones convert underwater pressure changes/vibrations into audio signals—perfect for sub-aquatic beds that feel “underworld/water.” 
+
+Practice context: Contemporary sound artists (e.g., Jana Winderen, Chris Watson) reveal hidden aquatic/ice acoustic ecologies—great reference points for textures (crackle, pops, creaks, clicks). 
+
+Dark-ambient grammar: sustained drones, field recordings, low-register timbres, sparse but potent gestures—exactly what we’re doing here. 
+
+Veles tie-ins: earth/waters/underworld + owl/serpent symbols; a luminous undertone in “chorus” sections underscores non-evil, balancing nature. 
+
+#### Producer.ai prompts
+
+Sound prompt: “sub-aquatic hydrophone bed, slow pressure swells, distant creaks and pops, abyssal drones, cavern reverb, singular bell”
+
+Sound prompt: “bowed metal over dark drone, granular water textures, willow wind, very slow swells”
+
+Sound prompt: “nocturnal wetland—owl far, soft mud knocks, hydrophone fizz, low choir pad, thunder IR bloom”
+
+Sound prompt: “distant zhaleika thread above underwater crackle, pedal-tone drone, hush and return to depth”
+
+Sound prompt: “equilibrium swell—brightened drone halo, faint bell triplets, water shimmer fading to silence”
+
+#### Production cues (quick)
+
+Tuning: low D or E; favor Dorian/Natural minor; add slight chorus to drones for “liquid” motion.
+
+Dynamics: keep LUFS gentle (−20 to −18 short-term) so micro-details in hydrophone textures remain audible.
+
+Space: one long cavern IR bus; parallel a very short early-reflection to keep creaks tactile.
+
+Foley: if you lack real hydrophone beds, simulate with filtered pink noise + granular ice/water samples; sparsity > density.
+
+#### Status
+
+Planned
+
+---
+
+### 5b. Ash-Bell Lament
+
+Neofolk, complementary to 5.
+
+#### Style of Music
+
+Neofolk lament with hush-tempo guitar, cello drones, hand bells, soft white-voice layers, sparse percussion; pagan-nature mood; intimate yet somber
+
+#### Lyrics
+
+```
+[control: neofolk, acoustic-lament, post-industrial-ambient]
+[genre: neofolk, dark-folk, dark-ambient]
+[mood: mournful, venerative, woodland]
+[tempo: slow, sparse pulse]
+[length: 200]
+[instruments: nylon-guitar, baritone-guitar, cello/viola drones, gusli accents, hand-bells, light frame-drum, harmonium/pad]
+[vocals: close-mic lead, white-voice layers, spoken-word option]
+[fx: room-ambience, tape-hiss, leaf-rustle]
+[sequence: intro, verse, chorus, verse, bridge, chorus, outro]
+
+[intro: Tape-hiss bed; distant bell; soft guitar figure enters]
+[verse: Lead vocal close and dry; cello drone underneath; minimal frame-drum]
+[chorus: White-voice pad widens; bells mark cattle/wealth motif; harmonium breathes]
+[verse: Gusli punctuates phrases; guitar darkens to minor/Dorian color]
+[bridge: Spoken-word option over sustained strings; faint leaf-rustle]
+[chorus: Wider neofolk stack—low male harmony added; bells orbit slow]
+[outro: Guitar decays; single bell; room falls to hush]
+[end]
+```
+
+#### Why these materials
+
+Neofolk blends acoustic folk with dark-ambient/post-industrial atmospheres—ideal for solemn, mythic nature rites. 
+
+Veles ties: cattle/wealth (bells), underworld/earth/water (low drones, mournful pace), woodland intimacy. 
+
+Retaining white-voice color in a restrained layer keeps the Slavic timbre without overpowering the neofolk intimacy. 
+
+Gusli gives authentic East-Slavic acoustic punctuation. 
+
+#### Producer.ai prompts
+
+“intimate neofolk guitar with cello drone, hand bells, room ambience, low tape hiss”
+
+“white-voice pad behind close-mic vocal, slow pulse, harmonium breath”
+
+“spoken-word bridge over sustained strings, leaf rustle, minor/Dorian hue”
+
+“gusli accents inside neofolk lament, gentle frame-drum, dusk forest”
+
+“final chorus—soft bells, layered low harmonies, warm room tail”
+
+#### Status
+
+Planned
+
+---
+
+### 6. Rootfire Procession
+
+Ritual techno (slow) × Slavic frame-drum procession
+
+Brings about rhythmic, mesmerising beds with hallucinated vocalisation; suitable for meditative/thrilling themes.
+
+#### Style of Music
+
+Slow ritual-techno × Slavic frame-drum rites; low drones, willow-dark strings, bone rattles; half-time toms, trance pulses, white-voice calls, river/wind beds; dusk-to-dawn arc; solemn yet luminous
+
+#### Lyrics
+
+```
+[control: ritual-techno, processional, persona-agnostic, cinematic-ambient]
+[genre: ritual-techno, slavic-folk-fusion, dark-ambient]
+[mood: chthonic, reverent, ancestral, luminous-under-shadow]
+[tempo: slow half-time pulse ~70–92, processional swing]
+[length: 210]
+[instruments: frame-drum(buben/tupan), low toms, gusli, bowed-metals, sub-drones, willow shaker, zhaleika/sopilka, mossy pads, bell-chimes]
+[vocals: white-voice calls, low male drone, breathy chorus pads]
+[fx: cavern-reverb, thunder-ir, hydrophone-water, forest-wind, distant-owl]
+[sequence: intro, verse, pre-chorus, chorus, verse, bridge, chorus, outro]
+
+[intro: River-bed drones, willow-shaker rustle, distant frame-drum heartbeat; faint bell-chimes suggest cattle wealth]
+[verse: Low toms + buben step; gusli ostinato enters; white-voice solo phrases (wordless) answer by soft male drone]
+[pre-chorus: Sub-drones rise; bowed metal swells; toms double—anticipation before the solar lift]
+[chorus: Procession opens—brighter pads, bell triads, wider white-voice harmonies; rhythm remains slow but radiant]
+[verse: Motif returns earthward—tighter drums, quieter pads; zhaleika/sopilka serpentine line]
+[bridge: Storm-myth chase—thunder IR hits, call-and-response between white-voice and tom triplets; brief silence breath]
+[chorus: Final luminous pass—layered harmonies, gentle bell cycles; equilibrium of sky-fire and root-water]
+[outro: Water/forest beds reclaim; frame-drum recedes; a last bell and owl call fade]
+[end]
+```
+
+#### Why these choices (brief)
+
+Veles’ attributes: underworld/lowlands, cattle/wealth, serpentine shapeshifter and rival to the sky-thunder Perun—yet not “evil,” more earth-water principle; hence low drones, bells (herds), water/forest beds, and a cyclical chase motif in the bridge. 
+
+White-voice timbre evokes Slavic rites and open-air calling—perfect for wordless, powerful refrain layers without committing to lyrics yet. 
+
+Frame drum (buben/tupan) procession anchors the ritual gait; adding bowed metals and sub drones keeps it subterranean. 
+
+Slow ritual techno: we keep the hypnotic, steady pulse but in a 70–92 BPM half-time, processional zone—outside typical club BPM yet fully viable for “slow” DJ aesthetics. 
+
+#### Production cues (quick)
+
+Tonal center: low D/E, natural minor ↔ Dorian shifts for “ancient” color (brighten on choruses).
+
+Drums: buben/tupan + low toms in duple half-time, with triplet flourishes in the bridge to suggest the Perun–Veles chase.
+
+IRs/FX: layer a subtle thunder IR in the bridge and a hydrophone water bed under intros/outros to tie the underworld-waters theme. (Storm myth + water/lowlands domain.) 
+
+#### Producer.ai prompts
+
+Sound prompt: “slow ritual techno procession, frame drum and low toms, sub-bass drone, cavern reverb, forest wind and water textures, faint bell chimes”
+
+Sound prompt: “white-voice solo phrases over gusli ostinato, mossy pads, half-time pulse, bowed metals rising”
+
+Sound prompt: “bridge thunder ritual—tom triplets, bowed cymbals, storm impulse response, short silence break, return to drone”
+
+Sound prompt: “serpentine zhaleika over dark ambient drones, half-time ritual techno kick-toms, hydrophone water bed”
+
+Sound prompt: “final luminous chorus—wider harmonies, soft bells, steady processional drums, trance-calm pads”
+
+#### Status
+
+Implemented
+
+---
+
+### 7. Mosslight Dreaming
+
+Psybient × Forest folk (telynka/sopilka over pads)
+
+#### Style of Music
+
+Psybient forest drift; warm pads, slow sub-pulse, telynka/sopilka leads, bird/leaf beds, soft hand-percussion; hypnotic, meditative, woodland
+
+#### Lyrics
+
+```
+[control: psybient, forest-folk, cinematic-ambient]
+[genre: psybient, downtempo-ambient]
+[mood: numinous, tranquil, woodland]
+[tempo: slow 70–90 or meterless swells]
+[length: 205]
+[instruments: telynka(overtone-flute), sopilka(folk-flute), warm-pads, soft-sub, hand-percussion, wind-chimes]
+[vocals: airy-hums, breathy-oo, distant-choral-pad (optional)]
+[fx: leaf-rustle, birds, small-stream, long-delays]
+[sequence: intro, verse, pre-chorus, chorus, verse, bridge, chorus, outro]
+
+[intro: Leaf and stream bed; soft pad drone; faint chimes]
+[verse: Telynka overtone phrases weave; sopilka echoes; soft-sub heartbeat]
+[pre-chorus: Pads thicken; delay tails bloom; hand-percussion ghosts enter]
+[chorus: Wide pad lift; overtone flute sings simple motif; slow trance calm]
+[verse: Motif variation; birds lighten; sub and pads breathe]
+[bridge: Airy-vox pad swells; brief hush; chime cascade returns]
+[chorus: Final halo—telynka+sopilka in call-and-response over pads]
+[outro: Pads thin; stream and leaves close the scene]
+[end]
+```
+
+#### Why these materials
+
+Psybient/psychill = ambient + psytrance aesthetics at slower, meditative tempos—ideal for “forest drift” pads and sub-pulse. 
+
+Telynka (telenka/telynka) is an overtone flute without finger holes; sopilka is a Slavic end-blown folk flute—perfect organic leads over pads. 
+
+#### Status
+
+Planned
+
+---
+
+### 8. Grief Under Bark
+
+Neofolk × Funeral doom strings
+
+#### Style of Music
+
+Neofolk lament with funeral-doom strings; close acoustic guitar, low cello/viola drones, bells; sul-pont tremor swells; very slow, processional
+
+#### Lyrics
+
+```
+[control: neofolk, funeral-doom-strings, acoustic-lament]
+[genre: neofolk, funeral-doom]
+[mood: mournful, reverent, cavernous]
+[tempo: very-slow 40–60, processional]
+[length: 215]
+[instruments: nylon-guitar, baritone-guitar, cello/viola drones, contrabass, harmonium, hand-bells, floor-toms (sparse)]
+[vocals: low-male or close-mic lead, white-voice-pad (very soft, optional)]
+[fx: room-ambience, tape-hiss, cavern-IR]
+[sequence: intro, verse, pre-chorus, chorus, verse, bridge, chorus, outro]
+
+[intro: Tape hiss + hand-bell; contrabass breathes a long pedal]
+[verse: Close guitar figure; cello drone and faint harmonium]
+[pre-chorus: Strings lean sul ponticello; tension rises without tempo lift]
+[chorus: Funeral swell—low strings + baritone guitar dyads; bell orb]
+[verse: Return to dry room; whispered harmony shade]
+[bridge: Section tremolo sul pont—eerie glassy overtones; toms pulse once]
+[chorus: Heaviest swell; drones deepen; voice can sustain vowel tones]
+[outro: Pedal fades; last bell; room falls quiet]
+[end]
+```
+
+#### Why these materials
+
+Neofolk blends acoustic folk with dark-ambient/post-industrial aesthetics—fits the intimate, pagan-nature lament. 
+
+Funeral doom emphasizes extremely slow tempos and massive, processional weight—here rendered via low strings and sparse toms. 
+
+Sul ponticello bowing yields the eerie, glassy overtones used in the pre-chorus/bridge swells. 
+
+#### Status
+
+Planned
+
+---
+
+### 9. Predator Step
+
+Gqom-tempo ritual × Bear/wolf drums
+
+#### Style of Music
+
+Dark gqom-tempo ritual; sparse heavy kicks, low tom ensembles (“bear/wolf” power), frame-drum hits, breathy hisses; hypnotic, minimal; nocturnal procession
+
+#### Lyrics
+
+```
+[control: ritual-club, minimal-percussion, cinematic-dark]
+[genre: gqom, ritual-ambient, tribal-Drums]
+[mood: predatory, hypnotic, chthonic]
+[tempo: 126–130 gqom-tempo, halftime feels allowed]
+[length: 205]
+[instruments: 808-kick(sub), low-toms(ensemble), frame-drum(buben/tupan), shaker-rattle, detuned-saw-stabs, bass-drones, breath-noise]
+[vocals: percussive-grunts, short calls, crowd-shouts (optional)]
+[fx: long-reverb, room-slap, sub-drop, reverse-suck]
+[sequence: intro, verse, pre-chorus, chorus, verse, bridge, chorus, outro]
+
+[intro: Sub-drones and distant tom calls; one frame-drum hit sets the gait]
+[verse: Broken kick pattern + tom accents; breath hisses syncopate the gaps]
+[pre-chorus: Bass swell; short reverse-suck; tom rolls hint at drop]
+[chorus: Full stomp—heavy kick, tom ensemble in unison; ritual claps layer]
+[verse: Motif mutates; fewer kicks, more tom triplets; shaker-rattle enters]
+[bridge: Call-and-response toms; brief silence pocket, then sub-drop]
+[chorus: Final stomp—wide stereo toms; crowd shouts tucked back]
+[outro: Kicks mute; tom echoes decay; last frame-drum hit fades]
+[end]
+```
+
+#### Why these materials
+
+Gqom’s hallmark is minimal, raw, repetitive beat design with heavy bass and non-four-on-the-floor patterns—perfect for a predatory, ritual stomp. 
+
+Typical working tempo zone: ~126–130 BPM (can be felt in halftime at ~63–65), matching the above pacing. 
+
+“Bear/wolf drums” is realized via low tom ensembles and frame-drum colors (buben/tupan) to keep it culturally generic yet authentic to regional hand-drum timbres. 
+
+Dark, hypnotic atmosphere aligns with widely noted gqom aesthetics. 
+
+#### Producer.ai prompts
+
+“gqom minimal stomp, heavy sub kick, low tom ensemble, ritual claps, dark room”
+
+“frame-drum hits with broken kick, breathy hisses, reverse-suck riser”
+
+“bridge call-and-response toms, silence pocket, deep sub-drop return”
+
+#### Status
+
+Planned
+
+---
+
+### 10. One Bell, One Breath
+
+Sacred minimalism × White-voice solo
+
+#### Style of Music
+
+Sacred-minimal drone with white-voice solo; tintinnabuli-like triad halo, long silences, single bell; austere, devotional, luminous-under-shadow
+
+#### Lyrics
+
+```
+[control: sacred-minimalism, austere, choral-solo]
+[genre: sacred-minimal, ritual-ambient]
+[mood: contemplative, reverent, still]
+[tempo: very-slow / breath-paced]
+[length: 195]
+[instruments: organ/pedal-drone, soft-strings, bell(single), glass-harmonics (subtle)]
+[vocals: white-voice-solo (open-throat), faint octave-doubling (optional)]
+[fx: long-cavern-IR, natural-room, gentle-tape-hiss]
+[sequence: intro, verse, chorus, verse, bridge, chorus, outro]
+
+[intro: Pedal drone establishes tonic; one bell strikes; silence breath]
+[verse: White-voice solo enters—stepwise, chant-like; organ sustains triad tones]
+[chorus: Tintinnabuli-style triad arpeggios halo the solo; dynamic barely rises]
+[verse: Return to near-silence; solo on a lower reciting tone; organ thins]
+[bridge: Short bell + sustained harmonic; two bars of deep quiet]
+[chorus: Final statement—solo above simple triad; time feels suspended]
+[outro: Drone closes; last partial of bell hangs and fades]
+[end]
+```
+
+#### Why these materials
+
+Sacred minimalism / tintinnabuli: chant-influenced, ultra-reduced materials, triad-based haloing, silence and simplicity central to affect. 
+
+White-voice (open-throat, bright carry) suits unaccompanied/near-unaccompanied, chant-like solo over drones. 
+
+#### Producer.ai prompts
+
+“white-voice solo over quiet organ drone, single bell strike, long cavern reverb”
+
+“tintinnabuli-like triad halo, very slow breath pacing, near-silence passages”
+
+“final cadence: sustained drone, fading bell partials, contemplative air”
+
+#### Status
+
+Planned
+
+---
+
+### 11. Lanterns Under Rain
+
+Trip-hop × Zhaleika/gusli
+
+#### Style of Music
+
+Moody trip-hop with Slavic folk leads; smoked-vinyl drums, dubby bass, rainy keys; zhaleika hornpipe motifs and gusli plucks over atmospheric pads; late-night, cinematic
+
+#### Lyrics
+
+```
+[control: trip-hop, folk-fusion, cinematic-noir]
+[genre: trip-hop, downtempo, slavic-folk]
+[mood: nocturnal, melancholic, intimate]
+[tempo: slow 70–84, swung breakbeat]
+[length: 210]
+[instruments: dusty-breaks, sub-bass, rhodes/lofi-keys, pads, zhaleika, gusli, vinyl-crackle]
+[vocals: hushed lead or spoken-word, ghost harmonies (optional)]
+[fx: tape-hiss, spring-reverb, dub-delays]
+[sequence: intro, verse, pre-chorus, chorus, verse, bridge, chorus, outro]
+
+[intro: Vinyl crackle; soft pad; sparse rhodes; distant zhaleika call]
+[verse: Swung dusty break + sub-bass; gusli arpeggio sketches motif]
+[pre-chorus: Delay throws widen; hornpipe echoes answer keys]
+[chorus: Full trip-hop bloom—fat sub, wide pads; zhaleika sings hook]
+[verse: Beat thins; spoken-word/hushed lead rides the groove]
+[bridge: Dub space—drums drop to rim/ghosts; gusli harmonics shimmer]
+[chorus: Return bigger—hornpipe + keys in unison; bass deeper]
+[outro: Break dissolves; last zhaleika note and tape-hiss fade]
+[end]
+```
+
+#### Why these materials
+
+Trip-hop: slow, atmospheric, Bristol-scene breakbeats + dub/jazz/soul influences—fits the smoky, late-night pacing here. 
+
+Zhaleika: single-reed Slavic “folk clarinet”/hornpipe with piercing, plaintive timbre—perfect for the vocal-like lead lines. 
+
+Gusli: East-Slavic plucked zither; historic folk color that complements the hornpipe with soft arpeggios. 
+
+#### Producer.ai prompts
+
+“slow trip-hop break with sub-bass, rainy rhodes, vinyl crackle, dub delay”
+
+“zhaleika hornpipe lead over atmospheric pads, echo throws, film-noir mood”
+
+“gusli plucks weaving through swung breakbeat, spring reverb, night city air”
+
+#### Status
+
+Planned
+
+---
+
+### 12. Iron & Hallelujah
+
+Post-industrial ritual × Field hymns
+
+#### Style of Music
+
+Ritual post-industrial—chains, logs, metal scrapes, low drum processions—crossed with field-recorded hymn fragments (shape-note/Sacred-Harp flavor), framed as distant, communal calls in a hollow-square-like space
+
+#### Lyrics
+
+```
+[control: post-industrial, ritual-ambient, field-hymns]
+[genre: post-industrial, ritual-ambient, folk-hymn]
+[mood: solemn, numinous, cathartic]
+[tempo: slow 60–72, processional]
+[length: 220]
+[instruments: log-drums, chain-scrapes, metal-sheets bowed, floor-toms, harmonium/pedal, bell, tape-machine]
+[vocals: field-hymn snippets (a cappella stack), leader calls + group responses]
+[fx: stone-room-IR, tape-wobble, outdoor-air, distant-crowd]
+[sequence: intro, verse, pre-chorus, chorus, verse, bridge, chorus, outro]
+
+[intro: Outdoor air + faint congregation murmur; single bell; far hymn fragment]
+[verse: Log-drum pulse; chain scrape rhythm; leader call (distant, dry)]
+[pre-chorus: Harmonium pedal swells; metal sheet bowed; room size grows]
+[chorus: Field-hymn stack enters (short, loud, participatory), framed by toms]
+[verse: Hymn recedes; ritual hits in asymmetrical pattern; tape wobble]
+[bridge: Silence pocket; bell and breath; brief unison shout; thunder of metal]
+[chorus: Final communal swell—hymn fragment returns; drums heavier]
+[outro: Air returns; congregation fades; one last chain rattle and bell]
+[end]
+```
+
+#### Why these materials
+
+Post-industrial is a catch-all for industrial-derived, non-dance strains (ritual/dark ambient, death industrial, neofolk, etc.)—the metal/wood/ritual palette is idiomatic here. 
+
+Field hymns: shape-note/Sacred Harp is participatory, loud, communal (hollow-square) a cappella—perfect for “leader + group” calls as environmental layers. 
+
+Field recording practice justifies treating the hymn layers and outdoor ambience as location sound, not studio choir. 
+
+#### Producer.ai prompts
+
+“ritual metal and log-drum procession, chain scrapes, stone room, single bell”
+
+“distant Sacred-Harp-style a cappella stack in hollow-square feel, leader calls”
+
+“silence pocket then metal thunder, tape wobble, outdoor air returning”
+
+#### Status
+
+Planned
 
 ---
 
