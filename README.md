@@ -10,7 +10,7 @@ AI assisted audio distribution guideline: [AIAADiG](aiaadig.md) file in this rep
 
 The meta-tags reference is compiled by studying Suno users' public posts and comments, related to the currently supported meta-tags (used in Lyrics field).
 
-Latest documents update: November 02, 2025: templates.
+Latest documents update: November 19, 2025: tag-reference
 
 Latest news: Suno, model v5.0
 

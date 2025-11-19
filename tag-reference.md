@@ -1,12 +1,17 @@
 # Suno meta-tags
 
-Last modified: 2025, September 24.
+Last modified: 2025, November 19.
 
 ## Suno service news (updated: September 24, 2025): model v5.0
 
 Starting from September, Suno began deploying version 5.0 of their model.
 
 The model is richer in polyphony, in vocals implementations and better implements the in-tag instructions.
+ 
+**New v5.0 capabilities (confirmed November 2025):**
+**Genre mashups** now work reliably (e.g., `[genre: midwest emo + neosoul]`)
+**Natural language tempo descriptors** (e.g., `[tempo: mid-tempo 90s hip-hop swing]`)
+**Enhanced prompt parsing** for embedded tags in conversational text
 
 ## Suno service news (updated: July 18, 2025): model v4.5+
 
@@ -121,30 +126,22 @@ And it works (the model starts with an instrumental intro then brings in vocals)
 
 ## Newly Confirmed or User-Tested Meta-Tags (v4.0 / v4.5)
 
-### [vocalist: <name or descriptor>]
-- **Purpose**: Defines voice identity or texture. Works alongside `[vocals]`.
-- **Example**: `[vocalist: breathy female mezzo-soprano with jazz phrasing]`
-
-### [male vocal], [female vocal]
-- **Purpose**: Forces male or female vocal presence.
-- **Example**: `[female vocal]` or `[male vocal]`
-
-### [duet]
-- **Purpose**: Indicates a two-voice arrangement (often alternating or harmonizing).
-- **Example**: `[duet: female lead with whispered male counterline]`
-
-### [spoken word]
-- **Purpose**: Triggers narration or monologue mode instead of singing.
-- **Example**: `[spoken word: distorted narration under ambient pad]`
-
-### [harmonies: <description>]
-- **Purpose**: Adds stacked or layered vocals; works for both lead and background.
-- **Example**: `[harmonies: sustained high-third vocal stack under main melody]`
-
-### [vulnerable vocals: <description>]
-- **Purpose**: Defines tremulous or emotionally fragile vocal tone.
-- **Correct Usage**: `[vulnerable vocals: trembling voice, cracked falsetto in chorus]`
-- **Avoid**: Placing descriptive text outside tag.
+- announcer
+- build
+- duet
+- era: <decade or stylistic period>
+- hook
+- female vocal
+- harmonies: <description>
+- male vocal
+- no-repeat
+- polyphony
+- spoken word
+- technique
+- vocalist: <name or descriptor>
+- vulnerable vocals: <description>
+- whisper
+- whispering
 
 ### Instrument Solo Tags
 - Usable as structural tags, often treated like `[section]` but with strong instrument focus:
@@ -153,10 +150,6 @@ And it works (the model starts with an instrumental intro then brings in vocals)
     - `[violin solo: baroque trills and glissando]`
     - `[synth solo: retro wave arpeggios rise into high delay]`
     - `[flute solo: airy modal runs]`
-
-### [era: <decade or stylistic period>]
-- **Purpose**: Suggests period aesthetics, influences instrument and mix style.
-- **Example**: `[era: early 2000s UK garage]`
 
 ### Expanded [style:] Values (freeform, observed functional)
 - `retro-horror`
@@ -181,24 +174,45 @@ Starting with v4.5, the maximal "Style of Music" field length has been increased
 
 ### New/confirmed tags
 
-New tags confirmed:
-
+**New tags confirmed for v4.5+:**
+ 
+- announcer
 - aria-rise
 - build
 - chant-loop
+- hook
 - inversion
 - lament
 - polyphony
 - scat break
 - subject
-- technique
 
-New for the current version (v4.5 and later):
+**New for v4.5 and later:**
 
 - hook
 - rapped verse
 - distorted vocals
 - quiet arrangement
+
+**New tags confirmed for v5.0 (November 2025):**
+
+- aria-rise (enhanced operatic implementation)
+- build (improved polyphonic builds)
+- chant-loop (expanded ritualistic parameters)
+- inversion (fugal technique support)
+- lament (sorrowful motif generation)
+- polyphony (richer vocal polyphony)
+- scat break (jazz improvisation sections)
+- subject (primary theme marking)
+- technique (compositional method specification)
+
+### Tags with expanded v5.0 behavior
+
+- **[control]**: Now supports `hallucinatory`, `no-repeat`, `dynamic transitions` parameters
+- **[genre]**: Hybrid genres (e.g., "midwest emo + neosoul") now reliably produce blended styles
+- **[tempo]**: Natural language phrases like "mid-tempo 90s hip-hop swing" are parsed effectively
+- **[vocalist]**: More consistent voice locking across sections
+- **[whisper]/[whispering]**: Improved whisper detection and rendering
 
 ### Tags obsoleted or changing the behavior
 
@@ -245,6 +259,44 @@ etc.
 ---
 
 # Meta-tags definitions: frequently used meta-tags
+
+## [announcer]
+
+**Category:** Vocal / narrative role tag  
+**Primary use:** To request a spoken or semi-spoken “host” or “presenter” voice that introduces, comments on, or frames parts of the track.
+
+**Behavior and intent**  
+`[announcer]` suggests a clear, articulate delivery similar to a radio DJ, podcast host, sports commentator, or event MC. It works best when you briefly describe the tone and context you want:
+
+- Radio-style intros: “late-night FM host”, “upbeat morning radio DJ”  
+- Retro aesthetics: “1950s newsreel announcer”, “old vinyl commercial announcer”  
+- In‑universe narration: “mystery show host”, “horror anthology narrator”
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - As a section header or inline role cue:  
+    - `[announcer: retro radio DJ, warm, friendly tone]`  
+    - `[announcer: horror show host, ominous, slow delivery]`  
+- *Style of Music field:*  
+  - As part of the description if the announcer role is central to the track:  
+    - “lofi hip-hop with a warm late-night radio announcer introducing each section”
+
+**Typical use-cases**  
+
+- “Radio show” or “podcast” framing around songs or instrumental beds  
+- Story intros and outros that explain the scene or episode  
+- Fake commercials, station IDs, or interludes inside concept albums  
+
+Use short, concrete adjectives for voice color (warm, crisp, vintage, serious, playful) rather than long prose to keep this tag effective.
+
+**Example**
+```
+[announcer: horror show host, ominous, slow delivery]
+"The mystery comes over the cursed land, as dusk approaches..."
+```
+
+---
 
 ## [aria-rise]
 *   **Meaning**: A section marked by an **operatic, rising vocal phrase**, often dramatic and soaring.
@@ -355,27 +407,29 @@ etc.
 ---
 
 ## [build]
-*   **Meaning**: Defines a **gradual increase in intensity or texture**, typically leading to a climax, chorus, or drop.
-*   **Placement**: Within `[structure]` or as a standalone section marker.
-*   **Accepted Parameters**:
-    *   **instrumental** – layering instruments to grow intensity.
-    *   **vocal** – stacking harmonies, ad-libs, or chanting.
-    *   **orchestral** – cinematic rise with strings/brass.
-    *   **percussive** – drums and rhythm elements build tension.
-    *   **electronic** – synth risers, filter sweeps, stutter FX.
-*   **Sample Usage**:
-    ```
-    [build: Layered synths and rising choir swell toward chorus]  
-    ```
-*   **Genre-Based Usage**:
-    *   **EDM & Trance**: Classic riser into a drop.
-    *   **Rock & Metal**: Guitar/Drum build into explosive chorus.
-    *   **Pop & R&B**: Vocal layering into emotional peak.
-    *   **Orchestral**: Crescendo with strings and brass.
-### **Track Structure Recommendation**
-    *   `[verse: subdued instrumentation]`
-    *   `[build: gradual intensity, riser effect]`
-    *   `[chorus: full arrangement payoff]`
+
+**Category:** Structural / dynamic progression tag  
+**Primary use:** To mark a section that gradually increases intensity, usually leading into a chorus, drop, or climax.
+
+**Behavior and intent**  
+`[build]` tells Suno that this section should feel like a ramp: layers come in, drums grow more energetic, harmony thickens, and tension rises before a payoff. It often pairs with tags like `[drop]`, `[chorus]`, or `[hook]`.
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - As a section start tag, often combined with descriptive modifiers:  
+    - `[build | rising tension, more drums, more synth layers]`  
+    - `[pre-chorus | build | bigger rhythm, lifted melody]`  
+- *Style of Music field:*  
+  - “epic electronic track with long cinematic builds and impactful drops”
+
+**Typical use-cases**  
+
+- EDM / pop: pre‑chorus builds into a big chorus or drop  
+- Post-rock / cinematic: long atmospheric builds into climactic peaks  
+- Rock / metal: drum and guitar swells before a shout‑along chorus
+
+Keep your scene short but specific: describe what increases (drums, distortion, choir, tempo feel, etc.) rather than just saying “more intense”.
 
 ---
 
@@ -571,30 +625,29 @@ etc.
 ---
 
 ## [hook]
-- **Meaning**: Specifies **the most memorable, catchy part of the song**, whether instrumental or vocal.
-- **Placement**: Typically used within `[structure]` or `[vocals]`.
-- **Accepted Parameters**:
-  - **vocal** - The hook is a sung phrase.
-  - **instrumental** - A riff or melody serves as the hook.
-  - **repetitive** - The hook repeats multiple times for memorability.
-  - **syncopated** - Rhythmically engaging hook.
-  - **anthemic** - A bold, singalong-style hook.
-- **Sample Usage**:
-  ```
-  [hook: Repetitive vocal melody layered over punchy drums.]
-  ```
-- **Genre-Based Usage**:
-  - **Pop & R&B**: **Melodic, lyrical hooks**.
-  - **Rock & Metal**: **Guitar riff-driven hooks**.
-  - **Electronic & House**: **Synth-based recurring motifs**.
-  - **Hip-Hop & Trap**: **Catchy, chant-like refrains**.
 
-### **Track Structure Recommendation**
-- **[intro: Soft build-up introducing hook melody]**
-- **[verse: Developing lyrics leading to the hook]**
-- **[chorus: The main hook is fully introduced]**
-- **[bridge: A breakdown section leading to the final hook repetition]**
-- **[outro: The hook fades out with a reverb tail]**
+**Category:** Structural / key element tag  
+**Primary use:** To highlight the most memorable musical / lyrical idea in the track.
+
+**Behavior and intent**  
+`[hook]` marks a phrase or line meant to “stick in the ear”. It can be a micro‑section within a chorus, a short melodic motif, or a repeated line that carries the song’s identity. Unlike `[chorus]`, which defines a whole section, `[hook]` often focuses on a compact, repeatable idea.
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - As a section label or inline cue:  
+    - `[hook] Wherever we go, the record spins slow.`  
+    - `[chorus | catchy hook, simple repeating phrase]`  
+- *Style of Music field:*  
+  - “warm old‑vinyl hip‑hop with a simple, nostalgic hook in the chorus”
+
+**Typical use-cases**  
+
+- Emphasizing one key line in the chorus that should stand out  
+- Creating a short vocal motif for instrumental‑heavy tracks  
+- Tagging call‑and‑response lines or slogans in rap / pop
+
+For best results, keep the hook text very short, rhythmically clear, and easy to repeat.
 
 ---
 
@@ -780,25 +833,29 @@ etc.
 ---
 
 ## [polyphony]
-*   **Meaning**: Specifies **multiple independent melodic lines** played or sung together.
-*   **Placement**: Within `[vocals]`, `[harmony]`, or `[texture]`.
-*   **Accepted Parameters**:
-    *   **two-part** – duet or double voice.
-    *   **three-part** – trio harmonization.
-    *   **four-part** – full SATB choral style.
-    *   **layered** – multiple independent melodies.
-*   **Sample Usage**:
-    ```
-    [polyphony: Four-part fugue texture, organ + voices]  
-    ```
-*   **Genre-Based Usage**:
-    *   **Sacred/Choral**: Traditional 4-part harmony.
-    *   **Fugue/Classical**: Counterpoint.
-    *   **Jazz Fusion/Avant-garde**: Layered melodic improvisations.
-### **Track Structure Recommendation**:
-    *   `[subject: main line]`
-    *   `[polyphony: three-part counterpoint develops]`
-    *   `[big finish: layered voices in harmony]`
+
+**Category:** Arrangement / vocal-choir / harmony tag  
+**Primary use:** To request multiple independent melodic lines or layered voices rather than a single simple melody with block chords.
+
+**Behavior and intent**  
+`[polyphony]` encourages overlapping melodies and counterpoint. In vocal music, it suggests several simultaneous lines (choir parts interweaving rather than moving in lockstep). In instrumental music, it can yield more complex interacting parts instead of one dominant lead with static backing.
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - As a section descriptor, especially for choirs or group singing:  
+    - `[chorus | polyphony, overlapping choir lines, call-and-response]`  
+    - `[bridge | polyphony in strings and woodwinds, slowly unfolding]`  
+- *Style of Music field:*  
+  - “sacred-style polyphony with interweaving vocal lines and gentle organ support”
+
+**Typical use-cases**  
+
+- Choral / sacred / renaissance‑inspired pieces  
+- Complex climactic choruses with several melody fragments at once  
+- Orchestral or post‑rock textures where many lines move semi-independently
+
+For best results, pair `[polyphony]` with clear section roles (verse, chorus, coda) and maybe indicate which instruments or voices participate.
 
 ---
 
@@ -929,27 +986,29 @@ etc.
 ---
 
 ## [technique]
-*   **Meaning**: Defines a **specific compositional or instrumental method** to be applied.
-*   **Placement**: Within `[structure]`, `[harmony]`, `[vocals]`, or `[instruments]`.
-*   **Accepted Parameters**:
-    *   **fugue-expansion** – subject extended in counterpoint.
-    *   **reverse-entry** – motif played backwards.
-    *   **spectral-loop-fusion** – layering spectral textures.
-    *   **aria-loop-fracture** – breaking operatic lines into fragments.
-    *   **sustained-harmony** – holding chords over shifting textures.
-*   **Sample Usage**:
-    ```
-    [technique: reverse-entry of main subject on synth]  
-    ```
-*   **Genre-Based Usage**:
-    *   **Classical & Contemporary**: Canon/fugue techniques.
-    *   **Electronic/Experimental**: Reverse loops, granular resynthesis.
-    *   **Jazz Fusion**: Extended improvisational methods.
-### **Track Structure Recommendation**:
-    *   `[subject: main motif]`
-    *   `[technique: fugue-expansion]`
-    *   `[inversion: mirrored entry]`
-    *   `[coda: resolution]`
+
+**Category:** Instrumental / performance detail tag  
+**Primary use:** To specify how an instrument or voice is played or treated (e.g., picking style, bowing, extended techniques), not just *what* instrument is used.
+
+**Behavior and intent**  
+`[technique]` is a general label you can pair with a short description of performance style. Instead of simply saying “[guitar]”, you can indicate “[guitar | technique: muted funky strums]”. This helps shape rhythmic feel and timbre.
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - As part of a section descriptor for arrangement:  
+    - `[intro | guitar, technique: tremolo picking over reverb]`  
+    - `[bridge | cello, technique: harmonics and glissando]`  
+- *Style of Music field:*  
+  - “neo-folk with detailed acoustic techniques: fingerstyle arpeggios, soft slides, and harmonics”
+
+**Typical use-cases**  
+
+- Guitar, strings, winds: fingerstyle, bowing, staccato, legato, muted, slapped, etc.  
+- Vocal techniques: “technique: belting”, “technique: soft head voice”, “technique: spoken rhythmically”  
+- Experimental sounds: “technique: prepared piano”, “technique: tape‑style pitch warble”
+
+Keep technique descriptions short, focusing on physical action (“plucked,” “bowed long,” “muted,” “sliding”) rather than abstract mood words.
 
 ---
 
@@ -1809,12 +1868,30 @@ Below is the list of meta-tags recognized by Suno audio tracks generation servic
 ---
 
 ## [duet]
-- **Purpose**: Marks the piece as a two-part vocal composition.
-- **Syntax**: `[duet: male and female voices alternating in verses]`
-- **Usage Tips**: Often used with `[sequence]`; boosts vocal complexity.
-- **Known Parameters**: freeform descrition; voice pairing, texture, emotion.
-- **Version Info**: Confirmed in v4.0+
-- **Sample Usage**: `[duet: ghost soprano and robotic tenor in call-and-response]`
+
+**Category:** Vocal configuration tag  
+**Primary use:** To request two distinct lead voices sharing the spotlight: trading lines, harmonizing, or answering each other.
+
+**Behavior and intent**  
+`[duet]` suggests a conversation or partnership between two singers. Suno may interpret this as contrasting timbres (e.g., one higher, one lower) or different phrasing styles.
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - At the start of the track or specific sections:  
+    - `[duet | female lead + male lead, alternating lines]`  
+    - `[chorus | duet, both voices sing together in harmony]`  
+  - You can add inline cues like “(Voice A)” / “(Voice B)” if you want the text to imply who sings what, even though it’s a soft hint.
+- *Style of Music field:*  
+  - “romantic ballad duet with intertwined vocals and gentle piano”
+
+**Typical use-cases**  
+
+- Dialog-based love songs or narrative conversations  
+- Call‑and‑response choruses in pop, gospel, or folk  
+- Two‑character story tracks (e.g., Wilds Sisters, two Personas, etc.)
+
+Keep the language around the duet simple (“two voices”, “trading lines”, “singing together”) to avoid confusing the model with too much detail.
 
 ---
 
@@ -2957,29 +3034,29 @@ Below is the list of meta-tags recognized by Suno audio tracks generation servic
 ---
 
 ## [no-repeat]
-- **Meaning**: Ensures that **no section of the track is repeated**, forcing Suno to generate unique progressions throughout the composition.  
-- **Placement**: Typically placed **before `[structure]`** to define how sections behave.  
-- **Accepted Parameters**:  
-  - **strict** - No elements (lyrics, instrumental phrases) repeat.  
-  - **chorus-only** - Allows repetition of the chorus, but prevents repeating verses.  
-  - **instrumental-varied** - Ensures each instrumental section is distinct.  
-- **Sample Usage**:  
-  ```
-  [no-repeat: chorus-only]
-  ```
-- **Genre-Based Usage**:  
-  - **Jazz & Improvisation**: **"Instrumental-varied" for evolving solos.**  
-  - **Progressive Rock & Metal**: **"Strict" to ensure unique song progression.**  
-  - **Orchestral & Film Score**: **"No-repeat" to avoid looping motifs.**  
-  - **Minimalist & Ambient**: **"Chorus-only" to maintain some repetition while avoiding redundancy.**  
 
-### **Track Structure Recommendation**  
-- **[no-repeat: strict]**  
-- **[intro: Unique evolving soundscape]**  
-- **[verse: Slow piano chords, building in complexity]**  
-- **[chorus: Choir enters with swelling orchestration]**  
-- **[bridge: Modulated transition into new harmony]**  
-- **[outro: Resolved final theme, no recurrence]**  
+**Category:** Control / structural behavior tag  
+**Primary use:** To discourage the model from automatically repeating lines, verses, or full sections when you do not want extra duplication.
+
+**Behavior and intent**  
+Suno sometimes repeats text fragments to fill a section. The `[no-repeat]` tag is a soft instruction that you want fresh material or a single occurrence of the given lines, rather than extended repetition. It is *not* guaranteed, but it can reduce unplanned looping.
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - At the start of a section or directly before important lines:  
+    - `[no-repeat | verse with simple, one-time images]`  
+    - `[verse | no-repeat]`  
+- *Style of Music field:*  
+  - Rare; usually unnecessary. This tag is most useful embedded in lyrics.
+
+**Typical use-cases**  
+
+- Narrative verses where each line advances the story  
+- Spoken word or rap sections where repetition would muddy the meaning  
+- Short epigrams or punchlines you only want once
+
+Combine `[no-repeat]` with *deliberately non-repetitive* text: if your words are already highly repetitive, the model has less room to vary them.
 
 ---
 
@@ -3949,12 +4026,29 @@ Below is the list of meta-tags recognized by Suno audio tracks generation servic
 ---
 
 ## [spoken word]
-- **Purpose**: Marks portions of the lyrics or performance as spoken (not sung).
-- **Syntax**: `[spoken word: monologue on memory decay begins here]`
-- **Usage Tips**: Often used in dreamlike/horror tracks or lo-fi narration.
-- **Accepted Parameters**: freeform description of the spoken manner
-- **Version Info**: v3.5 partial, fully functional in v4.0+
-- **Sample Usage**: `[spoken word: Detective speaks through broken radio line]`
+
+**Category:** Vocal delivery / genre tag  
+**Primary use:** To request non-sung, rhythmic or prose-like speech instead of traditional melodic singing.
+
+**Behavior and intent**  
+`[spoken word]` encourages the model to treat the delivery more like poetry performance, narration, or rap‑adjacent speech, often with loose pitch but clear rhythm. It differs from `[rap]` by leaning less on strict flow patterns and more on poetic or storytelling cadence.
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - As a section tag:  
+    - `[spoken word | intimate, close-mic, almost whispered]`  
+    - `[verse | spoken word over minimal piano]`  
+- *Style of Music field:*  
+  - “ambient spoken word piece with sparse chords and vinyl crackle”
+
+**Typical use-cases**  
+
+- Poetry over drones or ambient beds  
+- Narrative interludes between sung sections  
+- Concept tracks where storytelling is more important than melody
+
+Combine `[spoken word]` with clear, well‑punctuated text. Very complex rhyme schemes or forced line breaks may reduce the natural feel of the delivery.
 
 ---
 
@@ -4561,12 +4655,29 @@ Below is the list of meta-tags recognized by Suno audio tracks generation servic
 ---
 
 ## [vocalist]
-- **Meaning**: Explicitly declares that the track includes a lead singer (optional: name or voice type).
-- **Syntax**: `[vocalist: female lead]`, `[vocalist: ghost vocals]`, `[vocalist: robotic falsetto]`
-- **Usage Tips**: Improves vocal track consistency. Can be used in addition to `[vocals: ...]`.
-- **Known Parameters**: Descriptive free-form.
-- **Version Info**: Supported v3.5-v4.5.
-- **Sample Usage**: `[vocalist: male baritone with reverb-heavy phrasing]`
+
+**Category:** Vocal role / character tag  
+**Primary use:** To describe the main singer’s character, range, or style without tying it to a specific real‑world artist.
+
+**Behavior and intent**  
+`[vocalist]` lets you specify who is “front and center” in stylistic terms: gender expression, timbre, age impression, and general vibe. It is more about describing the *role* and *tone* than about structure.
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - At the top of the track, or before the first sung section:  
+    - `[vocalist | soft female voice, indie folk tone]`  
+    - `[vocalist | relaxed baritone, storyteller style]`  
+- *Style of Music field:*  
+  - “old‑vinyl hip-hop with a mellow male vocalist and distant harmonies”
+
+**Typical use-cases**  
+
+- Clarifying who should lead when you also have choirs, narrators, or duets  
+- Indicating age/vibe (“teen pop vocalist”, “mature jazz vocalist”)  
+- Steering the vocal tone when Personas are not used, or when you want to override them gently
+
+Pair `[vocalist]` with one or two precise adjectives (warm, raspy, bright, fragile) rather than long backstories.
 
 ---
 
@@ -4621,67 +4732,85 @@ Below is the list of meta-tags recognized by Suno audio tracks generation servic
 ---
 
 ## [vulnerable vocals]
-- **Purpose**: Marks vocals as soft, emotional, tremulous.
-- **Syntax**: `[vulnerable vocals: whispery female voice falters in minor key phrases]`
-- **Accepted Parameters**: freeform description
-- **Usage Tips**: Enhances emotional character.
-- **Version Info**: Supported since v4.0
-- **Sample Usage**: `[vulnerable vocals: gentle male tenor singing a lullaby in faltering tone]`
+
+**Category:** Vocal emotion / tone tag  
+**Primary use:** To shape the emotional quality of the voice toward fragility, intimacy, and emotional openness rather than power or polish.
+
+**Behavior and intent**  
+`[vulnerable vocals]` invites a softer, more exposed delivery: less belting, more breath, slight shakiness or tenderness, and a sense of emotional honesty. It can apply to quiet moments in otherwise big productions.
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - At the start of emotionally raw sections:  
+    - `[verse | vulnerable vocals, soft, nearly breaking]`  
+    - `[bridge | vulnerable vocals, confessional tone]`  
+- *Style of Music field:*  
+  - “indie ballad with vulnerable vocals and sparse piano accompaniment”
+
+**Typical use-cases**  
+
+- Confessional verses revealing inner thoughts  
+- Stripped-down intros or outros before/after big choruses  
+- Tracks centered around heartbreak, doubt, nostalgia, or quiet hope
+
+For more control, pair `[vulnerable vocals]` with dynamic cues like “low volume”, “close to the mic”, “minimal reverb” or with arrangement hints (“just piano and voice”).
 
 ---
 
 ## [whisper]
-- **Meaning**: Specifies **a whispered vocal performance**, often used for eerie, intimate, or atmospheric effects.  
-- **Placement**: Typically used **within [vocals], [effects], or [background-vocals]**, modifying the vocal style.  
-- **Accepted Parameters**:
-  - **soft** - Gentle, barely audible whispers.  
-  - **intense** - Harsh, dramatic whispers for tension.  
-  - **layered** - Multiple whispering voices at different intensities.  
-  - **distorted** - Whispering with electronic or glitchy processing.  
-- **Sample Usage**:
-  ```
-  [whisper: Soft, eerie whispers layered over ambient synths.]
-  ```
-- **Genre-Based Usage**:
-  - **Horror & Darkwave**: **"Intense" for unsettling tension.**  
-  - **Ambient & ASMR**: **"Soft" for relaxing, breathy sounds.**  
-  - **Trip-Hop & Industrial**: **"Distorted" for glitchy vocal effects.**  
-  - **Orchestral & Cinematic**: **"Layered" for dramatic storytelling.**  
 
-### **Track Structure Recommendation**
-- **[whisper: Soft, layered whispers creating an eerie ambiance]**  
-- **[intro: Distant whispers gradually fading in]**  
-- **[verse: Sparse beats with whispered lyrics]**  
-- **[chorus: Intensified whispers with reverb and delay]**  
-- **[bridge: Whispered chants with distant echoes]**  
-- **[outro: Whispers fading into silence]**
+**Category:** Vocal delivery / FX tag  
+**Primary use:** To request whisper‑like vocal delivery or subtle whispered layers.
+
+**Behavior and intent**  
+`[whisper]` suggests that the main vocal line in that spot is delivered softly and breathily, close to a whisper. Depending on context, Suno may treat it as:
+- fully whispered lead, or  
+- a hushed, intimate tone with extra breath and less power.
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - As a local delivery tag:  
+    - `[whisper] the secrets only night can hear`  
+    - `[verse | whisper, intimate, close-mic]`  
+- *Style of Music field:*  
+  - “dark ambient pop with whispered verses over sparse piano”
+
+**Typical use-cases**  
+
+- Intimate or ASMR‑like sections  
+- Tension-building passages before a loud chorus / drop  
+- Horror / thriller aesthetics with eerie whispers under the main mix
+
+Avoid stacking too many conflicting vocal style tags (e.g., `[whisper]` + `[shouted vocals]` on the same line). Use one primary delivery style per section.
 
 ---
 
 ## [whispering]
-- **Meaning**: Similar to [whisper], but generally applies **to extended sections or continuous vocal delivery** rather than isolated whispered phrases.  
-- **Placement**: Typically used **within [vocals] or [effects]**, describing sections of the track dominated by whispered speech or singing.  
-- **Accepted Parameters**:
-  - **ghostly** - Ethereal, haunting whispering.  
-  - **urgent** - Fast-paced, intense whispered speech.  
-  - **soft-spoken** - Gentle, breathy delivery.  
-  - **distant** - Processed to sound like a faraway voice.  
-- **Sample Usage**:
-  ```
-  [whispering: Ghostly voices echoing through the background.]
-  ```
-- **Genre-Based Usage**:
-  - **Horror & Experimental**: **"Ghostly" for supernatural vocal effects.**  
-  - **Electronic & Trip-Hop**: **"Distant" for atmospheric textures.**  
-  - **Cinematic & ASMR**: **"Soft-spoken" for intimate narration.**  
-  - **Darkwave & Industrial**: **"Urgent" for rhythmic, breathy vocals.**  
 
-### **Track Structure Recommendation**
-- **[whispering: Urgent, rhythmic whispers layered under percussion]**  
-- **[intro: Slow whispering voices appearing from silence]**  
-- **[verse: Background whispering supporting lead vocals]**  
-- **[chorus: Rising tension with ghostly whispered echoes]**  
-- **[outro: Whispers fading out with deep reverberation]**
+**Category:** Vocal texture / background atmosphere tag  
+**Primary use:** To add a continuous or background layer of whispered phrases, often more textural than a clear lead.
+
+**Behavior and intent**  
+Where `[whisper]` often focuses on the main vocal delivery, `[whispering]` hints at ongoing murmurs, background phrases, or crowd‑like whisper textures. It works particularly well in atmospheric, horror, or experimental contexts.
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - As a background / texture cue, often in brackets or side-notes:  
+    - `[whispering voices in the background, unintelligible, eerie]`  
+    - `[chorus | main vocal strong, subtle whispering doubles underneath]`  
+- *Style of Music field:*  
+  - “cinematic dark ambient with constant whispering textures and distant choir pads”
+
+**Typical use-cases**  
+
+- Horror, thriller, or ritual scenes where whispers form a sonic “fog”  
+- Contrast between clear lead and ghostly whisper layers  
+- Experimental or sound‑design‑heavy compositions
+
+Use short descriptions of what the whispers feel like (“crowd of voices”, “one close voice”, “distant and echoing”) instead of long narrative sentences.
 
 ---
 
