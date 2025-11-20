@@ -1,6 +1,6 @@
 # Suno meta-tags
 
-Last modified: 2025, November 19.
+Last modified: 2025, November 20.
 
 ## Suno service news (updated: September 24, 2025): model v5.0
 
@@ -258,846 +258,9 @@ etc.
 
 ---
 
-# Meta-tags definitions: frequently used meta-tags
+# Meta-tags definitions
 
-## [announcer]
-
-**Category:** Vocal / narrative role tag  
-**Primary use:** To request a spoken or semi-spoken “host” or “presenter” voice that introduces, comments on, or frames parts of the track.
-
-**Behavior and intent**  
-`[announcer]` suggests a clear, articulate delivery similar to a radio DJ, podcast host, sports commentator, or event MC. It works best when you briefly describe the tone and context you want:
-
-- Radio-style intros: “late-night FM host”, “upbeat morning radio DJ”  
-- Retro aesthetics: “1950s newsreel announcer”, “old vinyl commercial announcer”  
-- In‑universe narration: “mystery show host”, “horror anthology narrator”
-
-**Placement and syntax**  
-
-- *Lyrics field:*  
-  - As a section header or inline role cue:  
-    - `[announcer: retro radio DJ, warm, friendly tone]`  
-    - `[announcer: horror show host, ominous, slow delivery]`  
-- *Style of Music field:*  
-  - As part of the description if the announcer role is central to the track:  
-    - “lofi hip-hop with a warm late-night radio announcer introducing each section”
-
-**Typical use-cases**  
-
-- “Radio show” or “podcast” framing around songs or instrumental beds  
-- Story intros and outros that explain the scene or episode  
-- Fake commercials, station IDs, or interludes inside concept albums  
-
-Use short, concrete adjectives for voice color (warm, crisp, vintage, serious, playful) rather than long prose to keep this tag effective.
-
-**Example**
-```
-[announcer: horror show host, ominous, slow delivery]
-"The mystery comes over the cursed land, as dusk approaches..."
-```
-
----
-
-## [aria-rise]
-*   **Meaning**: A section marked by an **operatic, rising vocal phrase**, often dramatic and soaring.
-*   **Placement**: Within `[vocals]` or `[structure]`.
-*   **Accepted Parameters**:
-    *   **solo** – single dramatic vocal.
-    *   **choral** – choir rising together.
-    *   **orchestral** – orchestration builds with vocal rise.
-*   **Sample Usage**:
-    ```
-    [aria-rise: Soprano vocals rise into climax, strings swell]  
-    ```
-*   **Genre-Based Usage**:
-    *   **Opera/Classical**: Traditional aria-style build.
-    *   **Symphonic Metal**: Operatic vocals with band.
-    *   **Cinematic Pop**: Ballad climax.
-### **Track Structure Recommendation**:
-    *   `[verse: restrained delivery]`
-    *   `[aria-rise: dramatic operatic build]`
-    *   `[chorus: full orchestration + vocals]`
-
----
-
-## [break]
-- **Meaning**: A **brief pause or stripped-down section** in the song, often used for tension or transition.
-- **Placement**: Typically used within `[structure]`, `[rhythm]`, or `[dynamics]`.
-- **Accepted Parameters**:
-  - **instrumental** - A solo instrumental section.
-  - **percussive** - A drum break with no melody.
-  - **silence** - A moment of complete pause.
-  - **glitch** - A digitally processed stutter effect.
-  - **acapella** - Vocals only, no instrumentation.
-- **Sample Usage**:
-  ```
-  [break: Silence before the final chorus drop.]
-  ```
-- **Genre-Based Usage**:
-  - **Hip-Hop & Breakbeat**: Percussive breaks for **sampling and scratching**.
-  - **Jazz & Funk**: Drum breaks set up **improvised solos**.
-  - **Electronic & Trap**: **Glitch or silence breaks** before a drop.
-  - **Rock & Metal**: **Instrumental breakdowns** add intensity.
-
-### **Track Structure Recommendation**
-- **[intro: Full-band intro leading into break]**
-- **[verse: Steady groove with instrumental build]**
-- **[chorus: Strong energy before break]**
-- **[bridge: Sudden percussive break leading to climax]**
-- **[outro: Soft acapella break before fade-out]**
-
----
-
-## [breakdown]
-- **Meaning**: A section where the **instrumentation is stripped down**, usually reducing intensity before building back up.
-- **Placement**: Typically used within `[structure]`, `[rhythm]`, or `[dynamics]`.
-- **Accepted Parameters**:
-  - **percussive** - Emphasis on drums or rhythmic elements.
-  - **instrumental** - Focused on instruments with minimal vocals.
-  - **electronic** - Filtered or chopped electronic elements.
-  - **syncopated** - A more rhythmically complex breakdown.
-  - **minimal** - Only a few instruments, creating an intimate moment.
-- **Sample Usage**:
-  ```
-  [breakdown: Percussive break with syncopated drum fills before the final chorus.]
-  ```
-- **Genre-Based Usage**:
-  - **Electronic & EDM**: Often used before a **drop**, with **filtered synths**.
-  - **Rock & Metal**: Stripped-down **guitar and bass sections** before a climax.
-  - **Hip-Hop & Trap**: Beat-only sections for **rapping emphasis**.
-  - **Jazz & Funk**: Instrumental solo breaks for **improvisation**.
-
-### **Track Structure Recommendation**
-- **[intro: Soft ambient pads leading into verse]**
-- **[verse: Full instrumentation with vocal delivery]**
-- **[chorus: Energetic, layered section]**
-- **[breakdown: Stripped percussion and bass, creating anticipation]**
-- **[bridge: Gradual build-up leading back into chorus]**
-- **[outro: Fading synths with percussion elements]**
-
----
-
-## [bridge]
-- **Meaning**: A contrasting section that **connects different parts of a song**, often providing harmonic or melodic variation.
-- **Placement**: Typically used within `[structure]` or `[harmony]`.
-- **Accepted Parameters**:
-  - **melodic** - Focus on a new melody line.
-  - **harmonic** - Introduces a new chord progression.
-  - **instrumental** - No vocals, only instrumental contrast.
-  - **climactic** - Builds intensity leading into the final chorus.
-  - **stripped-down** - Softer than other sections, creating contrast.
-- **Sample Usage**:
-  ```
-  [bridge: Stripped-down vocals with subtle guitar arpeggios before the climax.]
-  ```
-- **Genre-Based Usage**:
-  - **Pop & Rock**: A **melodic shift** before returning to the chorus.
-  - **Jazz & Soul**: Modulations to **new harmonic territories**.
-  - **Metal & Prog Rock**: Dynamic **tempo or key changes**.
-  - **Electronic & House**: **Filter sweeps** and instrumental shifts.
-
-### **Track Structure Recommendation**
-- **[intro: Instrumental fade-in]**
-- **[verse: Primary melody and lyrics]**
-- **[chorus: Energetic, memorable hook]**
-- **[bridge: Harmonic variation leading into tension]**
-- **[chorus: Final, climactic return]**
-- **[outro: Slow fade-out with ambient textures]**
-
----
-
-## [build]
-
-**Category:** Structural / dynamic progression tag  
-**Primary use:** To mark a section that gradually increases intensity, usually leading into a chorus, drop, or climax.
-
-**Behavior and intent**  
-`[build]` tells Suno that this section should feel like a ramp: layers come in, drums grow more energetic, harmony thickens, and tension rises before a payoff. It often pairs with tags like `[drop]`, `[chorus]`, or `[hook]`.
-
-**Placement and syntax**  
-
-- *Lyrics field:*  
-  - As a section start tag, often combined with descriptive modifiers:  
-    - `[build | rising tension, more drums, more synth layers]`  
-    - `[pre-chorus | build | bigger rhythm, lifted melody]`  
-- *Style of Music field:*  
-  - “epic electronic track with long cinematic builds and impactful drops”
-
-**Typical use-cases**  
-
-- EDM / pop: pre‑chorus builds into a big chorus or drop  
-- Post-rock / cinematic: long atmospheric builds into climactic peaks  
-- Rock / metal: drum and guitar swells before a shout‑along chorus
-
-Keep your scene short but specific: describe what increases (drums, distortion, choir, tempo feel, etc.) rather than just saying “more intense”.
-
----
-
-## [chant-loop]
-*   **Meaning**: Specifies a **repeated vocal or instrumental chant**, looped for trance-like or ritualistic effect.
-*   **Placement**: Often within `[vocals]`, `[structure]`, or `[texture]`.
-*   **Accepted Parameters**:
-    *   **ritual** – repetitive, tribal-like chants.
-    *   **layered** – multiple voices stacked in loop.
-    *   **percussive** – chant delivered rhythmically.
-    *   **ambient** – soft, mantra-like background chant.
-*   **Sample Usage**:
-    ```
-    [chant-loop: Layered ghost voices repeating mantra phrase]  
-    ```
-*   **Genre-Based Usage**:
-    *   **World & Folk**: Ritual or traditional chant forms.
-    *   **Ambient & Drone**: Mantra textures as sound bed.
-    *   **Hip-Hop & Trap**: Chanted loops as rhythmic backing.
-    *   **Industrial/Experimental**: Distorted, mechanical chant.
-### **Track Structure Recommendation**:
-    *   `[intro: chant-loop begins quietly]`
-    *   `[chorus: chant grows in volume]`
-    *   `[outro: chant fades to silence]`
-
----
-
-## [coda]
-- **Meaning**: Specifies the **concluding section of a piece**, often distinct from the main body, used for closure or reinforcement of themes.
-- **Placement**: Typically used within `[structure]` or `[harmony]`.
-- **Accepted Parameters**:
-  - **recapitulative** - Revisits earlier themes before resolving.
-  - **unexpected** - Provides a twist at the end.
-  - **fading** - Gradually reduces in volume and texture.
-  - **dramatic** - A sudden, strong ending.
-  - **layered** - Multiple instrument groups resolving together.
-- **Sample Usage**:
-  ```
-  [coda: Soft piano outro echoing the main melody.]
-  ```
-- **Genre-Based Usage**:
-  - **Classical & Symphonic**: **Recapitulation of themes** for structural unity.
-  - **Rock & Progressive**: **Extended guitar-driven codas** for epic conclusions.
-  - **Electronic & Ambient**: **Fading textures** to leave an open-ended feel.
-  - **Pop & Jazz**: **Reharmonized final phrases** for a smooth exit.
-
-### **Track Structure Recommendation**
-- **[intro: Gentle motif introduction]**
-- **[verse: Expands on the theme with dynamic variations]**
-- **[chorus: Peak energy with full harmonization]**
-- **[bridge: A contrasting section to heighten emotional impact]**
-- **[coda: Slow, resolving melody fading into silence]**
-
----
-
-## [chorus]
-- **Meaning**: Defines the **main repeated hook** of the song, often the most memorable part.
-- **Placement**: Typically used within `[structure]` or `[vocals]`.
-- **Accepted Parameters**:
-  - **anthemic** - Big, singalong chorus.
-  - **soft** - Gentle, contrasting chorus.
-  - **harmonic** - Focus on vocal harmonies.
-  - **dynamic** - Instrumentation builds in the chorus.
-  - **stripped** - Minimal arrangement for emotional impact.
-- **Sample Usage**:
-  ```
-  [chorus: Anthemic vocal-driven hook with layered harmonies.]
-  ```
-- **Genre-Based Usage**:
-  - **Pop & Rock**: **Catchy, energetic chorus** hooks.
-  - **Ballads & Folk**: **Soft, emotionally driven choruses**.
-  - **Metal & Punk**: **Aggressive, high-energy choruses**.
-  - **Electronic & Dance**: **Instrumentally rich choruses** that peak dynamically.
-
-### **Track Structure Recommendation**
-- **[intro: Instrumental buildup]**
-- **[verse: Lead-in to the hook]**
-- **[chorus: High-energy, anthem-like section]**
-- **[bridge: Dynamic contrast leading into final chorus]**
-- **[outro: Stripped-down reprise of the chorus]**
-
----
-
-## [compression]
-- **Meaning**: Defines **dynamic range processing**, used to balance loud and soft parts in a track.
-- **Placement**: Typically used within `[mixing]`, `[dynamics]`, or `[effects]`.
-- **Accepted Parameters**:
-  - **light** - Soft compression, retaining dynamic variation.
-  - **heavy** - Strong compression, flattening peaks.
-  - **pumping** - Rhythmic compression, common in EDM.
-  - **transparent** - Subtle compression that smooths dynamics without altering tone.
-  - **aggressive** - High-ratio compression for a punchy sound.
-- **Sample Usage**:
-  ```
-  [compression: Transparent vocal compression for clarity.]
-  ```
-- **Genre-Based Usage**:
-  - **Pop & Vocal Music**: Light compression ensures **consistent vocals**.
-  - **EDM & Trap**: Pumping compression creates **rhythmic breathing effects**.
-  - **Rock & Metal**: Aggressive compression **enhances impact**.
-  - **Jazz & Acoustic**: Transparent compression **maintains dynamics**.
-
-### **Track Structure Recommendation**
-- **[intro: No compression, natural ambiance]**
-- **[verse: Light compression to keep vocal dynamics intact]**
-- **[chorus: Heavier compression to emphasize power]**
-- **[bridge: Subtle compression to create contrast]**
-- **[outro: Gradual release of compression for a more organic fade-out]**
-
----
-
-## [control]
-- **Meaning**: Specifies **how certain elements of the composition are structured, processed, or restricted**.
-- **Placement**: Typically used at the **beginning of the definition**, as it applies to **global track parameters**.
-- **Accepted Parameters**:
-  - **instrumental** - No vocals in the track.
-  - **acapella** - Vocals only, no instrumentation.
-  - **looped** - The structure is cyclic or repetitive.
-  - **no-repeat** - Ensures no section is repeated.
-  - **dynamic** - Allows variation in tempo, intensity, and texture.
-- **Sample Usage**:
-  ```
-  [control: Instrumental, no-repeat, dynamic transitions.]
-  ```
-- **Genre-Based Usage**:
-  - **Ambient & Minimalist**: **Looped structures** maintain atmosphere.
-  - **Jazz & Improvised Music**: **Dynamic control** allows live feel.
-  - **Electronic & Dance**: **No-repeat variations** create continuous evolution.
-  - **Symphonic & Cinematic**: **Instrumental focus** supports narrative flow.
-
-### **Track Structure Recommendation**
-- **[intro: Loop-based rhythmic foundation]**
-- **[verse: Dynamic texture variations]**
-- **[chorus: Expanding soundscape with thematic growth]**
-- **[bridge: Contrast through modulation]**
-- **[outro: Instrumental fade-out, sustaining tension]**
-
----
-
-## [drop]
-- **Meaning**: Defines a **sudden shift in intensity**, often a key element in EDM and modern music styles.
-- **Placement**: Typically used within `[structure]`, `[dynamics]`, or `[effects]`.
-- **Accepted Parameters**:
-  - **bass-heavy** - A deep, sub-bass-driven drop.
-  - **melodic** - A drop that introduces a powerful melody.
-  - **glitchy** - The drop is fragmented and unpredictable.
-  - **orchestral** - A cinematic drop into high-energy themes.
-  - **minimalist** - A subtle yet effective drop with reduced elements.
-- **Sample Usage**:
-  ```
-  [drop: Bass-heavy synth explosion after the build-up.]
-  ```
-- **Genre-Based Usage**:
-  - **EDM & Dubstep**: Central to **massive beat drops**.
-  - **Hip-Hop & Trap**: **808-driven drops** enhance groove.
-  - **Rock & Metal**: **Drum-heavy and guitar-driven breakdowns**.
-  - **Cinematic & Experimental**: **Tension-building orchestral drops**.
-
-### **Track Structure Recommendation**
-- **[intro: Minimal build-up with rising tension]**
-- **[verse: Establishing groove and melody]**
-- **[chorus: Expanding harmonic textures]**
-- **[build-up: Crescendo leading into drop]**
-- **[drop: Heavy bass and dynamic shift]**
-- **[outro: Soft landing with reverb decay]**
-
----
-
-## [genre]
-- **Meaning**: Defines the **overall stylistic category** of the composition.
-- **Placement**: Typically **at the start of the definition**, as it determines how the track is structured.
-- **Accepted Parameters**:
-  - **single-genre** - A single, well-defined musical genre (e.g., `[genre: jazz]`).
-  - **hybrid-genre** - A fusion of two or more genres (e.g., `[genre: jazz-electronic-fusion]`).
-  - **subgenre** - A more specific style within a genre (e.g., `[genre: dark-ambient]`).
-- **Sample Usage**:
-  ```
-  [genre: cinematic-orchestral hybrid with electronic textures.]
-  ```
-- **Genre-Based Usage**:
-  - **Rock & Pop**: `[genre: classic-rock]`, `[genre: indie-pop]`
-  - **Electronic & Dance**: `[genre: deep-house]`, `[genre: industrial-techno]`
-  - **Hip-Hop & R&B**: `[genre: trap-soul]`, `[genre: boom-bap]`
-  - **Experimental & Soundscape**: `[genre: musique-concrete]`, `[genre: noise-drone]`
-
-### **Track Structure Recommendation**
-- **[intro: Atmospheric textures setting the tone]**
-- **[verse: Genre-defining elements introduced]**
-- **[chorus: Fully developed style with layered instruments]**
-- **[bridge: A contrasting section that reinterprets genre tropes]**
-- **[outro: Genre's characteristic resolution or fade-out]**
-
----
-
-## [hook]
-
-**Category:** Structural / key element tag  
-**Primary use:** To highlight the most memorable musical / lyrical idea in the track.
-
-**Behavior and intent**  
-`[hook]` marks a phrase or line meant to “stick in the ear”. It can be a micro‑section within a chorus, a short melodic motif, or a repeated line that carries the song’s identity. Unlike `[chorus]`, which defines a whole section, `[hook]` often focuses on a compact, repeatable idea.
-
-**Placement and syntax**  
-
-- *Lyrics field:*  
-  - As a section label or inline cue:  
-    - `[hook] Wherever we go, the record spins slow.`  
-    - `[chorus | catchy hook, simple repeating phrase]`  
-- *Style of Music field:*  
-  - “warm old‑vinyl hip‑hop with a simple, nostalgic hook in the chorus”
-
-**Typical use-cases**  
-
-- Emphasizing one key line in the chorus that should stand out  
-- Creating a short vocal motif for instrumental‑heavy tracks  
-- Tagging call‑and‑response lines or slogans in rap / pop
-
-For best results, keep the hook text very short, rhythmically clear, and easy to repeat.
-
----
-
-## [intro]
-- **Meaning**: Defines the **opening section of a track**, setting the mood, instrumentation, and rhythm before transitioning into structured sections.
-- **Placement**: Typically **at the beginning of the track definition**.
-- **Accepted Parameters**:
-  - **soft** - Gentle, understated opening.
-  - **dramatic** - Strong, impactful beginning.
-  - **percussive** - Driven by rhythmic elements.
-  - **atmospheric** - Textural, ambient soundscapes.
-  - **synth-driven** - Electronic intro using pads, arpeggios.
-- **Sample Usage**:
-  ```
-  [intro: Soft choral voices fading in with ambient pads.]
-  ```
-- **Genre-Based Usage**:
-  - **Rock & Metal**: **Guitar intros leading into heavy riffs**.
-  - **Electronic & Synthwave**: **Filtered synths and arpeggios**.
-  - **Jazz & Fusion**: **Solo saxophone or piano introduction**.
-  - **Cinematic & Classical**: **Grand orchestral swells**.
-
-### **Track Structure Recommendation**
-- **[intro: Low strings rumbling beneath ethereal choral voices]**
-- **[verse: Vocal melody enters with soft piano accompaniment]**
-- **[chorus: Full orchestration with percussion layers]**
-- **[bridge: Drop in intensity, shifting to solo violin]**
-- **[outro: Gentle fade-out with harp and flute]**
-
----
-
-## [instruments]
-- **Meaning**: Specifies the **instruments used in the composition**, helping define the timbre and orchestration of the track.
-- **Placement**: Typically placed **before structure tags** to establish instrumentation at the beginning of the track definition.
-- **Accepted Parameters**:
-  - **Specific instruments** - e.g., **piano, violin, electric guitar, synthesizer, brass, flute, harp**.
-  - **Ensembles** - e.g., **string quartet, symphonic orchestra, jazz trio**.
-  - **Electronic elements** - e.g., **808 bass, modular synth, vocoder, pads**.
-- **Sample Usage**:
-  ```
-  [instruments: Acoustic guitar, soft synth pads, subtle piano accompaniment.]
-  ```
-- **Genre-Based Usage**:
-  - **Rock & Pop**: **Electric guitar, bass, drums, synths**.
-  - **Classical & Cinematic**: **Orchestral strings, brass, harp**.
-  - **Electronic & Ambient**: **Synth pads, drones, digital bells**.
-  - **Jazz & Blues**: **Saxophone, upright bass, electric piano**.
-
-### **Track Structure Recommendation**
-- **[instruments: Piano, cello, atmospheric synths]**
-- **[intro: Solo piano melody introducing the theme]**
-- **[verse: Cello enters with deep harmonies]**
-- **[chorus: Synth pads build a cinematic atmosphere]**
-- **[outro: Instruments fade out into soft reverberation]**
-
----
-
-## [inversion]
-*   **Meaning**: States that a **theme or motif should be inverted** (played upside-down in melodic contour).
-*   **Placement**: Paired with `[subject]` or `[motif]`.
-*   **Accepted Parameters**:
-    *   **strict** – precise inversion.
-    *   **free** – partial inversion with modification.
-    *   **stretched** – inversion with augmented rhythm.
-*   **Sample Usage**:
-    ```
-    [inversion: Subject theme inverted on strings]  
-    ```
-*   **Genre-Based Usage**:
-    *   **Fugue/Classical**: Canonical inversion technique.
-    *   **Jazz Fusion**: Inverted melodic riffs.
-    *   **Electronic/Experimental**: Inverted synth motif loops.
-### **Track Structure Recommendation**:
-    *   `[subject: original theme]`
-    *   `[inversion: mirror of subject]`
-    *   `[coda: combine both for resolution]`
-
----
-
-## [lament]
-*   **Meaning**: Defines a **sorrowful, descending motif or expressive passage**.
-*   **Placement**: Within `[melody]`, `[harmony]`, or `[vocals]`.
-*   **Accepted Parameters**:
-    *   **descending** – typical lament bass line (e.g. minor descending tetrachord).
-    *   **vocal** – sorrowful vocal delivery.
-    *   **instrumental** – plaintive strings or winds.
-    *   **choral** – choir in lament style.
-*   **Sample Usage**:
-    ```
-    [lament: Descending strings in minor mode]  
-    ```
-*   **Genre-Based Usage**:
-    *   **Baroque/Classical**: Lament bass line.
-    *   **Gothic/Metal**: Sorrowful motifs.
-    *   **Folk/Choral**: Funeral lament style.
-### **Track Structure Recommendation**:
-    *   `[verse: narrative lyrics]`
-    *   `[lament: sorrowful instrumental descent]`
-    *   `[chorus: emotional climax]`
-
----
-
-## [length]
-- **Meaning**: Specifies the **desired duration of the track**, controlling overall runtime.
-- **Placement**: Typically placed **before `[structure]`** to ensure Suno processes it before structuring the composition.
-- **Accepted Parameters**:
-  - **short** - 30-60 seconds.
-  - **standard** - 2-3 minutes (default).
-  - **extended** - 4-5 minutes.
-  - **loopable** - Designed to seamlessly loop.
-  - **epic** - 5+ minutes with grand arrangements.
-- **Sample Usage**:
-  ```
-  [length: Extended, with a cinematic build-up]
-  ```
-- **Genre-Based Usage**:
-  - **Pop & Mainstream**: **Standard radio-friendly lengths (2-3 min)**.
-  - **Electronic & Dance**: **Extended club mixes (5+ min)**.
-  - **Classical & Film Score**: **Epic storytelling (5+ min orchestral)**.
-  - **Game Music & Ambient**: **Loopable background tracks**.
-
-### **Track Structure Recommendation**
-- **[length: Loopable]**
-- **[intro: Smooth ambient pad fade-in]**
-- **[verse: Subtle arpeggiated melodies drifting through]**
-- **[chorus: Slightly intensified layering for dynamic movement]**
-- **[outro: Seamless transition to start again]**
-
----
-
-## [mood]
-- **Meaning**: Defines the **emotional atmosphere** of the track.
-- **Placement**: Typically used at the **start of the track definition** to guide composition style.
-- **Accepted Parameters**:
-  - **dark** - Brooding, mysterious, or ominous.
-  - **uplifting** - Positive, energizing.
-  - **melancholic** - Sad, introspective.
-  - **mystical** - Ethereal, otherworldly.
-  - **playful** - Lighthearted and fun.
-- **Sample Usage**:
-  ```
-  [mood: Dark, atmospheric tension with deep drones.]
-  ```
-- **Genre-Based Usage**:
-  - **Rock & Metal**: **Dark and aggressive moods**.
-  - **Electronic & Chill**: **Uplifting or melancholic textures**.
-  - **Cinematic & Orchestral**: **Mystical and grand moods**.
-  - **Jazz & Soul**: **Playful and laid-back vibes**.
-
-### **Track Structure Recommendation**
-- **[mood: Melancholic, soft and reflective]**
-- **[intro: Gentle strings and atmospheric pads]**
-- **[verse: Emotional, expressive melody on piano]**
-- **[chorus: Expansive orchestration with rising intensity]**
-- **[outro: Soft, fading resolution in minor tonality]**
-
----
-
-## [pre-chorus]
-- **Meaning**: Defines the **section leading from the verse into the chorus**, building tension and anticipation.
-- **Placement**: Typically placed **between `[verse]` and `[chorus]`** in `[structure]`.
-- **Accepted Parameters**:
-  - **rising** - Gradual build-up into the chorus.
-  - **syncopated** - Off-beat rhythms to create anticipation.
-  - **minimal** - Stripped-down before a strong chorus impact.
-  - **harmonized** - Vocally layered to enhance tension.
-- **Sample Usage**:
-  ```
-  [pre-chorus: Rising vocal harmonies with increasing synth layers.]
-  ```
-- **Genre-Based Usage**:
-  - **Pop & R&B**: **Melodic pre-choruses setting up catchy hooks**.
-  - **Rock & Alternative**: **Guitar-driven pre-choruses for tension**.
-  - **Hip-Hop & Trap**: **Minimalist, beat-only pre-choruses**.
-  - **Cinematic & Epic**: **Orchestral swells leading into grand moments**.
-
-### **Track Structure Recommendation**
-- **[verse: Soft piano melody with subdued vocals]**
-- **[pre-chorus: Gradual rise in vocal intensity and instrumentation]**
-- **[chorus: Full orchestral and vocal explosion]**
-- **[outro: Smooth transition back to soft textures]**
-
----
-
-## [polyphony]
-
-**Category:** Arrangement / vocal-choir / harmony tag  
-**Primary use:** To request multiple independent melodic lines or layered voices rather than a single simple melody with block chords.
-
-**Behavior and intent**  
-`[polyphony]` encourages overlapping melodies and counterpoint. In vocal music, it suggests several simultaneous lines (choir parts interweaving rather than moving in lockstep). In instrumental music, it can yield more complex interacting parts instead of one dominant lead with static backing.
-
-**Placement and syntax**  
-
-- *Lyrics field:*  
-  - As a section descriptor, especially for choirs or group singing:  
-    - `[chorus | polyphony, overlapping choir lines, call-and-response]`  
-    - `[bridge | polyphony in strings and woodwinds, slowly unfolding]`  
-- *Style of Music field:*  
-  - “sacred-style polyphony with interweaving vocal lines and gentle organ support”
-
-**Typical use-cases**  
-
-- Choral / sacred / renaissance‑inspired pieces  
-- Complex climactic choruses with several melody fragments at once  
-- Orchestral or post‑rock textures where many lines move semi-independently
-
-For best results, pair `[polyphony]` with clear section roles (verse, chorus, coda) and maybe indicate which instruments or voices participate.
-
----
-
-## [refrain]
-- **Meaning**: Defines a **repeated phrase or musical passage**, typically appearing in multiple sections of the track.
-- **Placement**: Typically placed **within `[structure]`, `[chorus]`, or `[vocals]`**.
-- **Accepted Parameters**:
-  - **melodic** - A tune repeated throughout.
-  - **lyrical** - A repeated vocal phrase.
-  - **instrumental** - A motif repeated by instruments.
-  - **harmonic** - A chord progression appearing multiple times.
-- **Sample Usage**:
-  ```
-  [refrain: Repeated vocal phrase that echoes at the end of each chorus.]
-  ```
-- **Genre-Based Usage**:
-  - **Pop & Rock**: **"Melodic" refrains for earworms**.
-  - **Hip-Hop & R&B**: **"Lyrical" refrains for hook-based tracks**.
-  - **Electronic & House**: **"Instrumental" refrains for looping textures**.
-  - **Orchestral & Jazz**: **"Harmonic" refrains for theme consistency**.
-
-### **Track Structure Recommendation**
-- **[intro: Refrain introduced as an instrumental hook]**
-- **[verse: New melody leading toward the refrain]**
-- **[chorus: Full refrain, sung with layered harmonies]**
-- **[bridge: A break before the refrain returns]**
-- **[outro: Fading refrain, gradually repeating into silence]**
-
----
-
-## [scat break]
-*   **Meaning**: Denotes a **scatting vocal improvisation section**, usually jazz-influenced.
-*   **Placement**: Within `[vocals]` or `[structure]`.
-*   **Accepted Parameters**:
-    *   **solo** – single vocalist scat improvisation.
-    *   **duet** – multiple voices scatting in call-and-response.
-    *   **layered** – overlapping scat vocals for texture.
-*   **Sample Usage**:
-    ```
-    [scat break: Playful jazz-style scat improvisation, no lyrics]  
-    ```
-*   **Genre-Based Usage**:
-    *   **Jazz & Swing**: Classic scat solos.
-    *   **Experimental & Avant-pop**: Vocal improvisation as texture.
-    *   **Hip-Hop Fusion**: Rhythmic scatting between verses.
-### **Track Structure Recommendation**:
-    *   `[verse: lyrical section]`
-    *   `[scat break: vocalist improvises syllables]`
-    *   `[chorus: return to main hook]`
-
----
-
-## [sequence]
-- **Meaning**: Specifies **the order and repetition of musical sections**, helping structure the track dynamically.
-- **Placement**: Typically used **within [structure]**, ensuring that segments appear in a defined order.
-- **Accepted Parameters**:
-  - **linear** - A straightforward progression of sections.
-  - **cyclical** - Repeating sections in a structured manner.
-  - **reversed** - Themes appear in the opposite order.
-  - **mirrored** - The second half of the track reflects the first.
-- **Sample Usage**:
-  ```
-  [sequence: Linear with a mirrored return in the final section.]
-  ```
-- **Genre-Based Usage**:
-  - **Classical & Film Score**: **"Mirrored" for symmetrical compositions.**
-  - **Dance & Electronic**: **"Cyclical" for repeating, looping sections.**
-  - **Rock & Pop**: **"Linear" for conventional storytelling structures.**
-  - **Progressive & Jazz**: **"Reversed" for unconventional arrangements.**
-
-### **Track Structure Recommendation**
-- **[sequence: Cyclical, alternating between verse and instrumental interludes]**
-- **[intro: Soft pad textures leading into rhythm]**
-- **[section: Thematic section introducing melody]**
-- **[section: Repeated development with slight variation]**
-- **[outro: Return of the theme in a mirrored resolution]**
-
----
-
-## [style]
-- **Meaning**: Defines the **musical style or aesthetic** of the track, influencing genre fusion and overall production approach.
-- **Placement**: **Before [genre] or [mood]**, specifying artistic direction.
-- **Accepted Parameters**:
-  - **minimalist** - Sparse instrumentation, subtle textures.
-  - **cinematic** - Large-scale, soundtrack-like arrangements.
-  - **lo-fi** - Vintage, tape-saturated, and degraded sound.
-  - **high-energy** - Intense, fast-paced composition.
-  - **experimental** - Non-traditional elements and unpredictable shifts.
-- **Sample Usage**:
-  ```
-  [style: Cinematic with sweeping orchestral arrangements.]
-  ```
-- **Genre-Based Usage**:
-  - **Ambient & Minimalist**: **"Minimalist" for delicate, sparse textures.**
-  - **Film Score & Symphonic**: **"Cinematic" for dramatic orchestrations.**
-  - **Lo-Fi & Vintage Hip-Hop**: **"Lo-fi" for nostalgic sound.**
-  - **Electronic & Industrial**: **"Experimental" for glitch and non-traditional structures.**
-
-### **Track Structure Recommendation**
-- **[style: Minimalist, focusing on space and subtle dynamics]**
-- **[intro: Soft ambient pads and distant reverberations]**
-- **[verse: Sparse instrumentation with delayed plucks]**
-- **[chorus: Slow chordal swells creating depth]**
-- **[outro: Fading echoes and cinematic strings]**
-
----
-
-## [subject]
-*   **Meaning**: Marks the **primary musical theme or motif**, especially in fugues or structured classical/jazz works.
-*   **Placement**: Within `[harmony]`, `[melody]`, or `[structure]`.
-*   **Accepted Parameters**:
-    *   **main** – introduces the principal theme.
-    *   **counter** – secondary theme against the main subject.
-    *   **stretto** – overlapping entries of the subject.
-*   **Sample Usage**:
-    ```
-    [subject: Main fugue theme on organ]  
-    ```
-*   **Genre-Based Usage**:
-    *   **Classical**: Core fugue subject.
-    *   **Jazz**: Head motif before improvisation.
-    *   **Experimental/Phonk-Classical**: Subject line woven into hybrid styles.
-### **Track Structure Recommendation**:
-    *   `[intro: subject introduced]`
-    *   `[inversion: theme restated in reverse]`
-    *   `[bridge: new harmonic counterpoint]`
-
----
-
-## [technique]
-
-**Category:** Instrumental / performance detail tag  
-**Primary use:** To specify how an instrument or voice is played or treated (e.g., picking style, bowing, extended techniques), not just *what* instrument is used.
-
-**Behavior and intent**  
-`[technique]` is a general label you can pair with a short description of performance style. Instead of simply saying “[guitar]”, you can indicate “[guitar | technique: muted funky strums]”. This helps shape rhythmic feel and timbre.
-
-**Placement and syntax**  
-
-- *Lyrics field:*  
-  - As part of a section descriptor for arrangement:  
-    - `[intro | guitar, technique: tremolo picking over reverb]`  
-    - `[bridge | cello, technique: harmonics and glissando]`  
-- *Style of Music field:*  
-  - “neo-folk with detailed acoustic techniques: fingerstyle arpeggios, soft slides, and harmonics”
-
-**Typical use-cases**  
-
-- Guitar, strings, winds: fingerstyle, bowing, staccato, legato, muted, slapped, etc.  
-- Vocal techniques: “technique: belting”, “technique: soft head voice”, “technique: spoken rhythmically”  
-- Experimental sounds: “technique: prepared piano”, “technique: tape‑style pitch warble”
-
-Keep technique descriptions short, focusing on physical action (“plucked,” “bowed long,” “muted,” “sliding”) rather than abstract mood words.
-
----
-
-## [tempo]
-- **Meaning**: Defines the **speed (BPM) and pacing** of the track.
-- **Placement**: Typically **before [rhythm] or [mood]**, influencing groove and feel.
-- **Accepted Parameters**:
-  - **slow** - Relaxed, chill pacing (BPM 60-90).
-  - **moderate** - Balanced, mid-tempo energy (BPM 90-120).
-  - **fast** - High-energy, upbeat (BPM 120-160).
-  - **variable** - Tempo changes dynamically.
-- **Sample Usage**:
-  ```
-  [tempo: Fast, high-energy BPM with driving percussion.]
-  ```
-- **Genre-Based Usage**:
-  - **Ballads & Lo-Fi**: **"Slow" for relaxed pacing.**
-  - **Pop & Rock**: **"Moderate" for steady song flow.**
-  - **EDM & Metal**: **"Fast" for energetic, danceable beats.**
-  - **Prog Rock & Experimental**: **"Variable" for tempo shifts.**
-
-### **Track Structure Recommendation**
-- **[tempo: Moderate with a slight increase in the chorus]**
-- **[intro: Smooth tempo introduction with light percussion]**
-- **[verse: Consistent mid-tempo groove]**
-- **[chorus: Slightly faster tempo for added intensity]**
-- **[outro: Gradual slow-down leading into a soft fade]**
-
----
-
-## [verse]
-- **Meaning**: Defines a **repeated song section with evolving lyrics or instrumentation**, typically alternating with a chorus.
-- **Placement**: Typically used **within [structure]**, indicating lyrical or instrumental sections.
-- **Accepted Parameters**:
-  - **soft** - Gentle and subdued verse dynamics.
-  - **powerful** - Intense, full-sounding verse.
-  - **instrumental** - A non-vocal variation of the verse.
-  - **spoken-word** - A recited rather than sung verse.
-- **Sample Usage**:
-  ```
-  [verse: Soft, intimate vocal lines over acoustic guitar.]
-  ```
-- **Genre-Based Usage**:
-  - **Pop & Rock**: **"Powerful" for high-energy vocal passages.**
-  - **Hip-Hop & Spoken Word**: **"Spoken-word" for rhythmic delivery.**
-  - **Folk & Acoustic**: **"Soft" for storytelling lyrical verses.**
-  - **Electronic & Synthwave**: **"Instrumental" for evolving textures.**
-
-### **Track Structure Recommendation**
-- **[verse: Soft, whispery vocals over minimalist piano]**
-- **[chorus: Full-band explosion with layered harmonies]**
-- **[verse: Powerfully sung variation with rising energy]**
-- **[outro: Verse returns in a stripped-down, fading arrangement]**
-
----
-
-## [vocals]
-- **Meaning**: Defines **the presence, type, and characteristics of vocal performances** in the track.  
-- **Placement**: Typically used **before [structure] or [style]**, guiding the vocal performance and its prominence.  
-- **Accepted Parameters**:
-  - **lead** - Primary vocal line leading the melody.  
-  - **background** - Secondary harmonized or atmospheric vocals.  
-  - **choir** - Layered choral voices, often used for dramatic effect.  
-  - **spoken-word** - Rhythmically spoken lyrics instead of singing.  
-  - **a cappella** - Only vocal performances, no instrumental accompaniment.  
-  - **filtered** - Vocals processed with special effects (e.g., robotic, distorted).  
-- **Sample Usage**:
-  ```
-  [vocals: Lead female vocals with ethereal background harmonies.]
-  ```
-- **Genre-Based Usage**:
-  - **Pop & Rock**: **"Lead" for a strong melodic presence.**  
-  - **Gospel & Orchestral**: **"Choir" for layered, harmonic vocals.**  
-  - **Hip-Hop & Spoken Word**: **"Spoken-word" for rhythmic vocal phrasing.**  
-  - **Electronic & Experimental**: **"Filtered" for robotic or distorted effects.**  
-
-### **Track Structure Recommendation**
-- **[vocals: Lead female voice, with ethereal harmonies]**  
-- **[intro: Atmospheric pad swells introducing whispered background vocals]**  
-- **[verse: Soft, expressive lead vocals with light reverberation]**  
-- **[chorus: Choir-like harmonies creating a soaring effect]**  
-- **[bridge: Spoken-word transition with distant echoes]**  
-- **[outro: Vocals fading into layered ambient whispers]**
-
----
-
-# Meta-tags definitions: less frequently used meta-tags
-
-Below is the list of meta-tags recognized by Suno audio tracks generation service (as confirmed by user tests and official Suno documentation).
+All the tags definitions has been united to the single list
 
 ## [accelerando]
 - **Meaning**: Specifies a **gradual increase in tempo**, creating a sense of urgency, excitement, or transition.
@@ -1180,6 +343,66 @@ Below is the list of meta-tags recognized by Suno audio tracks generation servic
 - **[chorus: Expanding textures with shimmering synths]**
 - **[bridge: Minimalist moment with evolving drones]**
 - **[outro: Fading ambient echoes]**
+
+---
+
+## [announcer]
+
+**Category:** Vocal / narrative role tag  
+**Primary use:** To request a spoken or semi-spoken “host” or “presenter” voice that introduces, comments on, or frames parts of the track.
+
+**Behavior and intent**  
+`[announcer]` suggests a clear, articulate delivery similar to a radio DJ, podcast host, sports commentator, or event MC. It works best when you briefly describe the tone and context you want:
+
+- Radio-style intros: “late-night FM host”, “upbeat morning radio DJ”  
+- Retro aesthetics: “1950s newsreel announcer”, “old vinyl commercial announcer”  
+- In‑universe narration: “mystery show host”, “horror anthology narrator”
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - As a section header or inline role cue:  
+    - `[announcer: retro radio DJ, warm, friendly tone]`  
+    - `[announcer: horror show host, ominous, slow delivery]`  
+- *Style of Music field:*  
+  - As part of the description if the announcer role is central to the track:  
+    - “lofi hip-hop with a warm late-night radio announcer introducing each section”
+
+**Typical use-cases**  
+
+- “Radio show” or “podcast” framing around songs or instrumental beds  
+- Story intros and outros that explain the scene or episode  
+- Fake commercials, station IDs, or interludes inside concept albums  
+
+Use short, concrete adjectives for voice color (warm, crisp, vintage, serious, playful) rather than long prose to keep this tag effective.
+
+**Example**
+```
+[announcer: horror show host, ominous, slow delivery]
+"The mystery comes over the cursed land, as dusk approaches..."
+```
+
+---
+
+## [aria-rise]
+*   **Meaning**: A section marked by an **operatic, rising vocal phrase**, often dramatic and soaring.
+*   **Placement**: Within `[vocals]` or `[structure]`.
+*   **Accepted Parameters**:
+    *   **solo** – single dramatic vocal.
+    *   **choral** – choir rising together.
+    *   **orchestral** – orchestration builds with vocal rise.
+*   **Sample Usage**:
+    ```
+    [aria-rise: Soprano vocals rise into climax, strings swell]  
+    ```
+*   **Genre-Based Usage**:
+    *   **Opera/Classical**: Traditional aria-style build.
+    *   **Symphonic Metal**: Operatic vocals with band.
+    *   **Cinematic Pop**: Ballad climax.
+### **Track Structure Recommendation**:
+    *   `[verse: restrained delivery]`
+    *   `[aria-rise: dramatic operatic build]`
+    *   `[chorus: full orchestration + vocals]`
 
 ---
 
@@ -1433,6 +656,146 @@ Below is the list of meta-tags recognized by Suno audio tracks generation servic
 
 ---
 
+## [bleep]
+
+**Description:** Inserts a short high-pitched “beep” or censorship-style sound effect. Commonly used to simulate a machine alert or censor a word/phrase.  
+**Acceptable Parameters:**  
+- `length=short|medium|long` (e.g., ~0.2-0.5 s / ~0.5-1 s / ~1+ s)  
+- `pitch=high|low`  
+- `style=glitch|digital|broadcast-censor`  
+- `count=2|3|…` (multiple beeps)  
+**Typical Placement:**  
+- Within a lyric line to replace or interrupt a word:  
+  ```
+  I won't say your name [bleep: length=short] again.
+  ```
+- At transitions to simulate an alert or interface beep.  
+**Usage Example:**  
+```
+[bridge: style: glitch-interface]
+[bleep: length=short, style: digital]
+Warning: protocol breach imminent [bleep]
+```  
+### **Structure Recommendation:**  
+- Intro: Use one `[bleep]` as a “system beep” cue.  
+- Verse/Bridge: Use `[bleep]` to interrupt spoken-word lines.  
+- Outro: Use `[bleep: pitch=low, length=medium]` to fade into silence.
+
+---
+
+## [break]
+- **Meaning**: A **brief pause or stripped-down section** in the song, often used for tension or transition.
+- **Placement**: Typically used within `[structure]`, `[rhythm]`, or `[dynamics]`.
+- **Accepted Parameters**:
+  - **instrumental** - A solo instrumental section.
+  - **percussive** - A drum break with no melody.
+  - **silence** - A moment of complete pause.
+  - **glitch** - A digitally processed stutter effect.
+  - **acapella** - Vocals only, no instrumentation.
+- **Sample Usage**:
+  ```
+  [break: Silence before the final chorus drop.]
+  ```
+- **Genre-Based Usage**:
+  - **Hip-Hop & Breakbeat**: Percussive breaks for **sampling and scratching**.
+  - **Jazz & Funk**: Drum breaks set up **improvised solos**.
+  - **Electronic & Trap**: **Glitch or silence breaks** before a drop.
+  - **Rock & Metal**: **Instrumental breakdowns** add intensity.
+
+### **Track Structure Recommendation**
+- **[intro: Full-band intro leading into break]**
+- **[verse: Steady groove with instrumental build]**
+- **[chorus: Strong energy before break]**
+- **[bridge: Sudden percussive break leading to climax]**
+- **[outro: Soft acapella break before fade-out]**
+
+---
+
+## [breakdown]
+- **Meaning**: A section where the **instrumentation is stripped down**, usually reducing intensity before building back up.
+- **Placement**: Typically used within `[structure]`, `[rhythm]`, or `[dynamics]`.
+- **Accepted Parameters**:
+  - **percussive** - Emphasis on drums or rhythmic elements.
+  - **instrumental** - Focused on instruments with minimal vocals.
+  - **electronic** - Filtered or chopped electronic elements.
+  - **syncopated** - A more rhythmically complex breakdown.
+  - **minimal** - Only a few instruments, creating an intimate moment.
+- **Sample Usage**:
+  ```
+  [breakdown: Percussive break with syncopated drum fills before the final chorus.]
+  ```
+- **Genre-Based Usage**:
+  - **Electronic & EDM**: Often used before a **drop**, with **filtered synths**.
+  - **Rock & Metal**: Stripped-down **guitar and bass sections** before a climax.
+  - **Hip-Hop & Trap**: Beat-only sections for **rapping emphasis**.
+  - **Jazz & Funk**: Instrumental solo breaks for **improvisation**.
+
+### **Track Structure Recommendation**
+- **[intro: Soft ambient pads leading into verse]**
+- **[verse: Full instrumentation with vocal delivery]**
+- **[chorus: Energetic, layered section]**
+- **[breakdown: Stripped percussion and bass, creating anticipation]**
+- **[bridge: Gradual build-up leading back into chorus]**
+- **[outro: Fading synths with percussion elements]**
+
+---
+
+## [bridge]
+- **Meaning**: A contrasting section that **connects different parts of a song**, often providing harmonic or melodic variation.
+- **Placement**: Typically used within `[structure]` or `[harmony]`.
+- **Accepted Parameters**:
+  - **melodic** - Focus on a new melody line.
+  - **harmonic** - Introduces a new chord progression.
+  - **instrumental** - No vocals, only instrumental contrast.
+  - **climactic** - Builds intensity leading into the final chorus.
+  - **stripped-down** - Softer than other sections, creating contrast.
+- **Sample Usage**:
+  ```
+  [bridge: Stripped-down vocals with subtle guitar arpeggios before the climax.]
+  ```
+- **Genre-Based Usage**:
+  - **Pop & Rock**: A **melodic shift** before returning to the chorus.
+  - **Jazz & Soul**: Modulations to **new harmonic territories**.
+  - **Metal & Prog Rock**: Dynamic **tempo or key changes**.
+  - **Electronic & House**: **Filter sweeps** and instrumental shifts.
+
+### **Track Structure Recommendation**
+- **[intro: Instrumental fade-in]**
+- **[verse: Primary melody and lyrics]**
+- **[chorus: Energetic, memorable hook]**
+- **[bridge: Harmonic variation leading into tension]**
+- **[chorus: Final, climactic return]**
+- **[outro: Slow fade-out with ambient textures]**
+
+---
+
+## [build]
+
+**Category:** Structural / dynamic progression tag  
+**Primary use:** To mark a section that gradually increases intensity, usually leading into a chorus, drop, or climax.
+
+**Behavior and intent**  
+`[build]` tells Suno that this section should feel like a ramp: layers come in, drums grow more energetic, harmony thickens, and tension rises before a payoff. It often pairs with tags like `[drop]`, `[chorus]`, or `[hook]`.
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - As a section start tag, often combined with descriptive modifiers:  
+    - `[build | rising tension, more drums, more synth layers]`  
+    - `[pre-chorus | build | bigger rhythm, lifted melody]`  
+- *Style of Music field:*  
+  - “epic electronic track with long cinematic builds and impactful drops”
+
+**Typical use-cases**  
+
+- EDM / pop: pre‑chorus builds into a big chorus or drop  
+- Post-rock / cinematic: long atmospheric builds into climactic peaks  
+- Rock / metal: drum and guitar swells before a shout‑along chorus
+
+Keep your scene short but specific: describe what increases (drums, distortion, choir, tempo feel, etc.) rather than just saying “more intense”.
+
+---
+
 ## [cadence]
 - **Meaning**: Defines how a **musical phrase ends** in terms of **chord progression** or **resolution**.
 - **Placement**: Typically placed within `[harmony]`, `[structure]`, or `[theme]`.
@@ -1521,6 +884,30 @@ Below is the list of meta-tags recognized by Suno audio tracks generation servic
 
 ---
 
+## [chant-loop]
+*   **Meaning**: Specifies a **repeated vocal or instrumental chant**, looped for trance-like or ritualistic effect.
+*   **Placement**: Often within `[vocals]`, `[structure]`, or `[texture]`.
+*   **Accepted Parameters**:
+    *   **ritual** – repetitive, tribal-like chants.
+    *   **layered** – multiple voices stacked in loop.
+    *   **percussive** – chant delivered rhythmically.
+    *   **ambient** – soft, mantra-like background chant.
+*   **Sample Usage**:
+    ```
+    [chant-loop: Layered ghost voices repeating mantra phrase]  
+    ```
+*   **Genre-Based Usage**:
+    *   **World & Folk**: Ritual or traditional chant forms.
+    *   **Ambient & Drone**: Mantra textures as sound bed.
+    *   **Hip-Hop & Trap**: Chanted loops as rhythmic backing.
+    *   **Industrial/Experimental**: Distorted, mechanical chant.
+### **Track Structure Recommendation**:
+    *   `[intro: chant-loop begins quietly]`
+    *   `[chorus: chant grows in volume]`
+    *   `[outro: chant fades to silence]`
+
+---
+
 ## [choir]
 - **Meaning**: Specifies **group vocal harmonization**, often for a grand, emotional effect.
 - **Placement**: Typically used within `[vocals]`, `[harmony]`, or `[structure]`.
@@ -1546,6 +933,34 @@ Below is the list of meta-tags recognized by Suno audio tracks generation servic
 - **[chorus: Full choir harmonization]**
 - **[bridge: Choir-only interlude with layered harmonies]**
 - **[outro: Angelic choir fading into silence]**
+
+---
+
+## [chorus]
+- **Meaning**: Defines the **main repeated hook** of the song, often the most memorable part.
+- **Placement**: Typically used within `[structure]` or `[vocals]`.
+- **Accepted Parameters**:
+  - **anthemic** - Big, singalong chorus.
+  - **soft** - Gentle, contrasting chorus.
+  - **harmonic** - Focus on vocal harmonies.
+  - **dynamic** - Instrumentation builds in the chorus.
+  - **stripped** - Minimal arrangement for emotional impact.
+- **Sample Usage**:
+  ```
+  [chorus: Anthemic vocal-driven hook with layered harmonies.]
+  ```
+- **Genre-Based Usage**:
+  - **Pop & Rock**: **Catchy, energetic chorus** hooks.
+  - **Ballads & Folk**: **Soft, emotionally driven choruses**.
+  - **Metal & Punk**: **Aggressive, high-energy choruses**.
+  - **Electronic & Dance**: **Instrumentally rich choruses** that peak dynamically.
+
+### **Track Structure Recommendation**
+- **[intro: Instrumental buildup]**
+- **[verse: Lead-in to the hook]**
+- **[chorus: High-energy, anthem-like section]**
+- **[bridge: Dynamic contrast leading into final chorus]**
+- **[outro: Stripped-down reprise of the chorus]**
 
 ---
 
@@ -1614,6 +1029,90 @@ Below is the list of meta-tags recognized by Suno audio tracks generation servic
   - **Soft clusters** work well for **ambient and impressionistic music**.
   - **Harsh clusters** are used in **horror scores, avant-garde, and industrial**.
   - **Electronic clusters** can create **textural drone effects**.
+
+---
+
+## [coda]
+- **Meaning**: Specifies the **concluding section of a piece**, often distinct from the main body, used for closure or reinforcement of themes.
+- **Placement**: Typically used within `[structure]` or `[harmony]`.
+- **Accepted Parameters**:
+  - **recapitulative** - Revisits earlier themes before resolving.
+  - **unexpected** - Provides a twist at the end.
+  - **fading** - Gradually reduces in volume and texture.
+  - **dramatic** - A sudden, strong ending.
+  - **layered** - Multiple instrument groups resolving together.
+- **Sample Usage**:
+  ```
+  [coda: Soft piano outro echoing the main melody.]
+  ```
+- **Genre-Based Usage**:
+  - **Classical & Symphonic**: **Recapitulation of themes** for structural unity.
+  - **Rock & Progressive**: **Extended guitar-driven codas** for epic conclusions.
+  - **Electronic & Ambient**: **Fading textures** to leave an open-ended feel.
+  - **Pop & Jazz**: **Reharmonized final phrases** for a smooth exit.
+
+### **Track Structure Recommendation**
+- **[intro: Gentle motif introduction]**
+- **[verse: Expands on the theme with dynamic variations]**
+- **[chorus: Peak energy with full harmonization]**
+- **[bridge: A contrasting section to heighten emotional impact]**
+- **[coda: Slow, resolving melody fading into silence]**
+
+---
+
+## [compression]
+- **Meaning**: Defines **dynamic range processing**, used to balance loud and soft parts in a track.
+- **Placement**: Typically used within `[mixing]`, `[dynamics]`, or `[effects]`.
+- **Accepted Parameters**:
+  - **light** - Soft compression, retaining dynamic variation.
+  - **heavy** - Strong compression, flattening peaks.
+  - **pumping** - Rhythmic compression, common in EDM.
+  - **transparent** - Subtle compression that smooths dynamics without altering tone.
+  - **aggressive** - High-ratio compression for a punchy sound.
+- **Sample Usage**:
+  ```
+  [compression: Transparent vocal compression for clarity.]
+  ```
+- **Genre-Based Usage**:
+  - **Pop & Vocal Music**: Light compression ensures **consistent vocals**.
+  - **EDM & Trap**: Pumping compression creates **rhythmic breathing effects**.
+  - **Rock & Metal**: Aggressive compression **enhances impact**.
+  - **Jazz & Acoustic**: Transparent compression **maintains dynamics**.
+
+### **Track Structure Recommendation**
+- **[intro: No compression, natural ambiance]**
+- **[verse: Light compression to keep vocal dynamics intact]**
+- **[chorus: Heavier compression to emphasize power]**
+- **[bridge: Subtle compression to create contrast]**
+- **[outro: Gradual release of compression for a more organic fade-out]**
+
+---
+
+## [control]
+- **Meaning**: Specifies **how certain elements of the composition are structured, processed, or restricted**.
+- **Placement**: Typically used at the **beginning of the definition**, as it applies to **global track parameters**.
+- **Accepted Parameters**:
+  - **instrumental** - No vocals in the track.
+  - **acapella** - Vocals only, no instrumentation.
+  - **looped** - The structure is cyclic or repetitive.
+  - **no-repeat** - Ensures no section is repeated.
+  - **dynamic** - Allows variation in tempo, intensity, and texture.
+- **Sample Usage**:
+  ```
+  [control: Instrumental, no-repeat, dynamic transitions.]
+  ```
+- **Genre-Based Usage**:
+  - **Ambient & Minimalist**: **Looped structures** maintain atmosphere.
+  - **Jazz & Improvised Music**: **Dynamic control** allows live feel.
+  - **Electronic & Dance**: **No-repeat variations** create continuous evolution.
+  - **Symphonic & Cinematic**: **Instrumental focus** supports narrative flow.
+
+### **Track Structure Recommendation**
+- **[intro: Loop-based rhythmic foundation]**
+- **[verse: Dynamic texture variations]**
+- **[chorus: Expanding soundscape with thematic growth]**
+- **[bridge: Contrast through modulation]**
+- **[outro: Instrumental fade-out, sustaining tension]**
 
 ---
 
@@ -1836,6 +1335,35 @@ Below is the list of meta-tags recognized by Suno audio tracks generation servic
   - **Overdrive works well** for **blues, funk, and vintage rock**.
   - **Heavy distortion is essential** in **metal, industrial, and punk**.
   - **Crushed distortion** is perfect for **lo-fi, glitch, and experimental tracks**.
+
+---
+
+## [drop]
+- **Meaning**: Defines a **sudden shift in intensity**, often a key element in EDM and modern music styles.
+- **Placement**: Typically used within `[structure]`, `[dynamics]`, or `[effects]`.
+- **Accepted Parameters**:
+  - **bass-heavy** - A deep, sub-bass-driven drop.
+  - **melodic** - A drop that introduces a powerful melody.
+  - **glitchy** - The drop is fragmented and unpredictable.
+  - **orchestral** - A cinematic drop into high-energy themes.
+  - **minimalist** - A subtle yet effective drop with reduced elements.
+- **Sample Usage**:
+  ```
+  [drop: Bass-heavy synth explosion after the build-up.]
+  ```
+- **Genre-Based Usage**:
+  - **EDM & Dubstep**: Central to **massive beat drops**.
+  - **Hip-Hop & Trap**: **808-driven drops** enhance groove.
+  - **Rock & Metal**: **Drum-heavy and guitar-driven breakdowns**.
+  - **Cinematic & Experimental**: **Tension-building orchestral drops**.
+
+### **Track Structure Recommendation**
+- **[intro: Minimal build-up with rising tension]**
+- **[verse: Establishing groove and melody]**
+- **[chorus: Expanding harmonic textures]**
+- **[build-up: Crescendo leading into drop]**
+- **[drop: Heavy bass and dynamic shift]**
+- **[outro: Soft landing with reverb decay]**
 
 ---
 
@@ -2310,6 +1838,27 @@ Keep the language around the duet simple (“two voices”, “trading lines”,
 
 ---
 
+## [field-recording] (or [ambient-field])  
+
+**Description:** Incorporates environmental sound or real-world recording (rain, street noise, wind) into the track’s background.  
+**Acceptable Parameters:**  
+- `type=rain|street|forest|wind|ocean`  
+- `volume=low|medium`  
+- `loop: yes|no`  
+**Typical Placement:**  
+- Intro, outro, or ambient interlude.  
+**Usage Example:**  
+```
+[intro: ambient]
+[field-recording: type=rain, volume=low, loop=yes]
+Soft drops fall, the city sighs.
+```  
+### **Structure Recommendation:**  
+- Use before verse to set setting.  
+- Use in a low‐energy outro for mood closure.
+
+---
+
 ## [finale]
 - **Meaning**: Defines the **grand, concluding section** of a composition, often marked by increased intensity or a resolution.
 - **Placement**: Typically used within `[structure]`, `[coda]`, or `[dynamics]`.
@@ -2430,6 +1979,32 @@ Keep the language around the duet simple (“two voices”, “trading lines”,
   - **Post-rock, cinematic scores**: long gain surges.
   - **EDM, glitch-hop**: peaking beats, fade-in bass.
   - **Ballads, soft-pop**: fade-in vocals in intro, rising chorus.
+
+---
+
+## [genre]
+- **Meaning**: Defines the **overall stylistic category** of the composition.
+- **Placement**: Typically **at the start of the definition**, as it determines how the track is structured.
+- **Accepted Parameters**:
+  - **single-genre** - A single, well-defined musical genre (e.g., `[genre: jazz]`).
+  - **hybrid-genre** - A fusion of two or more genres (e.g., `[genre: jazz-electronic-fusion]`).
+  - **subgenre** - A more specific style within a genre (e.g., `[genre: dark-ambient]`).
+- **Sample Usage**:
+  ```
+  [genre: cinematic-orchestral hybrid with electronic textures.]
+  ```
+- **Genre-Based Usage**:
+  - **Rock & Pop**: `[genre: classic-rock]`, `[genre: indie-pop]`
+  - **Electronic & Dance**: `[genre: deep-house]`, `[genre: industrial-techno]`
+  - **Hip-Hop & R&B**: `[genre: trap-soul]`, `[genre: boom-bap]`
+  - **Experimental & Soundscape**: `[genre: musique-concrete]`, `[genre: noise-drone]`
+
+### **Track Structure Recommendation**
+- **[intro: Atmospheric textures setting the tone]**
+- **[verse: Genre-defining elements introduced]**
+- **[chorus: Fully developed style with layered instruments]**
+- **[bridge: A contrasting section that reinterprets genre tropes]**
+- **[outro: Genre's characteristic resolution or fade-out]**
 
 ---
 
@@ -2595,6 +2170,33 @@ Keep the language around the duet simple (“two voices”, “trading lines”,
 
 ---
 
+## [hook]
+
+**Category:** Structural / key element tag  
+**Primary use:** To highlight the most memorable musical / lyrical idea in the track.
+
+**Behavior and intent**  
+`[hook]` marks a phrase or line meant to “stick in the ear”. It can be a micro‑section within a chorus, a short melodic motif, or a repeated line that carries the song’s identity. Unlike `[chorus]`, which defines a whole section, `[hook]` often focuses on a compact, repeatable idea.
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - As a section label or inline cue:  
+    - `[hook] Wherever we go, the record spins slow.`  
+    - `[chorus | catchy hook, simple repeating phrase]`  
+- *Style of Music field:*  
+  - “warm old‑vinyl hip‑hop with a simple, nostalgic hook in the chorus”
+
+**Typical use-cases**  
+
+- Emphasizing one key line in the chorus that should stand out  
+- Creating a short vocal motif for instrumental‑heavy tracks  
+- Tagging call‑and‑response lines or slogans in rap / pop
+
+For best results, keep the hook text very short, rhythmically clear, and easy to repeat.
+
+---
+
 ## [improvisation]
 - **Meaning**: Allows performers to **freely create melodic, harmonic, or rhythmic variations** during performance.
 - **Placement**: Typically used within `[harmony]`, `[style]`, or `[theme]`.
@@ -2660,6 +2262,32 @@ Keep the language around the duet simple (“two voices”, “trading lines”,
 - **[chorus: Strings swell alongside brass accents]**
 - **[bridge: Guitar interlude providing contrast]**
 - **[outro: Gentle harp plucking fading into silence]**
+
+---
+
+## [instruments]
+- **Meaning**: Specifies the **instruments used in the composition**, helping define the timbre and orchestration of the track.
+- **Placement**: Typically placed **before structure tags** to establish instrumentation at the beginning of the track definition.
+- **Accepted Parameters**:
+  - **Specific instruments** - e.g., **piano, violin, electric guitar, synthesizer, brass, flute, harp**.
+  - **Ensembles** - e.g., **string quartet, symphonic orchestra, jazz trio**.
+  - **Electronic elements** - e.g., **808 bass, modular synth, vocoder, pads**.
+- **Sample Usage**:
+  ```
+  [instruments: Acoustic guitar, soft synth pads, subtle piano accompaniment.]
+  ```
+- **Genre-Based Usage**:
+  - **Rock & Pop**: **Electric guitar, bass, drums, synths**.
+  - **Classical & Cinematic**: **Orchestral strings, brass, harp**.
+  - **Electronic & Ambient**: **Synth pads, drones, digital bells**.
+  - **Jazz & Blues**: **Saxophone, upright bass, electric piano**.
+
+### **Track Structure Recommendation**
+- **[instruments: Piano, cello, atmospheric synths]**
+- **[intro: Solo piano melody introducing the theme]**
+- **[verse: Cello enters with deep harmonies]**
+- **[chorus: Synth pads build a cinematic atmosphere]**
+- **[outro: Instruments fade out into soft reverberation]**
 
 ---
 
@@ -2768,6 +2396,79 @@ Keep the language around the duet simple (“two voices”, “trading lines”,
 
 ---
 
+## [intro]
+- **Meaning**: Defines the **opening section of a track**, setting the mood, instrumentation, and rhythm before transitioning into structured sections.
+- **Placement**: Typically **at the beginning of the track definition**.
+- **Accepted Parameters**:
+  - **soft** - Gentle, understated opening.
+  - **dramatic** - Strong, impactful beginning.
+  - **percussive** - Driven by rhythmic elements.
+  - **atmospheric** - Textural, ambient soundscapes.
+  - **synth-driven** - Electronic intro using pads, arpeggios.
+- **Sample Usage**:
+  ```
+  [intro: Soft choral voices fading in with ambient pads.]
+  ```
+- **Genre-Based Usage**:
+  - **Rock & Metal**: **Guitar intros leading into heavy riffs**.
+  - **Electronic & Synthwave**: **Filtered synths and arpeggios**.
+  - **Jazz & Fusion**: **Solo saxophone or piano introduction**.
+  - **Cinematic & Classical**: **Grand orchestral swells**.
+
+### **Track Structure Recommendation**
+- **[intro: Low strings rumbling beneath ethereal choral voices]**
+- **[verse: Vocal melody enters with soft piano accompaniment]**
+- **[chorus: Full orchestration with percussion layers]**
+- **[bridge: Drop in intensity, shifting to solo violin]**
+- **[outro: Gentle fade-out with harp and flute]**
+
+---
+
+## [inversion]
+*   **Meaning**: States that a **theme or motif should be inverted** (played upside-down in melodic contour).
+*   **Placement**: Paired with `[subject]` or `[motif]`.
+*   **Accepted Parameters**:
+    *   **strict** – precise inversion.
+    *   **free** – partial inversion with modification.
+    *   **stretched** – inversion with augmented rhythm.
+*   **Sample Usage**:
+    ```
+    [inversion: Subject theme inverted on strings]  
+    ```
+*   **Genre-Based Usage**:
+    *   **Fugue/Classical**: Canonical inversion technique.
+    *   **Jazz Fusion**: Inverted melodic riffs.
+    *   **Electronic/Experimental**: Inverted synth motif loops.
+### **Track Structure Recommendation**:
+    *   `[subject: original theme]`
+    *   `[inversion: mirror of subject]`
+    *   `[coda: combine both for resolution]`
+
+---
+
+## [lament]
+*   **Meaning**: Defines a **sorrowful, descending motif or expressive passage**.
+*   **Placement**: Within `[melody]`, `[harmony]`, or `[vocals]`.
+*   **Accepted Parameters**:
+    *   **descending** – typical lament bass line (e.g. minor descending tetrachord).
+    *   **vocal** – sorrowful vocal delivery.
+    *   **instrumental** – plaintive strings or winds.
+    *   **choral** – choir in lament style.
+*   **Sample Usage**:
+    ```
+    [lament: Descending strings in minor mode]  
+    ```
+*   **Genre-Based Usage**:
+    *   **Baroque/Classical**: Lament bass line.
+    *   **Gothic/Metal**: Sorrowful motifs.
+    *   **Folk/Choral**: Funeral lament style.
+### **Track Structure Recommendation**:
+    *   `[verse: narrative lyrics]`
+    *   `[lament: sorrowful instrumental descent]`
+    *   `[chorus: emotional climax]`
+
+---
+
 ## [language]
 - **Meaning**: Specifies the **language of the lyrics or vocal performance** in the generated track.
 - **Placement**: Typically placed **at the beginning of the track definition** or before `[vocals]`.
@@ -2870,6 +2571,53 @@ Keep the language around the duet simple (“two voices”, “trading lines”,
 - **[chorus: Expansive, cinematic orchestration with legato phrasing]**
 - **[bridge: Soft legato violin solo transitioning back to vocals]**
 - **[outro: Gentle legato fade-out of choir and strings]**
+
+---
+
+## [length]
+- **Meaning**: Specifies the **desired duration of the track**, controlling overall runtime.
+- **Placement**: Typically placed **before `[structure]`** to ensure Suno processes it before structuring the composition.
+- **Accepted Parameters**:
+  - **short** - 30-60 seconds.
+  - **standard** - 2-3 minutes (default).
+  - **extended** - 4-5 minutes.
+  - **loopable** - Designed to seamlessly loop.
+  - **epic** - 5+ minutes with grand arrangements.
+- **Sample Usage**:
+  ```
+  [length: Extended, with a cinematic build-up]
+  ```
+- **Genre-Based Usage**:
+  - **Pop & Mainstream**: **Standard radio-friendly lengths (2-3 min)**.
+  - **Electronic & Dance**: **Extended club mixes (5+ min)**.
+  - **Classical & Film Score**: **Epic storytelling (5+ min orchestral)**.
+  - **Game Music & Ambient**: **Loopable background tracks**.
+
+### **Track Structure Recommendation**
+- **[length: Loopable]**
+- **[intro: Smooth ambient pad fade-in]**
+- **[verse: Subtle arpeggiated melodies drifting through]**
+- **[chorus: Slightly intensified layering for dynamic movement]**
+- **[outro: Seamless transition to start again]**
+
+---
+
+## [loop-friendly]
+
+**Description:** Indicates that the track or section should be structured for seamless looping—useful for background music, video game ambience, or extended generative pieces.  
+**Acceptable Parameters:**  
+- `length=60|90|120` (seconds)  
+- `style: seamless`  
+**Typical Placement:**  
+- Tag placed at top of track definition.  
+**Usage Example:**  
+```
+[track: loop-friendly, length=90, style: seamless]
+[mood: chill]
+```
+### **Structure Recommendation:**  
+- Design the section with minimal abrupt changes.  
+- Use pad-based instrumentation and consistent tempo.
 
 ---
 
@@ -2985,6 +2733,34 @@ Keep the language around the duet simple (“two voices”, “trading lines”,
 
 ---
 
+## [mood]
+- **Meaning**: Defines the **emotional atmosphere** of the track.
+- **Placement**: Typically used at the **start of the track definition** to guide composition style.
+- **Accepted Parameters**:
+  - **dark** - Brooding, mysterious, or ominous.
+  - **uplifting** - Positive, energizing.
+  - **melancholic** - Sad, introspective.
+  - **mystical** - Ethereal, otherworldly.
+  - **playful** - Lighthearted and fun.
+- **Sample Usage**:
+  ```
+  [mood: Dark, atmospheric tension with deep drones.]
+  ```
+- **Genre-Based Usage**:
+  - **Rock & Metal**: **Dark and aggressive moods**.
+  - **Electronic & Chill**: **Uplifting or melancholic textures**.
+  - **Cinematic & Orchestral**: **Mystical and grand moods**.
+  - **Jazz & Soul**: **Playful and laid-back vibes**.
+
+### **Track Structure Recommendation**
+- **[mood: Melancholic, soft and reflective]**
+- **[intro: Gentle strings and atmospheric pads]**
+- **[verse: Emotional, expressive melody on piano]**
+- **[chorus: Expansive orchestration with rising intensity]**
+- **[outro: Soft, fading resolution in minor tonality]**
+
+---
+
 ## [mutation]
 - **Meaning**: Refers to the **transformation** of a melody, harmony, or rhythm into a new variation over time.
 - **Placement**: Typically used within `[structure]`, `[theme]`, or `[variation]`.
@@ -3002,6 +2778,26 @@ Keep the language around the duet simple (“two voices”, “trading lines”,
   - **Gradual mutation** works well for **ambient and electronic music**.
   - **Abrupt mutation** is useful for **avant-garde and progressive rock**.
   - **Textural mutation** is great for **experimental and cinematic music**.
+
+---
+
+## [narrator]
+
+**Description:** Specifies that vocals should take on a spoken-narration style rather than singing. Useful for story tracks, spoken interludes, or voice-over feel.  
+**Acceptable Parameters:**  
+- `voice: female|male`  
+- `style: announcer|documentary|storytelling`  
+**Typical Placement:**  
+- Intro or bridge, or as interlude between song sections.  
+**Usage Example:**  
+```
+[narrator: voice: female, style: documentary]
+In the year 2149 the world changed forever.
+``` 
+ 
+### **Structure Recommendation:**  
+- Use separately from sung verses/choruses to avoid confusion.  
+- Keep narration section shorter.
 
 ---
 
@@ -3239,6 +3035,33 @@ Combine `[no-repeat]` with *deliberately non-repetitive* text: if your words are
 
 ---
 
+## [polyphony]
+
+**Category:** Arrangement / vocal-choir / harmony tag  
+**Primary use:** To request multiple independent melodic lines or layered voices rather than a single simple melody with block chords.
+
+**Behavior and intent**  
+`[polyphony]` encourages overlapping melodies and counterpoint. In vocal music, it suggests several simultaneous lines (choir parts interweaving rather than moving in lockstep). In instrumental music, it can yield more complex interacting parts instead of one dominant lead with static backing.
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - As a section descriptor, especially for choirs or group singing:  
+    - `[chorus | polyphony, overlapping choir lines, call-and-response]`  
+    - `[bridge | polyphony in strings and woodwinds, slowly unfolding]`  
+- *Style of Music field:*  
+  - “sacred-style polyphony with interweaving vocal lines and gentle organ support”
+
+**Typical use-cases**  
+
+- Choral / sacred / renaissance‑inspired pieces  
+- Complex climactic choruses with several melody fragments at once  
+- Orchestral or post‑rock textures where many lines move semi-independently
+
+For best results, pair `[polyphony]` with clear section roles (verse, chorus, coda) and maybe indicate which instruments or voices participate.
+
+---
+
 ## [power-off drop]
 - **Meaning**: Defines a **dramatic, abrupt silence effect**, simulating an electronic system suddenly turning off.
 - **Placement**: Typically used **within `[structure]`, `[drop]`, or `[effects]`**.
@@ -3263,6 +3086,32 @@ Combine `[no-repeat]` with *deliberately non-repetitive* text: if your words are
 - **[power-off drop: Abrupt silence before the chorus]**
 - **[chorus: Full re-entry with dramatic percussion]**
 - **[outro: Distant echoes fading into silence]**
+
+---
+
+## [pre-chorus]
+- **Meaning**: Defines the **section leading from the verse into the chorus**, building tension and anticipation.
+- **Placement**: Typically placed **between `[verse]` and `[chorus]`** in `[structure]`.
+- **Accepted Parameters**:
+  - **rising** - Gradual build-up into the chorus.
+  - **syncopated** - Off-beat rhythms to create anticipation.
+  - **minimal** - Stripped-down before a strong chorus impact.
+  - **harmonized** - Vocally layered to enhance tension.
+- **Sample Usage**:
+  ```
+  [pre-chorus: Rising vocal harmonies with increasing synth layers.]
+  ```
+- **Genre-Based Usage**:
+  - **Pop & R&B**: **Melodic pre-choruses setting up catchy hooks**.
+  - **Rock & Alternative**: **Guitar-driven pre-choruses for tension**.
+  - **Hip-Hop & Trap**: **Minimalist, beat-only pre-choruses**.
+  - **Cinematic & Epic**: **Orchestral swells leading into grand moments**.
+
+### **Track Structure Recommendation**
+- **[verse: Soft piano melody with subdued vocals]**
+- **[pre-chorus: Gradual rise in vocal intensity and instrumentation]**
+- **[chorus: Full orchestral and vocal explosion]**
+- **[outro: Smooth transition back to soft textures]**
 
 ---
 
@@ -3418,6 +3267,33 @@ Combine `[no-repeat]` with *deliberately non-repetitive* text: if your words are
 - **[bridge: Expansion into different harmonic territory]**
 - **[recapitulation: Full orchestral return of the main melody]**
 - **[outro: Quiet resolution with a softened reprise]**
+
+---
+
+## [refrain]
+- **Meaning**: Defines a **repeated phrase or musical passage**, typically appearing in multiple sections of the track.
+- **Placement**: Typically placed **within `[structure]`, `[chorus]`, or `[vocals]`**.
+- **Accepted Parameters**:
+  - **melodic** - A tune repeated throughout.
+  - **lyrical** - A repeated vocal phrase.
+  - **instrumental** - A motif repeated by instruments.
+  - **harmonic** - A chord progression appearing multiple times.
+- **Sample Usage**:
+  ```
+  [refrain: Repeated vocal phrase that echoes at the end of each chorus.]
+  ```
+- **Genre-Based Usage**:
+  - **Pop & Rock**: **"Melodic" refrains for earworms**.
+  - **Hip-Hop & R&B**: **"Lyrical" refrains for hook-based tracks**.
+  - **Electronic & House**: **"Instrumental" refrains for looping textures**.
+  - **Orchestral & Jazz**: **"Harmonic" refrains for theme consistency**.
+
+### **Track Structure Recommendation**
+- **[intro: Refrain introduced as an instrumental hook]**
+- **[verse: New melody leading toward the refrain]**
+- **[chorus: Full refrain, sung with layered harmonies]**
+- **[bridge: A break before the refrain returns]**
+- **[outro: Fading refrain, gradually repeating into silence]**
 
 ---
 
@@ -3750,6 +3626,28 @@ Combine `[no-repeat]` with *deliberately non-repetitive* text: if your words are
 
 ---
 
+## [scat break]
+*   **Meaning**: Denotes a **scatting vocal improvisation section**, usually jazz-influenced.
+*   **Placement**: Within `[vocals]` or `[structure]`.
+*   **Accepted Parameters**:
+    *   **solo** – single vocalist scat improvisation.
+    *   **duet** – multiple voices scatting in call-and-response.
+    *   **layered** – overlapping scat vocals for texture.
+*   **Sample Usage**:
+    ```
+    [scat break: Playful jazz-style scat improvisation, no lyrics]  
+    ```
+*   **Genre-Based Usage**:
+    *   **Jazz & Swing**: Classic scat solos.
+    *   **Experimental & Avant-pop**: Vocal improvisation as texture.
+    *   **Hip-Hop Fusion**: Rhythmic scatting between verses.
+### **Track Structure Recommendation**:
+    *   `[verse: lyrical section]`
+    *   `[scat break: vocalist improvises syllables]`
+    *   `[chorus: return to main hook]`
+
+---
+
 ## [scherzo]
 - **Meaning**: Defines a **lively, fast-paced musical section**, often humorous or energetic.  
 - **Placement**: Typically used within **[structure], [theme], or [rhythm]**.  
@@ -3799,6 +3697,33 @@ Combine `[no-repeat]` with *deliberately non-repetitive* text: if your words are
 - **[secondary theme: Contrasting melody introduced by strings]**  
 - **[development: Expansion of both themes into interweaving motifs]**  
 - **[outro: Final resolution where both themes blend together]**  
+
+---
+
+## [sequence]
+- **Meaning**: Specifies **the order and repetition of musical sections**, helping structure the track dynamically.
+- **Placement**: Typically used **within [structure]**, ensuring that segments appear in a defined order.
+- **Accepted Parameters**:
+  - **linear** - A straightforward progression of sections.
+  - **cyclical** - Repeating sections in a structured manner.
+  - **reversed** - Themes appear in the opposite order.
+  - **mirrored** - The second half of the track reflects the first.
+- **Sample Usage**:
+  ```
+  [sequence: Linear with a mirrored return in the final section.]
+  ```
+- **Genre-Based Usage**:
+  - **Classical & Film Score**: **"Mirrored" for symmetrical compositions.**
+  - **Dance & Electronic**: **"Cyclical" for repeating, looping sections.**
+  - **Rock & Pop**: **"Linear" for conventional storytelling structures.**
+  - **Progressive & Jazz**: **"Reversed" for unconventional arrangements.**
+
+### **Track Structure Recommendation**
+- **[sequence: Cyclical, alternating between verse and instrumental interludes]**
+- **[intro: Soft pad textures leading into rhythm]**
+- **[section: Thematic section introducing melody]**
+- **[section: Repeated development with slight variation]**
+- **[outro: Return of the theme in a mirrored resolution]**
 
 ---
 
@@ -3965,6 +3890,25 @@ Combine `[no-repeat]` with *deliberately non-repetitive* text: if your words are
 - **[verse: Lightly syncopated snare rhythm for groove]**  
 - **[chorus: Full, complex syncopation with layered percussions]**  
 - **[outro: Slow fading groove with light rhythmic stutters]**
+
+---
+
+## [siren]
+
+**Description:** Adds an alarm/siren sound effect—used to signal urgency or create a sci-fi/industrial alert.  
+**Acceptable Parameters:**  
+- `length=short|medium`  
+- `style: air-raid|police|industrial`  
+**Typical Placement:**  
+- Bridge or drop section, pre-climax.  
+**Usage Example:**  
+```
+[bridge: mood: tense]
+[siren: style: industrial, length: medium]
+The walls shake, the code breaks.
+```  
+### **Structure Recommendation:**  
+- Preceding a high-energy chorus or drop to escalate tension.
 
 ---
 
@@ -4190,6 +4134,56 @@ Combine `[spoken word]` with clear, well‑punctuated text. Very complex rhyme s
 
 ---
 
+## [style]
+- **Meaning**: Defines the **musical style or aesthetic** of the track, influencing genre fusion and overall production approach.
+- **Placement**: **Before [genre] or [mood]**, specifying artistic direction.
+- **Accepted Parameters**:
+  - **minimalist** - Sparse instrumentation, subtle textures.
+  - **cinematic** - Large-scale, soundtrack-like arrangements.
+  - **lo-fi** - Vintage, tape-saturated, and degraded sound.
+  - **high-energy** - Intense, fast-paced composition.
+  - **experimental** - Non-traditional elements and unpredictable shifts.
+- **Sample Usage**:
+  ```
+  [style: Cinematic with sweeping orchestral arrangements.]
+  ```
+- **Genre-Based Usage**:
+  - **Ambient & Minimalist**: **"Minimalist" for delicate, sparse textures.**
+  - **Film Score & Symphonic**: **"Cinematic" for dramatic orchestrations.**
+  - **Lo-Fi & Vintage Hip-Hop**: **"Lo-fi" for nostalgic sound.**
+  - **Electronic & Industrial**: **"Experimental" for glitch and non-traditional structures.**
+
+### **Track Structure Recommendation**
+- **[style: Minimalist, focusing on space and subtle dynamics]**
+- **[intro: Soft ambient pads and distant reverberations]**
+- **[verse: Sparse instrumentation with delayed plucks]**
+- **[chorus: Slow chordal swells creating depth]**
+- **[outro: Fading echoes and cinematic strings]**
+
+---
+
+## [subject]
+*   **Meaning**: Marks the **primary musical theme or motif**, especially in fugues or structured classical/jazz works.
+*   **Placement**: Within `[harmony]`, `[melody]`, or `[structure]`.
+*   **Accepted Parameters**:
+    *   **main** – introduces the principal theme.
+    *   **counter** – secondary theme against the main subject.
+    *   **stretto** – overlapping entries of the subject.
+*   **Sample Usage**:
+    ```
+    [subject: Main fugue theme on organ]  
+    ```
+*   **Genre-Based Usage**:
+    *   **Classical**: Core fugue subject.
+    *   **Jazz**: Head motif before improvisation.
+    *   **Experimental/Phonk-Classical**: Subject line woven into hybrid styles.
+### **Track Structure Recommendation**:
+    *   `[intro: subject introduced]`
+    *   `[inversion: theme restated in reverse]`
+    *   `[bridge: new harmonic counterpoint]`
+
+---
+
 ## [subharmonic]
 - **Meaning**: Refers to **frequencies below the fundamental pitch**, often used to enhance **low-end power**.
 - **Placement**: Typically used within `[bass]`, `[mixing]`, or `[instruments]`.
@@ -4296,6 +4290,60 @@ Combine `[spoken word]` with clear, well‑punctuated text. Very complex rhyme s
 - **[chorus: Heavy syncopated guitar riffs and percussion]**
 - **[bridge: Polyrhythmic overlapping elements]**
 - **[outro: Simplified rhythm gradually fading]**
+
+---
+
+## [technique]
+
+**Category:** Instrumental / performance detail tag  
+**Primary use:** To specify how an instrument or voice is played or treated (e.g., picking style, bowing, extended techniques), not just *what* instrument is used.
+
+**Behavior and intent**  
+`[technique]` is a general label you can pair with a short description of performance style. Instead of simply saying “[guitar]”, you can indicate “[guitar | technique: muted funky strums]”. This helps shape rhythmic feel and timbre.
+
+**Placement and syntax**  
+
+- *Lyrics field:*  
+  - As part of a section descriptor for arrangement:  
+    - `[intro | guitar, technique: tremolo picking over reverb]`  
+    - `[bridge | cello, technique: harmonics and glissando]`  
+- *Style of Music field:*  
+  - “neo-folk with detailed acoustic techniques: fingerstyle arpeggios, soft slides, and harmonics”
+
+**Typical use-cases**  
+
+- Guitar, strings, winds: fingerstyle, bowing, staccato, legato, muted, slapped, etc.  
+- Vocal techniques: “technique: belting”, “technique: soft head voice”, “technique: spoken rhythmically”  
+- Experimental sounds: “technique: prepared piano”, “technique: tape‑style pitch warble”
+
+Keep technique descriptions short, focusing on physical action (“plucked,” “bowed long,” “muted,” “sliding”) rather than abstract mood words.
+
+---
+
+## [tempo]
+- **Meaning**: Defines the **speed (BPM) and pacing** of the track.
+- **Placement**: Typically **before [rhythm] or [mood]**, influencing groove and feel.
+- **Accepted Parameters**:
+  - **slow** - Relaxed, chill pacing (BPM 60-90).
+  - **moderate** - Balanced, mid-tempo energy (BPM 90-120).
+  - **fast** - High-energy, upbeat (BPM 120-160).
+  - **variable** - Tempo changes dynamically.
+- **Sample Usage**:
+  ```
+  [tempo: Fast, high-energy BPM with driving percussion.]
+  ```
+- **Genre-Based Usage**:
+  - **Ballads & Lo-Fi**: **"Slow" for relaxed pacing.**
+  - **Pop & Rock**: **"Moderate" for steady song flow.**
+  - **EDM & Metal**: **"Fast" for energetic, danceable beats.**
+  - **Prog Rock & Experimental**: **"Variable" for tempo shifts.**
+
+### **Track Structure Recommendation**
+- **[tempo: Moderate with a slight increase in the chorus]**
+- **[intro: Smooth tempo introduction with light percussion]**
+- **[verse: Consistent mid-tempo groove]**
+- **[chorus: Slightly faster tempo for added intensity]**
+- **[outro: Gradual slow-down leading into a soft fade]**
 
 ---
 
@@ -4626,6 +4674,32 @@ Combine `[spoken word]` with clear, well‑punctuated text. Very complex rhyme s
 
 ---
 
+## [verse]
+- **Meaning**: Defines a **repeated song section with evolving lyrics or instrumentation**, typically alternating with a chorus.
+- **Placement**: Typically used **within [structure]**, indicating lyrical or instrumental sections.
+- **Accepted Parameters**:
+  - **soft** - Gentle and subdued verse dynamics.
+  - **powerful** - Intense, full-sounding verse.
+  - **instrumental** - A non-vocal variation of the verse.
+  - **spoken-word** - A recited rather than sung verse.
+- **Sample Usage**:
+  ```
+  [verse: Soft, intimate vocal lines over acoustic guitar.]
+  ```
+- **Genre-Based Usage**:
+  - **Pop & Rock**: **"Powerful" for high-energy vocal passages.**
+  - **Hip-Hop & Spoken Word**: **"Spoken-word" for rhythmic delivery.**
+  - **Folk & Acoustic**: **"Soft" for storytelling lyrical verses.**
+  - **Electronic & Synthwave**: **"Instrumental" for evolving textures.**
+
+### **Track Structure Recommendation**
+- **[verse: Soft, whispery vocals over minimalist piano]**
+- **[chorus: Full-band explosion with layered harmonies]**
+- **[verse: Powerfully sung variation with rising energy]**
+- **[outro: Verse returns in a stripped-down, fading arrangement]**
+
+---
+
 ## [vibe]
 - **Meaning**: Defines the **general feel, groove, and aesthetic** of the track, guiding mood and instrumentation.
 - **Placement**: Typically used **before [mood] or [style]**, influencing the overall musical atmosphere.
@@ -4703,6 +4777,56 @@ Pair `[vocalist]` with one or two precise adjectives (warm, raspy, bright, fragi
 
 ---
 
+## [vocals]
+- **Meaning**: Defines **the presence, type, and characteristics of vocal performances** in the track.  
+- **Placement**: Typically used **before [structure] or [style]**, guiding the vocal performance and its prominence.  
+- **Accepted Parameters**:
+  - **lead** - Primary vocal line leading the melody.  
+  - **background** - Secondary harmonized or atmospheric vocals.  
+  - **choir** - Layered choral voices, often used for dramatic effect.  
+  - **spoken-word** - Rhythmically spoken lyrics instead of singing.  
+  - **a cappella** - Only vocal performances, no instrumental accompaniment.  
+  - **filtered** - Vocals processed with special effects (e.g., robotic, distorted).  
+- **Sample Usage**:
+  ```
+  [vocals: Lead female vocals with ethereal background harmonies.]
+  ```
+- **Genre-Based Usage**:
+  - **Pop & Rock**: **"Lead" for a strong melodic presence.**  
+  - **Gospel & Orchestral**: **"Choir" for layered, harmonic vocals.**  
+  - **Hip-Hop & Spoken Word**: **"Spoken-word" for rhythmic vocal phrasing.**  
+  - **Electronic & Experimental**: **"Filtered" for robotic or distorted effects.**  
+
+### **Track Structure Recommendation**
+- **[vocals: Lead female voice, with ethereal harmonies]**  
+- **[intro: Atmospheric pad swells introducing whispered background vocals]**  
+- **[verse: Soft, expressive lead vocals with light reverberation]**  
+- **[chorus: Choir-like harmonies creating a soaring effect]**  
+- **[bridge: Spoken-word transition with distant echoes]**  
+- **[outro: Vocals fading into layered ambient whispers]**
+
+---
+
+## [vocoder]
+
+**Description:** Applies vocoder or robotic voice effect to vocals; used for electronic, sci-fi, or stylized voice textures.  
+**Acceptable Parameters:**  
+- `voice: main|background`  
+- `style: robotic|digital|futuristic`  
+- `pitch=high|low`  
+**Typical Placement:**  
+- Verse, chorus, or bridge when a “robotic” voice is desired.  
+**Usage Example:**  
+```
+[chorus: vocals: mechanical]
+[vocoder: style: futuristic, pitch=low]
+I am the signal, the merge of flesh and machine.
+```  
+### **Structure Recommendation:**  
+- Use in one section only to maintain effect clarity, avoid oversaturation.
+
+---
+
 ## [voicing]
 - **Meaning**: Defines **how notes are distributed across instruments or voices**, affecting **chord texture and balance**.
 - **Placement**: Typically used within `[harmony]`, `[orchestration]`, or `[mixing]`.
@@ -4777,13 +4901,34 @@ For more control, pair `[vulnerable vocals]` with dynamic cues like “low volum
 - *Style of Music field:*  
   - “dark ambient pop with whispered verses over sparse piano”
 
-**Typical use-cases**  
+### **Typical use-cases**  
 
 - Intimate or ASMR‑like sections  
 - Tension-building passages before a loud chorus / drop  
 - Horror / thriller aesthetics with eerie whispers under the main mix
 
 Avoid stacking too many conflicting vocal style tags (e.g., `[whisper]` + `[shouted vocals]` on the same line). Use one primary delivery style per section.
+
+---
+
+## [whispers]
+
+**Description:** Applies whispering vocal effect or background whispered voices to enhance intimacy, suspense, or ambient texture. citeturn0search4turn0search1  
+**Acceptable Parameters:**  
+- `voice: background`  
+- `volume=low`  
+- `style: eerie|intimate|ASMR`  
+**Typical Placement:**  
+- Underlay in verses or intro/outro for mood.  
+**Usage Example:**  
+```
+[verse: vocals: soft, descriptive]
+[whispers: style: eerie]
+Shadows move where you cannot see, whispers in the hall.
+```  
+### **Structure Recommendation:**  
+- Use at track start or end for atmosphere.  
+- Use in a bridge to drop vocal energy.
 
 ---
 
@@ -4833,3 +4978,6 @@ Use short descriptions of what the whispers feel like (“crowd of voices”, �
   [sax solo: jazzy improvisation with glissandos]
   [piano solo: baroque-style broken arpeggios]
   ```
+
+---
+

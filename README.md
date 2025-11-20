@@ -10,7 +10,9 @@ AI assisted audio distribution guideline: [AIAADiG](aiaadig.md) file in this rep
 
 The meta-tags reference is compiled by studying Suno users' public posts and comments, related to the currently supported meta-tags (used in Lyrics field).
 
-Latest documents update: November 19, 2025: tag-reference
+Latest documents update: November 20, 2025: tag-reference
+
+Last changes: added tags bleep, field-recording, loop-friendly, narrator, siren, vocoder,  whispers
 
 Latest news: Suno, model v5.0
 
