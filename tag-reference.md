@@ -2,248 +2,6 @@
 
 Last modified: 2025, November 20.
 
-## Suno service news (updated: September 24, 2025): model v5.0
-
-Starting from September, Suno began deploying version 5.0 of their model.
-
-The model is richer in polyphony, in vocals implementations and better implements the in-tag instructions.
- 
-**New v5.0 capabilities (confirmed November 2025):**
-**Genre mashups** now work reliably (e.g., `[genre: midwest emo + neosoul]`)
-**Natural language tempo descriptors** (e.g., `[tempo: mid-tempo 90s hip-hop swing]`)
-**Enhanced prompt parsing** for embedded tags in conversational text
-
-## Suno service news (updated: July 18, 2025): model v4.5+
-
-On 18-th of July Suno has released for paid subscriptions, access to a new model, "v4.5+"
-
-The initial tests showed that v4.5+ generated more variable, richer tracks with better polyphony and overall quality. Typical restrictions are the same as for v4.5. It's not yet known if there are changes in how v4.5+ interprets meta-tags.
-
-Also, the "Inspo" tool has been added to tracks generation UI. That, according to the UI hint, uses songs from specified playlist as "source for inspiration" In practice, Suno blends the "inspiring" tracks, making kind of pot pourri  in the output. No formal definitions for "Inspo" was officially done yet.
-
-## Riffusion relation
-
-Since April 27, 2025 Riffusion.com audio tracks generation service (very much like Suno) introduced paid levels of membership and a new model FUZZ-1.0 Pro.
-
-After 400+ generations that were first tested in Suno and then in Riffusion ("Style of Music" at Suno going to "Sound" prompt at Riffusion; "Lyrics" going to "Lyrics") it was discovered that Riffusion  generally follows the same set of official and user-tested meta-tags known for Suno.
-
-## Known misbehaving tags/tags values (consider obsolete)
-
-| Tag | Status | Notes |
-|-----|--------|-------|
-| `[autotune: ...]` | ❌ Unsupported |  |
-| `[filter: ...]` | ❌  Inefficient |  |
-| `[loop: ...]` | ❌ Unsupported |  |
-| `[mix, mixing: ...]` | ❌ Inefficient |  |
-| `[master: ...]` | ❌ Inefficient |  |
-| `[pan, panning: ...]` | ❌ Inefficient |  |
-| `[style: none]` | ❌ Invalid | "none" is not interpreted as a meaningful style. Will confuse output. |
-| `[section: ...]` | ❌ Redundant | Rejected or misread; use `[intro: ...]`, `[verse: ...]` etc. |
-| `[theme: ...]` | ❌ Invalid | unlabelled  theme tag is ignored or causes parsing errors, use [theme A: ...] etc. |
-| `[volume: ...]` | ❌  Inefficient |  |
-
-## Tips on using meta-tags
-
-1. **Use only known or confirmed tags.**
-2. **Avoid alias or ambiguous tags** like `bpm`, `key`, `language`.
-3. **Test in Standalone mode first** — many tags that break in Extend or Cover work fine solo.
-4. If in doubt, **use "[style: experimental]"** or "[control: hallucinatory]" to encourage flexible output instead of forcing 
-
-## Parsing Note for Suno v4.0+
-
-- Any **unrecognized tag** (e.g. `[emotion build]`, `[tense development]`) is treated as a generic **[section X: ...]** tag.
-
-- Use colon syntax to embed directives safely:
-  ```
-  [tense development: Style and mood of the theme gets more tense until a climactic counterpoint is reached]
-  ```
-- Avoid placing instruction text **outside** the tag, as it will be **sung/spoken**:
-  ```
-  [tense development]
-  Style and mood... ← ❌ becomes lyrics
-  ```
-- Avoid inserting lyrics/text to sing as [verse] colon notation: the engine will only sing that text if doesn't  find obvious rendering directives; place the verse lyrics immediately below its [verse] tag
-
-- To prevent looping: do not repeat identical lyrics or tag sections verbatim; add variation or split across multiple [verse A], [verse B] etc.
-
-- For structure: always include [sequence: ...] to control order when extending or building long-form compositions.
-
-## Version-Dependent Differences in Tag Behavior (v4.0 vs v4.5)  
-
-Suno v4.0 and v4.5 share the same meta-tag system in spirit, but **there are notable differences in how tags are interpreted and how reliably they influence the music** between these two versions. Key version-dependent differences include:
-
-- **Natural Language Prompting**: Suno **v4.5 is significantly better at understanding descriptive, sentence-form prompts with embedded tags**, whereas v4.0 tended to respond mostly to more rigid, shorthand tags. In v4.0, users often listed a sequence of tags or keywords (e.g. `[Intro]`, `[Verse]`, `[Chorus]`, or `Mood: energetic | Genre: Pop | Vocals: Female` etc.) and kept instructions terse. With v4.5, the model can parse richer language around tags. The Suno v4.5 update was tuned to *"understand and translate your descriptions"* of mood, instruments, and style with more nuance. An official guide notes that *v4.5 still supports the old bracket tags format, **"but now responds better when those tags are embedded into natural, full-sentence instructions."***. In short, **v4.0 required more prompt "keyword telegraphing," while v4.5 allows a more conversational prompt with tags inside it**. For example: instead of just writing `[Chorus: anthemic]`, a v4.5 user might write a full line like "The **[chorus]** should hit with **[anthemic]** vocal harmonies and huge drums," and v4.5 will follow that more accurately than v4.0 would. This reflects improved prompt adherence in v4.5. Users have found they can be more verbose and specific in v4.5 without confusing the model. 
-
-- **Prompt Adherence and Reliability**: Overall **v4.5 is more reliable in obeying meta-tags than v4.0 was**. Suno v4 sometimes ignored or only loosely followed tags (especially complex style directives), leading to user frustration. In fact, some early v4.0 users complained that *"I can’t get Suno to obey the style tags, it’s as if they are not used at all..."*. By contrast, v4.5’s improved prompt fidelity means tags like `[Intro]`, `[Bridge]`, `[Mood: X]`, etc., *more consistently shape the output*. A Redditor noted that *"steering the final product with style tags is a lot better now [in 4.5]"* and that they can even use more natural phrasing instead of hunting for the perfect v4-era keyword. In summary, where v4.0 might *gloss over* a bracket tag or require multiple re-rolls to get the effect, v4.5 more often gets it right on the first try (especially for genre and mood tags, thanks to prompt adherence improvements).
-
-- **Structural Tags and Song Length**: Both versions support tags like `[Verse]`, `[Chorus]`, etc., but **v4.5 can handle longer structures**. Suno v4.0 was limited to about ~4 minutes of song, often requiring an *Extend* feature to continue. In v4.5 the max length doubled to 8 minutes, and the model maintains coherence over that length. This means tags delineating multiple verses and choruses (or multiple `[Theme A]`, `[Theme B]` sections in a long piece) are more feasible in v4.5. The tags themselves didn’t change, but the *behavior* is that v4.0 sometimes truncated or ignored later structural tags if the song was too long, whereas v4.5 can actually execute a full structure from intro to extended outro with all tags accounted for. Additionally, v4.5 introduced an **improved "Cover+Persona" mode** and better *Extend*, but those are features beyond the lyric meta-tags (except that `[extend-style]` tag from the doc is less needed now since v4.5 can natively go long).
-
-- **Deprecated vs Replacement Tags**: The transition from earlier versions to v4 introduced some tag deprecations. For example, as noted above, **`[sing-style]` was used in Suno’s early alpha** but by v4.0 it was replaced by `[vocal-style]`. Similarly, **`[song-type]` was an early tag** to indicate if the piece should be a song, rap, instrumental, etc., but by v4.0 it was rendered inert. Another subtle change: older prompts sometimes used `[style]` for genre/style, but in v4.0+ it became more effective to use `[genre:]` and specific style qualifiers (because "[style: none]" had proven invalid and you needed to actually name a style). These differences were captured in the documentation’s errata, but it’s worth noting they specifically affect **v3-era vs v4-era usage**. By the time of v4.0, those older tags were already phased out, and v4.5 continued to ignore them. In practical terms, a user coming from Suno v3.5 to v4.0 had to unlearn a tag like `[bpm]` or `[section]`. But between v4.0 and v4.5, there were *not* many new deprecations - mostly improvements in understanding rather than removal of tags (the major tag removals happened earlier, in the jump to v4).  
-
-- **Parameter Interpretation**: Some tags retained the same name but **improved their parameter handling in v4.5**. For instance, the `[tempo:]` tag in v4.0 could accept broad terms like "slow" or "fast." Suno v4.5 still doesn’t take exact BPM numbers, but it got *smarter about tempo descriptors* - it will pick up on more nuanced phrases like "mid-tempo 90s hip-hop swing" within a tag or prompt. Another example is the `[vocal-style:]` or `[vocal-tone:]` parameters: v4.0 might understand basic values (whispered, raspy, etc.), but v4.5 has a greater range of vocal texture it recognizes (you can specify things like "nasal, twangy" or "smooth crooning" in v4.5 and it more likely yields a difference, whereas v4.0 would often ignore such fine detail unless it was a preset tag). The underlying model upgrade in v4.5 *"captures subtle musical elements"* better, which extends to tag parameters for subtle dynamics (like the difference between a "soft" and "intense" whisper in `[whisper:]`). The documentation’s tag definitions didn’t change, but the *outcome* of using certain parameters (like `[chorus: soft]` vs `[chorus: anthemic]`) is more distinct in v4.5 than it was in v4.0, thanks to the model’s improved fidelity.
-
-- **Genre Tag Expansion**: As mentioned, v4.5 expanded genre support. This isn’t a syntax change but a behavior change: a tag like `[genre: jazz-house]` or `[genre: midwest emo]` might have confused v4.0 (or defaulted to one genre, ignoring the hybrid), whereas **v4.5 handles multi-genre combinations much more gracefully**. The result is that **some meta-tags that v4.0 would effectively not honor suddenly became meaningful in v4.5**. For example, if you put `[genre: punk rock meets classical]` in v4.0, you’d likely get something incoherent or just one genre dominating. In v4.5, the same tag prompt can actually yield a convincing punk/classical crossover because the model learned genre blending. Therefore, users in v4.5 can utilize *more imaginative genre tags or mashups*, which is a new capability not reflected in the older documentation of tags.  
-
-In essence, **Suno v4.0 and v4.5 use the *same set of meta-tags* for the most part, but v4.5 interprets them more accurately and with a broader palette.** V4.5 encourages more descriptive usage of tags (embedding them in sentences, stacking multiple attributes) whereas v4.0 required a more minimal, list-based approach. This means certain tags that were technically available in v4.0 only truly became *useful* in v4.5. A concrete example: `[Mood: Uplifting] [Genre: Gospel] [Style: Lo-fi]` might yield something muddled in v4.0, but in v4.5 one could write, "Create an *uplifting lo-fi gospel* piece - **[Mood: uplifting] [Genre: gospel] [Style: lo-fi]**, with a choir and dusty vinyl crackle," and it will surprisingly adhere to that vision. The tag names didn’t change, but the *behavior and fidelity did* from v4.0 to v4.5. Users should note these improvements when crafting prompts for the respective versions.
-
-## Instrumental vs. Song (Vocal) Tag Usage  
-
-Suno’s meta-tag system covers both purely instrumental music and songs with vocals, and **some tags are more relevant to one or the other**. It’s important to distinguish how tags apply in instrumental tracks versus vocal tracks, and note any differences in v4.0/v4.5 behavior for each category:
-
-- **Instrumental Tracks**: To generate an instrumental (no vocals) piece, the key tag is **`[instrumental]`**. This tag explicitly tells Suno *not to produce vocals*, focusing on instruments only. The documentation defines `[instrumental]` as *"ensures the track contains no vocals"*. In both v4.0 and v4.5, placing `[instrumental]` at the start of the lyrics prompt is the recommended way to get a music bed with zero singing. V4.5 seems to honor this even better (v4.0 sometimes would slip a faint vocal hum or oh’s, but v4.5 is more strict about it, likely due to improved prompt adherence). When using `[instrumental]`, you can also specify a style parameter (e.g. `[instrumental: orchestral cinematic composition]`) to guide the flavor. 
-
-  For instrumental pieces, **structure tags like** `[Intro]`, `[Verse]`, `[Chorus]` still can apply - they will just denote purely instrumental sections. For example, you might do:  
-  ```
-  [instrumental]  
-  [intro: Slowly building strings and piano]  
-  [verse: Main melody introduced on guitar]  
-  [chorus: Full band enters with drums and bass]  
-  ```  
-  This is valid in both v4.0 and v4.5. The difference is, v4.5 will likely produce a more coherent instrumental "song" with those sections (taking care to change up the instrumentation per tag), whereas v4.0 might have been more repetitive without vocals to lead. The documentation even gave *track structure recommendations* for instrumentals using normal section tags (intro, verse, etc.) but no vocals, illustrating that structural tags are not exclusively for sung lyrics.
-
-  Additionally, instrumental tracks often use **solo and instrument tags** extensively. Tags like `[Instrument: Piano]` or `[Guitar Solo]` become the "lead voice" in absence of vocals. Suno v4.5 can follow these well - e.g. `[Instrument: Violin (Lead)]` would likely make violin carry the melody. In v4.0 it also works, but perhaps with less nuance. The user doc defines a generic `[instrument]` tag to highlight a particular instrument in the arrangement, and an `[instruments]` tag to list multiple instruments for the whole track setup. Both of these are quite useful for instrumentals. For instance, one could prompt: `[instruments: acoustic guitar, cajón, handclaps]` to set the timbre palette of an instrumental. Suno v4.0 and v4.5 both pay attention to these lists, though v4.5 is better at correctly blending unusual combinations.
-
-  It’s also worth noting the **`[solo]` tag** (or instrument-specific solos) are primarily instrumental in nature. The doc provides `[solo: ...]` as a tag meaning an improvised instrumental solo section. In a song with vocals, a `[solo]` usually means an instrumental break (guitar solo, etc.). In a purely instrumental track, a `[solo]` might simply mean a single instrument is spotlighted. Both versions support it, but again v4.5 tends to produce more convincing solos (e.g. an electric guitar solo that actually sounds distinct and lead-like, whereas v4.0 solos might sound more like a continuation of the backing track). Community tags like `[Drum Solo]` or `[Instrumental Break]` are effectively specialized cases and work similarly across versions. 
-
-- **Songs with Vocals**: For tracks that include singing or rapping, there are many *vocal-related tags* which wouldn’t apply to instrumentals. Basic structural tags like `[Verse]`, `[Chorus]`, `[Bridge]`, `[Outro]` are chiefly used in vocal songs to organize lyrics and musical sections. Suno v4.0 and v4.5 both rely on these to know where to generate verses vs choruses. Typically, *verses have new lyrics, choruses repeat the hook*. If you use these tags in an instrumental track, the model might still create contrasting sections instrumentally (for example, a "chorus" section could bring in a fuller arrangement even if no words). But their primary purpose is for lyrical structure. V4.5 showed improvement in handling these - e.g. it produces **more dynamic, distinct choruses and bridges** than v4.0 did. The user comparison of v4 vs v4.5 noted *"more varied sections and transitions"* in v4.5’s instrumental output as well, meaning it followed the intended structure better.
-
-  For vocals specifically, tags like **`[Male]`, `[Female]`, `[Choir]`, `[Duet]`** (and their v4.5 variants `[Male Vocal]`, etc.) are crucial. They tell Suno what kind of voice to use. In a song context, you might start your lyrics with `[female:]` or simply tag the chorus with `[choir]` to add choral backing. Suno v4.0 did allow this, but v4.5 expanded the realism and range. For example, **v4.5 can produce richer choir harmonies** when given `[Choir]` - it understands parameters like "angelic" or "powerful" on that tag - whereas v4.0’s choir might have been more muted. The documentation lists detailed parameters for `[choir]` (layered, gospel, dissonant, etc.) which presumably apply to both versions, but v4.5 has the edge in executing those styles convincingly. 
-
-  Another vocal-centric tag is **`[harmonies]` / `[background-vocals]`**, which instructs adding harmony vocals behind the lead. In songs, this is widely used for choruses or to thicken important lines. The doc’s `[background-vocals]` tag (with parameters like harmonic, layered) is clearly for vocal tracks. Suno v4.0 could add background "oohs" or harmonies, but sometimes it struggled to keep them musically aligned. V4.5 does a better job - for instance, if you specify `[background-vocals: layered harmonies in the chorus]`, v4.5 is more likely to produce a satisfying result (stacked harmonies on the chorus lines) than v4.0 was. This aligns with v4.5’s improved *"richer vocals"* claim. 
-
-  **Spoken segments and effects**: In vocal songs, tags like `[Spoken Word]`, `[Rap]` (if used) or things like `[laugh]`, `[sigh]` (sound effect tags for vocals) come into play. The documentation included `[laughter]` as a tag for adding laughter SFX, which is obviously only relevant if vocals are present. Both v4.0 and v4.5 can inject these vocal effects if prompted (though these are more for fun - a well-placed evil laugh in a metal song, etc.). There is also a `[whisper]` tag in the doc, denoting a whispered vocal style. This is clearly vocal-oriented; you’d use it in a lyric line or section to get a whispery delivery. Notably, v4.5 handles whispered and spoken vocals more deftly - earlier versions sometimes *sang* the words anyway or made them too loud. V4.5, if given `[whisper: ...]` at the intro or verse, will often produce actual whispering voices, which adds a creepy or intimate effect as intended. This is another area where the tag’s *behavior* improved with the version.
-
-  Finally, **persona/voice tags**: In vocal songs, controlling the character of the voice is key. We discussed how `[personae:]` tag was a user-documented attempt to lock a voice persona (gritty male, etc.), but it’s not officially supported due to the Persona feature being separate. Instead, users achieve consistent voice by tagging the first verse or chorus with gender/range and tone (e.g. `[Male: gritty baritone]`). Both v4.0 and v4.5 allow that kind of description. V4.5 introduced the official *Personas* UI where you can simply select a voice profile (which was separate from the text prompt). If a Persona is selected, it essentially overrides what a meta-tag might try to do. So one could say a *version-dependent behavior* is: in v4.5, if you have a Persona chosen, tags like `[Male Vocal]` or `[Female Vocal]` might be redundant or ignored (because the model is already locked to a specific voice). In v4.0 (which had no Personas feature), those tags were the only way to specify voice gender. So usage shifts: **v4.0 relied on meta-tags for voice selection, while v4.5’s UI offers Personas that achieve the same without tags** - though you can still use tags if you want to *mix* multiple voices in one song (like a duet). 
-
-In summary, **instrumental tracks tend to use tags focusing on instruments, solos, and overall structure**, whereas **vocal tracks use an additional layer of tags for voice type, lyrics structuring, and vocal effects/harmonies**. Both v4.0 and v4.5 share the tag set, but v4.5 executes these with more fidelity (e.g. better separation of an instrumental break, more realistic backing vocals, clearer distinction between a verse and chorus as per tags). When crafting prompts, one should include tags appropriate to the content: for an instrumental, you’d definitely include `[instrumental]` and instrument tags; for a song, you’d use section and vocal tags (and *not* include `[instrumental]`, since that would suppress vocals entirely). The good news is Suno v4.5 is versatile enough that you can even combine them - for example, some advanced prompts have a song with an instrumental intro: they literally write something like:  
-```
-[Instrumental intro]  
-(guitar chords play, no vocals)  
-[Verse 1]  
-Lyrics start here...  
-``` 
-And it works (the model starts with an instrumental intro then brings in vocals). This kind of nuanced control is exactly what meta-tags enable, and v4.5 handles it more "intelligently" than earlier versions.
-
-## Newly Confirmed or User-Tested Meta-Tags (v4.0 / v4.5)
-
-- announcer
-- build
-- duet
-- era: <decade or stylistic period>
-- hook
-- female vocal
-- harmonies: <description>
-- male vocal
-- no-repeat
-- polyphony
-- spoken word
-- technique
-- vocalist: <name or descriptor>
-- vulnerable vocals: <description>
-- whisper
-- whispering
-
-### Instrument Solo Tags
-- Usable as structural tags, often treated like `[section]` but with strong instrument focus:
-    - `[guitar solo: blues-style run with wah FX]`
-    - `[sax solo: late-night echo sax with heavy reverb]`
-    - `[violin solo: baroque trills and glissando]`
-    - `[synth solo: retro wave arpeggios rise into high delay]`
-    - `[flute solo: airy modal runs]`
-
-### Expanded [style:] Values (freeform, observed functional)
-- `retro-horror`
-- `psychedelic-swing`
-- `neo-folk-electronica`
-- `horror-synth-cabaret`
-- `trap-fugue`
-- `sacred-jazz-chant`
-- `industrial-surf`
-- `musique-concrète-pop`
-
-### Confirmed Free-Form [style] or [genre] Examples
-- `horror-synth`, `ghost-folk`, `spacewestern-phonk`, `ambient-baroque`, `baroque-opera`
-- `glitch-jazz`, `vaporwave-trap`, `noir-hip-hop`, `musique-concrète`, `hauntology`
-- `enka-minimal-techno`, `dub-clockpunk`, `phonk-noir`, `echo-chamber-pop`
-
----
-
-## Update for v4.5, v4.5+ and upcoming v4.6 (added: August 25, 2025)
-
-Starting with v4.5, the maximal "Style of Music" field length has been increased from 200 characters to 1000.
-
-### New/confirmed tags
-
-**New tags confirmed for v4.5+:**
- 
-- announcer
-- aria-rise
-- build
-- chant-loop
-- hook
-- inversion
-- lament
-- polyphony
-- scat break
-- subject
-
-**New for v4.5 and later:**
-
-- hook
-- rapped verse
-- distorted vocals
-- quiet arrangement
-
-**New tags confirmed for v5.0 (November 2025):**
-
-- aria-rise (enhanced operatic implementation)
-- build (improved polyphonic builds)
-- chant-loop (expanded ritualistic parameters)
-- inversion (fugal technique support)
-- lament (sorrowful motif generation)
-- polyphony (richer vocal polyphony)
-- scat break (jazz improvisation sections)
-- subject (primary theme marking)
-- technique (compositional method specification)
-
-### Tags with expanded v5.0 behavior
-
-- **[control]**: Now supports `hallucinatory`, `no-repeat`, `dynamic transitions` parameters
-- **[genre]**: Hybrid genres (e.g., "midwest emo + neosoul") now reliably produce blended styles
-- **[tempo]**: Natural language phrases like "mid-tempo 90s hip-hop swing" are parsed effectively
-- **[vocalist]**: More consistent voice locking across sections
-- **[whisper]/[whispering]**: Improved whisper detection and rendering
-
-### Tags obsoleted or changing the behavior
-
-Meta-tags related to audio engineering (e.g. [mix], [master], [filter], [panning], [volume]) are considered ineffective in current Suno versions.
-
-Several early meta-tags have been deprecated in favor of newer equivalents. For example, **`[sing-style]`** (from Suno v3) was replaced by `[vocal-style]` and is ignored in v4. **`[song-type]`** (intended to denote song vs. rap vs. instrumental) was an experiment that became inert by v4.0. Likewise, an unlabeled `[theme]` tag (without a letter or description) no longer works – users must use specific section labels like `[Theme A]`, `[Theme B]` etc. or it will be ignored. In summary, many v3-era tags were phased out and **v4.5 will simply ignore** any of these obsolete tags if used.
-
-The catch-all `[section: ...]` tag has been rendered redundant. Instead of using `[section]` as a placeholder, the model expects explicit structural tags (intro, verse, chorus, etc.). In fact, any unrecognized tag word is now parsed as a section label by default. Users have found that using the actual section names yields better results, whereas a raw `[section: X]` might be ignored or misinterpreted. Suno’s documentation explicitly lists **`section`** as removed/redundant.
-
-There is no supported `[loop]` meta-tag to force looping playback. Earlier guides suggested tags like `[loop]` or `[loop chorus]`, but these do not function in v4.5. Indeed, “loop” is on the removed-tags list. To create a loop or repeated section, users must manually copy structures (or use the _Extend_ feature); a single tag will not make the song endlessly loop.
-
-The autotune effect tag is effectively **deprecated** in v4.5. While some community guides still mention using `[Autotune]` for a pitch-corrected vocal style, the official word is that **`autotune`** was removed as an unstable tag. Users confirm that simply adding `[Autotune]` in lyrics has little to no effect now – you may get an “auto-tuned” feel only by describing it in the style text or using a persona that implies it.
-
-The tag **`[end]`** (intended to mark the song’s conclusion) exists, but community feedback indicates it’s not very reliable. One user noted that _“\[end\] frequently does not work… even `[5 second fade out][end]` doesn’t seem to stop the music”_, though it **does** tend to prevent any new vocals after that point. In practice, Suno might ignore an end tag and continue the instrumental to the full length. As a workaround, some creators include an outro section description (and sometimes silence) to encourage a proper ending, since the `[end]` tag alone is hit-or-miss.
-
-### Tags with new behavior
-
-**Genre Mashups in `[genre:]`** – Suno v4.5 dramatically improved its handling of combined genres. The genre tag now accepts **hybrid values** and actually produces blended styles, which older versions often failed to do. For example, a prompt with **`[genre: midwest emo + neosoul]`** will yield a coherent mix of those genres in v4.5, whereas v4.0 might have defaulted to one genre or produced a muddled result. The model was expanded to recognize **1,200+ genres/styles** and interpret “X + Y” combinations smoothly. This means users can get creative with genre tags (even inventing combos like _“jazz-house,” “folk EDM,” “punk meets classical”_) and expect v4.5 to honor both elements more faithfully than before.
-
-**Richer Tempo Descriptors** – The **`[tempo:...]`** tag became more nuanced in v4.5. While it still doesn’t support exact BPM numbers, it now understands descriptive tempo phrases much better. In v4.0 one might only use simple terms (`[tempo: slow]` or `fast`), but v4.5 can parse complex inputs like _“mid-tempo 90s hip-hop swing”_ or _“steady 4/4, 120bpm feel”_ embedded in a tempo tag. The engine won’t lock to an exact BPM, but it will interpret **relative tempo and rhythmic feel** from natural language. Essentially, v4.5’s broader language comprehension lets you be more specific in tempo/mood tags (e.g. “slow-burning waltz tempo”) and get a correspondingly specific output, which was less true in earlier versions.
-
-**More Expressive Vocal Tags** – Tags controlling vocal style/timbre respond more deeply in v4.5. The model now differentiates subtle vocal instructions: for instance, `[vocal-style: whispered, airy]` or `[vocals: nasal, twangy tone]` will noticeably affect the performance. In v4.0, many such modifiers were ignored unless they were very common adjectives. Now, however, v4.5 was tuned for emotional and tonal nuance – users report that specifying a singer’s tone (raspy, operatic, whispered, etc.) yields a clear change in the output. Even without a dedicated tag, putting a descriptor in brackets (e.g. `[whisper voice]`) can work, but the recommended approach is to use the proper tag syntax (like `vocal-style` or include it in a `[vocals: ...]` list). **Result:** a richer palette of vocal textures – from smooth crooning to rough growls – can be invoked via tags in v4.5, whereas previously the model often defaulted to a generic voice.
-
-**Strict Instrumental Tag Adherence** – The `[instrumental]` tag (to generate music with **no vocals**) is honored more reliably post-v4.5. In v4.0 the “instrumental” tag sometimes wasn’t 100% respected (users occasionally heard stray humming or ooohs). In v4.5, by contrast, if you start your lyrics with **`[instrumental]`**, the model will produce a purely instrumental track almost every time. The upgrade in prompt fidelity means the system correctly silences vocals when asked. Users have also learned they can combine this tag with a brief style hint (e.g. `[instrumental: lo-fi hip hop beat]`) to guide the instrumental’s genre. This stricter obedience to the instrumental directive is a quality-of-life improvement noted by many after the v4.5 update.
-
-**Longer Structures Now Possible** – With v4.5’s extended max song length (~8 minutes), the classic structure tags like `[Verse]`, `[Chorus]`, `[Bridge]`, etc., can be used in _more repeated sections_ without being dropped. Previously, a very long prompt with many sections might see later tags get ignored as the model ran out of time/attention (v4.0 often wouldn’t reliably include a 3rd or 4th verse). Now, **v4.5 can execute a full song structure end-to-end** with multiple verses, choruses, a bridge, even multiple themes, and an outro. Community feedback around the v4.5+ release confirmed that the model maintains coherence over longer sequences, so tags defining, say, Verse 4 or a second Bridge actually produce those sections. Essentially, _the tags themselves haven’t changed_, but the **song-length limit increase and better coherence** mean you can structure a song with many tagged sections (intro through outro) and expect v4.5 to follow through. (As a side note, the formerly used `[extend-style]` tag for continuing songs is less needed now, since the base model can generate extended compositions without a separate extend prompt.)
-
-**Improved Tag Prompt Parsing** – Suno v4.5 introduced a smarter prompt parser, which affects how tags are interpreted within more natural sentences. Users have noticed that they can **embed tags in a descriptive sentence** and v4.5 still gets it – something v4.0 struggled with. For example: _“The \[chorus\] should explode with \[anthemic\] harmonies and big drums.”_ In v4.0, that may have confused the model or caused it to sing the words, but v4.5 correctly reads those as tags (Chorus section; anthemic style). The outcome is that you don’t have to list tags stiffly on separate lines; you can mix them into a narrative prompt. The model’s better natural-language understanding means **tags can carry more context**. A Reddit user noted that steering the song with style tags _“is a lot better now \[in 4.5\]”_ and you can use more natural phrasing around them. This update doesn’t introduce new tags per se, but it _expands the way existing tags can be used_, allowing for creative prompt-writing that still yields the desired structured result.
-
-**“Control” Meta-Tag Enhancements** – The special `[control: ...]` tag (which sets high-level guidance) gained new community uses in v4.5. It’s not a new tag, but users started leveraging it for things like preventing repetition or encouraging experimental outputs. For example, Suno experts suggest using **`[control: hallucinatory]`** to coax the model into more free-form, improvised vocals/instrumentation (useful for ambient or avant-garde pieces where _“vocal hallucinations”_ and non-lexical vocals are desired). Another trick is **`[control: no-repeat]`**, which some have placed at the top of a prompt to tell v4.5 not to repeat sections or lines excessively. Similarly, values like _“dynamic transitions”_ or _“instrumental”_ can be put in the control tag to influence the overall composition (e.g. `[control: instrumental, no-repeat, dynamic transitions]`). These were not documented in older reference material, but after v4.5 users discovered the model does respond to certain keywords in a control tag. In short, **v4.5 expanded the _impact_ of the `[control:]` tag**, making it a catch-all for high-level directives (from structure handling to creative “weirdness”). This goes hand-in-hand with using descriptive style tags – v4.5’s tolerance for abstract or compound instructions opened up new possibilities to guide the AI with tags like **hallucinatory, surreal, cinematic, no-repeat**, etc., under the `[control]` umbrella.
-
 ---
 
 # Style of Music/Lyrics restrictions
@@ -255,6 +13,67 @@ Suno would refuse to render a track definition, if it finds, within "Style of Mu
 - "skank": when defining the guitar play style, use "ska stroke" instead
 
 etc.
+
+---
+
+# Grouping and containers
+
+## [track] meta-tag
+
+**Description:**  
+
+Defines the overall **track container** and sets global control parameters for the entire song. This tag is placed at the very start of the track definition and governs attributes such as genre, style, mood, length, instrumentation, and other high-level defaults.
+
+**Acceptable Parameters (within‐tag notation):**  
+- `genre: <genre name>` (e.g., `phonk drift`, `lo-fi hip-hop`)  
+- `style: <descriptor>` (e.g., `gritty night drive`, `chill ambient`)  
+- `mood: <descriptor>` (e.g., `dark`, `uplifting`, `dreamy`)  
+- `length: <seconds>` (e.g., `180`, `240`)  
+- `instruments: <instrument list>` (e.g., `808 sub-bass, vinyl crackle, chopped lo-fi beat`)  
+- Other global modifiers: e.g., `loop-friendly`, `persona: female`, etc.
+
+### **Typical Placement:**  
+
+At the very top of the song definition prompt, before any section tags like `[intro]`, `[verse]`, etc.
+
+**Usage Example:**  
+```
+[track: genre: phonk drift, style: lo-fi hip-hop, mood: gritty night drive, length: 180, instruments: 808 sub-bass, vinyl crackle, chopped lo-fi beat]
+```
+
+**Notes:**  
+- Use this tag to set defaults for the track; individual sections may override these via their own tags.  
+- Avoid repeating all global parameters in every section unless you intend to change them.  
+- Helps keep your prompt structured and clear for large-scale generative workflows.
+
+---
+
+## Pipe notation: `[SectionName | param1: value, param2: value]`
+
+**Description:**  
+
+The **pipe notation** (vertical bar `|`) following a structural tag (e.g., `intro`, `verse`, `chorus`, `bridge`, `outro`) allows **local overrides or additions** of parameters specifically for that section. It refines the global track settings by specifying section-specific style, instrumentation, vocals or mood.
+
+**Acceptable Format:**  
+`[SectionName | paramA: valueA, paramB: valueB, …]`  
+Where `SectionName` is a structural tag and the parameters are similar to those used in `[track]` or vocal/instrument tags.
+
+### **Typical Placement:**  
+Immediately before the lyrics or content of that section. Example:  
+```
+[chorus | style: phonk hook, vocals: autotune-light, melodic]
+```
+
+**Usage Example:**  
+```
+[bridge | style: intense, dynamic, build]
+[bridge-drop | instruments: synth riser, percussion build, bass drop]
+```
+
+**Notes:**  
+- Use pipe notation when you want a section to **deviate** from the global defaults.  
+- Keeps the definition concise and avoids repeating everything in each section.  
+- Useful for changing vocal style, instrumentation, mood, or other modifiers just for one section.
 
 ---
 
@@ -4978,6 +4797,252 @@ Use short descriptions of what the whispers feel like (“crowd of voices”, �
   [sax solo: jazzy improvisation with glissandos]
   [piano solo: baroque-style broken arpeggios]
   ```
+
+---
+
+# Appendix A. History of changes
+
+## Suno service news (updated: September 24, 2025): model v5.0
+
+Starting from September, Suno began deploying version 5.0 of their model.
+
+The model is richer in polyphony, in vocals implementations and better implements the in-tag instructions.
+ 
+**New v5.0 capabilities (confirmed November 2025):**
+**Genre mashups** now work reliably (e.g., `[genre: midwest emo + neosoul]`)
+**Natural language tempo descriptors** (e.g., `[tempo: mid-tempo 90s hip-hop swing]`)
+**Enhanced prompt parsing** for embedded tags in conversational text
+
+## Suno service news (updated: July 18, 2025): model v4.5+
+
+On 18-th of July Suno has released for paid subscriptions, access to a new model, "v4.5+"
+
+The initial tests showed that v4.5+ generated more variable, richer tracks with better polyphony and overall quality. Typical restrictions are the same as for v4.5. It's not yet known if there are changes in how v4.5+ interprets meta-tags.
+
+Also, the "Inspo" tool has been added to tracks generation UI. That, according to the UI hint, uses songs from specified playlist as "source for inspiration" In practice, Suno blends the "inspiring" tracks, making kind of pot pourri  in the output. No formal definitions for "Inspo" was officially done yet.
+
+## Riffusion relation
+
+Since April 27, 2025 Riffusion.com audio tracks generation service (very much like Suno) introduced paid levels of membership and a new model FUZZ-1.0 Pro.
+
+After 400+ generations that were first tested in Suno and then in Riffusion ("Style of Music" at Suno going to "Sound" prompt at Riffusion; "Lyrics" going to "Lyrics") it was discovered that Riffusion  generally follows the same set of official and user-tested meta-tags known for Suno.
+
+## Known misbehaving tags/tags values (consider obsolete)
+
+| Tag | Status | Notes |
+|-----|--------|-------|
+| `[autotune: ...]` | ❌ Unsupported |  |
+| `[filter: ...]` | ❌  Inefficient |  |
+| `[loop: ...]` | ❌ Unsupported |  |
+| `[mix, mixing: ...]` | ❌ Inefficient |  |
+| `[master: ...]` | ❌ Inefficient |  |
+| `[pan, panning: ...]` | ❌ Inefficient |  |
+| `[style: none]` | ❌ Invalid | "none" is not interpreted as a meaningful style. Will confuse output. |
+| `[section: ...]` | ❌ Redundant | Rejected or misread; use `[intro: ...]`, `[verse: ...]` etc. |
+| `[theme: ...]` | ❌ Invalid | unlabelled  theme tag is ignored or causes parsing errors, use [theme A: ...] etc. |
+| `[volume: ...]` | ❌  Inefficient |  |
+
+## Tips on using meta-tags
+
+1. **Use only known or confirmed tags.**
+2. **Avoid alias or ambiguous tags** like `bpm`, `key`, `language`.
+3. **Test in Standalone mode first** — many tags that break in Extend or Cover work fine solo.
+4. If in doubt, **use "[style: experimental]"** or "[control: hallucinatory]" to encourage flexible output instead of forcing 
+
+## Parsing Note for Suno v4.0+
+
+- Any **unrecognized tag** (e.g. `[emotion build]`, `[tense development]`) is treated as a generic **[section X: ...]** tag.
+
+- Use colon syntax to embed directives safely:
+  ```
+  [tense development: Style and mood of the theme gets more tense until a climactic counterpoint is reached]
+  ```
+- Avoid placing instruction text **outside** the tag, as it will be **sung/spoken**:
+  ```
+  [tense development]
+  Style and mood... ← ❌ becomes lyrics
+  ```
+- Avoid inserting lyrics/text to sing as [verse] colon notation: the engine will only sing that text if doesn't  find obvious rendering directives; place the verse lyrics immediately below its [verse] tag
+
+- To prevent looping: do not repeat identical lyrics or tag sections verbatim; add variation or split across multiple [verse A], [verse B] etc.
+
+- For structure: always include [sequence: ...] to control order when extending or building long-form compositions.
+
+## Version-Dependent Differences in Tag Behavior (v4.0 vs v4.5)  
+
+Suno v4.0 and v4.5 share the same meta-tag system in spirit, but **there are notable differences in how tags are interpreted and how reliably they influence the music** between these two versions. Key version-dependent differences include:
+
+- **Natural Language Prompting**: Suno **v4.5 is significantly better at understanding descriptive, sentence-form prompts with embedded tags**, whereas v4.0 tended to respond mostly to more rigid, shorthand tags. In v4.0, users often listed a sequence of tags or keywords (e.g. `[Intro]`, `[Verse]`, `[Chorus]`, or `Mood: energetic | Genre: Pop | Vocals: Female` etc.) and kept instructions terse. With v4.5, the model can parse richer language around tags. The Suno v4.5 update was tuned to *"understand and translate your descriptions"* of mood, instruments, and style with more nuance. An official guide notes that *v4.5 still supports the old bracket tags format, **"but now responds better when those tags are embedded into natural, full-sentence instructions."***. In short, **v4.0 required more prompt "keyword telegraphing," while v4.5 allows a more conversational prompt with tags inside it**. For example: instead of just writing `[Chorus: anthemic]`, a v4.5 user might write a full line like "The **[chorus]** should hit with **[anthemic]** vocal harmonies and huge drums," and v4.5 will follow that more accurately than v4.0 would. This reflects improved prompt adherence in v4.5. Users have found they can be more verbose and specific in v4.5 without confusing the model. 
+
+- **Prompt Adherence and Reliability**: Overall **v4.5 is more reliable in obeying meta-tags than v4.0 was**. Suno v4 sometimes ignored or only loosely followed tags (especially complex style directives), leading to user frustration. In fact, some early v4.0 users complained that *"I can’t get Suno to obey the style tags, it’s as if they are not used at all..."*. By contrast, v4.5’s improved prompt fidelity means tags like `[Intro]`, `[Bridge]`, `[Mood: X]`, etc., *more consistently shape the output*. A Redditor noted that *"steering the final product with style tags is a lot better now [in 4.5]"* and that they can even use more natural phrasing instead of hunting for the perfect v4-era keyword. In summary, where v4.0 might *gloss over* a bracket tag or require multiple re-rolls to get the effect, v4.5 more often gets it right on the first try (especially for genre and mood tags, thanks to prompt adherence improvements).
+
+- **Structural Tags and Song Length**: Both versions support tags like `[Verse]`, `[Chorus]`, etc., but **v4.5 can handle longer structures**. Suno v4.0 was limited to about ~4 minutes of song, often requiring an *Extend* feature to continue. In v4.5 the max length doubled to 8 minutes, and the model maintains coherence over that length. This means tags delineating multiple verses and choruses (or multiple `[Theme A]`, `[Theme B]` sections in a long piece) are more feasible in v4.5. The tags themselves didn’t change, but the *behavior* is that v4.0 sometimes truncated or ignored later structural tags if the song was too long, whereas v4.5 can actually execute a full structure from intro to extended outro with all tags accounted for. Additionally, v4.5 introduced an **improved "Cover+Persona" mode** and better *Extend*, but those are features beyond the lyric meta-tags (except that `[extend-style]` tag from the doc is less needed now since v4.5 can natively go long).
+
+- **Deprecated vs Replacement Tags**: The transition from earlier versions to v4 introduced some tag deprecations. For example, as noted above, **`[sing-style]` was used in Suno’s early alpha** but by v4.0 it was replaced by `[vocal-style]`. Similarly, **`[song-type]` was an early tag** to indicate if the piece should be a song, rap, instrumental, etc., but by v4.0 it was rendered inert. Another subtle change: older prompts sometimes used `[style]` for genre/style, but in v4.0+ it became more effective to use `[genre:]` and specific style qualifiers (because "[style: none]" had proven invalid and you needed to actually name a style). These differences were captured in the documentation’s errata, but it’s worth noting they specifically affect **v3-era vs v4-era usage**. By the time of v4.0, those older tags were already phased out, and v4.5 continued to ignore them. In practical terms, a user coming from Suno v3.5 to v4.0 had to unlearn a tag like `[bpm]` or `[section]`. But between v4.0 and v4.5, there were *not* many new deprecations - mostly improvements in understanding rather than removal of tags (the major tag removals happened earlier, in the jump to v4).  
+
+- **Parameter Interpretation**: Some tags retained the same name but **improved their parameter handling in v4.5**. For instance, the `[tempo:]` tag in v4.0 could accept broad terms like "slow" or "fast." Suno v4.5 still doesn’t take exact BPM numbers, but it got *smarter about tempo descriptors* - it will pick up on more nuanced phrases like "mid-tempo 90s hip-hop swing" within a tag or prompt. Another example is the `[vocal-style:]` or `[vocal-tone:]` parameters: v4.0 might understand basic values (whispered, raspy, etc.), but v4.5 has a greater range of vocal texture it recognizes (you can specify things like "nasal, twangy" or "smooth crooning" in v4.5 and it more likely yields a difference, whereas v4.0 would often ignore such fine detail unless it was a preset tag). The underlying model upgrade in v4.5 *"captures subtle musical elements"* better, which extends to tag parameters for subtle dynamics (like the difference between a "soft" and "intense" whisper in `[whisper:]`). The documentation’s tag definitions didn’t change, but the *outcome* of using certain parameters (like `[chorus: soft]` vs `[chorus: anthemic]`) is more distinct in v4.5 than it was in v4.0, thanks to the model’s improved fidelity.
+
+- **Genre Tag Expansion**: As mentioned, v4.5 expanded genre support. This isn’t a syntax change but a behavior change: a tag like `[genre: jazz-house]` or `[genre: midwest emo]` might have confused v4.0 (or defaulted to one genre, ignoring the hybrid), whereas **v4.5 handles multi-genre combinations much more gracefully**. The result is that **some meta-tags that v4.0 would effectively not honor suddenly became meaningful in v4.5**. For example, if you put `[genre: punk rock meets classical]` in v4.0, you’d likely get something incoherent or just one genre dominating. In v4.5, the same tag prompt can actually yield a convincing punk/classical crossover because the model learned genre blending. Therefore, users in v4.5 can utilize *more imaginative genre tags or mashups*, which is a new capability not reflected in the older documentation of tags.  
+
+In essence, **Suno v4.0 and v4.5 use the *same set of meta-tags* for the most part, but v4.5 interprets them more accurately and with a broader palette.** V4.5 encourages more descriptive usage of tags (embedding them in sentences, stacking multiple attributes) whereas v4.0 required a more minimal, list-based approach. This means certain tags that were technically available in v4.0 only truly became *useful* in v4.5. A concrete example: `[Mood: Uplifting] [Genre: Gospel] [Style: Lo-fi]` might yield something muddled in v4.0, but in v4.5 one could write, "Create an *uplifting lo-fi gospel* piece - **[Mood: uplifting] [Genre: gospel] [Style: lo-fi]**, with a choir and dusty vinyl crackle," and it will surprisingly adhere to that vision. The tag names didn’t change, but the *behavior and fidelity did* from v4.0 to v4.5. Users should note these improvements when crafting prompts for the respective versions.
+
+## Instrumental vs. Song (Vocal) Tag Usage  
+
+Suno’s meta-tag system covers both purely instrumental music and songs with vocals, and **some tags are more relevant to one or the other**. It’s important to distinguish how tags apply in instrumental tracks versus vocal tracks, and note any differences in v4.0/v4.5 behavior for each category:
+
+- **Instrumental Tracks**: To generate an instrumental (no vocals) piece, the key tag is **`[instrumental]`**. This tag explicitly tells Suno *not to produce vocals*, focusing on instruments only. The documentation defines `[instrumental]` as *"ensures the track contains no vocals"*. In both v4.0 and v4.5, placing `[instrumental]` at the start of the lyrics prompt is the recommended way to get a music bed with zero singing. V4.5 seems to honor this even better (v4.0 sometimes would slip a faint vocal hum or oh’s, but v4.5 is more strict about it, likely due to improved prompt adherence). When using `[instrumental]`, you can also specify a style parameter (e.g. `[instrumental: orchestral cinematic composition]`) to guide the flavor. 
+
+  For instrumental pieces, **structure tags like** `[Intro]`, `[Verse]`, `[Chorus]` still can apply - they will just denote purely instrumental sections. For example, you might do:  
+  ```
+  [instrumental]  
+  [intro: Slowly building strings and piano]  
+  [verse: Main melody introduced on guitar]  
+  [chorus: Full band enters with drums and bass]  
+  ```  
+  This is valid in both v4.0 and v4.5. The difference is, v4.5 will likely produce a more coherent instrumental "song" with those sections (taking care to change up the instrumentation per tag), whereas v4.0 might have been more repetitive without vocals to lead. The documentation even gave *track structure recommendations* for instrumentals using normal section tags (intro, verse, etc.) but no vocals, illustrating that structural tags are not exclusively for sung lyrics.
+
+  Additionally, instrumental tracks often use **solo and instrument tags** extensively. Tags like `[Instrument: Piano]` or `[Guitar Solo]` become the "lead voice" in absence of vocals. Suno v4.5 can follow these well - e.g. `[Instrument: Violin (Lead)]` would likely make violin carry the melody. In v4.0 it also works, but perhaps with less nuance. The user doc defines a generic `[instrument]` tag to highlight a particular instrument in the arrangement, and an `[instruments]` tag to list multiple instruments for the whole track setup. Both of these are quite useful for instrumentals. For instance, one could prompt: `[instruments: acoustic guitar, cajón, handclaps]` to set the timbre palette of an instrumental. Suno v4.0 and v4.5 both pay attention to these lists, though v4.5 is better at correctly blending unusual combinations.
+
+  It’s also worth noting the **`[solo]` tag** (or instrument-specific solos) are primarily instrumental in nature. The doc provides `[solo: ...]` as a tag meaning an improvised instrumental solo section. In a song with vocals, a `[solo]` usually means an instrumental break (guitar solo, etc.). In a purely instrumental track, a `[solo]` might simply mean a single instrument is spotlighted. Both versions support it, but again v4.5 tends to produce more convincing solos (e.g. an electric guitar solo that actually sounds distinct and lead-like, whereas v4.0 solos might sound more like a continuation of the backing track). Community tags like `[Drum Solo]` or `[Instrumental Break]` are effectively specialized cases and work similarly across versions. 
+
+- **Songs with Vocals**: For tracks that include singing or rapping, there are many *vocal-related tags* which wouldn’t apply to instrumentals. Basic structural tags like `[Verse]`, `[Chorus]`, `[Bridge]`, `[Outro]` are chiefly used in vocal songs to organize lyrics and musical sections. Suno v4.0 and v4.5 both rely on these to know where to generate verses vs choruses. Typically, *verses have new lyrics, choruses repeat the hook*. If you use these tags in an instrumental track, the model might still create contrasting sections instrumentally (for example, a "chorus" section could bring in a fuller arrangement even if no words). But their primary purpose is for lyrical structure. V4.5 showed improvement in handling these - e.g. it produces **more dynamic, distinct choruses and bridges** than v4.0 did. The user comparison of v4 vs v4.5 noted *"more varied sections and transitions"* in v4.5’s instrumental output as well, meaning it followed the intended structure better.
+
+  For vocals specifically, tags like **`[Male]`, `[Female]`, `[Choir]`, `[Duet]`** (and their v4.5 variants `[Male Vocal]`, etc.) are crucial. They tell Suno what kind of voice to use. In a song context, you might start your lyrics with `[female:]` or simply tag the chorus with `[choir]` to add choral backing. Suno v4.0 did allow this, but v4.5 expanded the realism and range. For example, **v4.5 can produce richer choir harmonies** when given `[Choir]` - it understands parameters like "angelic" or "powerful" on that tag - whereas v4.0’s choir might have been more muted. The documentation lists detailed parameters for `[choir]` (layered, gospel, dissonant, etc.) which presumably apply to both versions, but v4.5 has the edge in executing those styles convincingly. 
+
+  Another vocal-centric tag is **`[harmonies]` / `[background-vocals]`**, which instructs adding harmony vocals behind the lead. In songs, this is widely used for choruses or to thicken important lines. The doc’s `[background-vocals]` tag (with parameters like harmonic, layered) is clearly for vocal tracks. Suno v4.0 could add background "oohs" or harmonies, but sometimes it struggled to keep them musically aligned. V4.5 does a better job - for instance, if you specify `[background-vocals: layered harmonies in the chorus]`, v4.5 is more likely to produce a satisfying result (stacked harmonies on the chorus lines) than v4.0 was. This aligns with v4.5’s improved *"richer vocals"* claim. 
+
+  **Spoken segments and effects**: In vocal songs, tags like `[Spoken Word]`, `[Rap]` (if used) or things like `[laugh]`, `[sigh]` (sound effect tags for vocals) come into play. The documentation included `[laughter]` as a tag for adding laughter SFX, which is obviously only relevant if vocals are present. Both v4.0 and v4.5 can inject these vocal effects if prompted (though these are more for fun - a well-placed evil laugh in a metal song, etc.). There is also a `[whisper]` tag in the doc, denoting a whispered vocal style. This is clearly vocal-oriented; you’d use it in a lyric line or section to get a whispery delivery. Notably, v4.5 handles whispered and spoken vocals more deftly - earlier versions sometimes *sang* the words anyway or made them too loud. V4.5, if given `[whisper: ...]` at the intro or verse, will often produce actual whispering voices, which adds a creepy or intimate effect as intended. This is another area where the tag’s *behavior* improved with the version.
+
+  Finally, **persona/voice tags**: In vocal songs, controlling the character of the voice is key. We discussed how `[personae:]` tag was a user-documented attempt to lock a voice persona (gritty male, etc.), but it’s not officially supported due to the Persona feature being separate. Instead, users achieve consistent voice by tagging the first verse or chorus with gender/range and tone (e.g. `[Male: gritty baritone]`). Both v4.0 and v4.5 allow that kind of description. V4.5 introduced the official *Personas* UI where you can simply select a voice profile (which was separate from the text prompt). If a Persona is selected, it essentially overrides what a meta-tag might try to do. So one could say a *version-dependent behavior* is: in v4.5, if you have a Persona chosen, tags like `[Male Vocal]` or `[Female Vocal]` might be redundant or ignored (because the model is already locked to a specific voice). In v4.0 (which had no Personas feature), those tags were the only way to specify voice gender. So usage shifts: **v4.0 relied on meta-tags for voice selection, while v4.5’s UI offers Personas that achieve the same without tags** - though you can still use tags if you want to *mix* multiple voices in one song (like a duet). 
+
+In summary, **instrumental tracks tend to use tags focusing on instruments, solos, and overall structure**, whereas **vocal tracks use an additional layer of tags for voice type, lyrics structuring, and vocal effects/harmonies**. Both v4.0 and v4.5 share the tag set, but v4.5 executes these with more fidelity (e.g. better separation of an instrumental break, more realistic backing vocals, clearer distinction between a verse and chorus as per tags). When crafting prompts, one should include tags appropriate to the content: for an instrumental, you’d definitely include `[instrumental]` and instrument tags; for a song, you’d use section and vocal tags (and *not* include `[instrumental]`, since that would suppress vocals entirely). The good news is Suno v4.5 is versatile enough that you can even combine them - for example, some advanced prompts have a song with an instrumental intro: they literally write something like:  
+```
+[Instrumental intro]  
+(guitar chords play, no vocals)  
+[Verse 1]  
+Lyrics start here...  
+``` 
+And it works (the model starts with an instrumental intro then brings in vocals). This kind of nuanced control is exactly what meta-tags enable, and v4.5 handles it more "intelligently" than earlier versions.
+
+## Newly Confirmed or User-Tested Meta-Tags (v4.0 / v4.5)
+
+- announcer
+- build
+- duet
+- era: <decade or stylistic period>
+- hook
+- female vocal
+- harmonies: <description>
+- male vocal
+- no-repeat
+- polyphony
+- spoken word
+- technique
+- vocalist: <name or descriptor>
+- vulnerable vocals: <description>
+- whisper
+- whispering
+
+### Instrument Solo Tags
+- Usable as structural tags, often treated like `[section]` but with strong instrument focus:
+    - `[guitar solo: blues-style run with wah FX]`
+    - `[sax solo: late-night echo sax with heavy reverb]`
+    - `[violin solo: baroque trills and glissando]`
+    - `[synth solo: retro wave arpeggios rise into high delay]`
+    - `[flute solo: airy modal runs]`
+
+### Expanded [style:] Values (freeform, observed functional)
+- `retro-horror`
+- `psychedelic-swing`
+- `neo-folk-electronica`
+- `horror-synth-cabaret`
+- `trap-fugue`
+- `sacred-jazz-chant`
+- `industrial-surf`
+- `musique-concrète-pop`
+
+### Confirmed Free-Form [style] or [genre] Examples
+- `horror-synth`, `ghost-folk`, `spacewestern-phonk`, `ambient-baroque`, `baroque-opera`
+- `glitch-jazz`, `vaporwave-trap`, `noir-hip-hop`, `musique-concrète`, `hauntology`
+- `enka-minimal-techno`, `dub-clockpunk`, `phonk-noir`, `echo-chamber-pop`
+
+---
+
+## Update for v4.5, v4.5+ and upcoming v4.6 (added: August 25, 2025)
+
+Starting with v4.5, the maximal "Style of Music" field length has been increased from 200 characters to 1000.
+
+### New/confirmed tags
+
+**New tags confirmed for v4.5+:**
+ 
+- announcer
+- aria-rise
+- build
+- chant-loop
+- hook
+- inversion
+- lament
+- polyphony
+- scat break
+- subject
+
+**New for v4.5 and later:**
+
+- hook
+- rapped verse
+- distorted vocals
+- quiet arrangement
+
+**New tags confirmed for v5.0 (November 2025):**
+
+- aria-rise (enhanced operatic implementation)
+- build (improved polyphonic builds)
+- chant-loop (expanded ritualistic parameters)
+- inversion (fugal technique support)
+- lament (sorrowful motif generation)
+- polyphony (richer vocal polyphony)
+- scat break (jazz improvisation sections)
+- subject (primary theme marking)
+- technique (compositional method specification)
+
+### Tags with expanded v5.0 behavior
+
+- **[control]**: Now supports `hallucinatory`, `no-repeat`, `dynamic transitions` parameters
+- **[genre]**: Hybrid genres (e.g., "midwest emo + neosoul") now reliably produce blended styles
+- **[tempo]**: Natural language phrases like "mid-tempo 90s hip-hop swing" are parsed effectively
+- **[vocalist]**: More consistent voice locking across sections
+- **[whisper]/[whispering]**: Improved whisper detection and rendering
+
+### Tags obsoleted or changing the behavior
+
+Meta-tags related to audio engineering (e.g. [mix], [master], [filter], [panning], [volume]) are considered ineffective in current Suno versions.
+
+Several early meta-tags have been deprecated in favor of newer equivalents. For example, **`[sing-style]`** (from Suno v3) was replaced by `[vocal-style]` and is ignored in v4. **`[song-type]`** (intended to denote song vs. rap vs. instrumental) was an experiment that became inert by v4.0. Likewise, an unlabeled `[theme]` tag (without a letter or description) no longer works – users must use specific section labels like `[Theme A]`, `[Theme B]` etc. or it will be ignored. In summary, many v3-era tags were phased out and **v4.5 will simply ignore** any of these obsolete tags if used.
+
+The catch-all `[section: ...]` tag has been rendered redundant. Instead of using `[section]` as a placeholder, the model expects explicit structural tags (intro, verse, chorus, etc.). In fact, any unrecognized tag word is now parsed as a section label by default. Users have found that using the actual section names yields better results, whereas a raw `[section: X]` might be ignored or misinterpreted. Suno’s documentation explicitly lists **`section`** as removed/redundant.
+
+There is no supported `[loop]` meta-tag to force looping playback. Earlier guides suggested tags like `[loop]` or `[loop chorus]`, but these do not function in v4.5. Indeed, “loop” is on the removed-tags list. To create a loop or repeated section, users must manually copy structures (or use the _Extend_ feature); a single tag will not make the song endlessly loop.
+
+The autotune effect tag is effectively **deprecated** in v4.5. While some community guides still mention using `[Autotune]` for a pitch-corrected vocal style, the official word is that **`autotune`** was removed as an unstable tag. Users confirm that simply adding `[Autotune]` in lyrics has little to no effect now – you may get an “auto-tuned” feel only by describing it in the style text or using a persona that implies it.
+
+The tag **`[end]`** (intended to mark the song’s conclusion) exists, but community feedback indicates it’s not very reliable. One user noted that _“\[end\] frequently does not work… even `[5 second fade out][end]` doesn’t seem to stop the music”_, though it **does** tend to prevent any new vocals after that point. In practice, Suno might ignore an end tag and continue the instrumental to the full length. As a workaround, some creators include an outro section description (and sometimes silence) to encourage a proper ending, since the `[end]` tag alone is hit-or-miss.
+
+### Tags with new behavior
+
+**Genre Mashups in `[genre:]`** – Suno v4.5 dramatically improved its handling of combined genres. The genre tag now accepts **hybrid values** and actually produces blended styles, which older versions often failed to do. For example, a prompt with **`[genre: midwest emo + neosoul]`** will yield a coherent mix of those genres in v4.5, whereas v4.0 might have defaulted to one genre or produced a muddled result. The model was expanded to recognize **1,200+ genres/styles** and interpret “X + Y” combinations smoothly. This means users can get creative with genre tags (even inventing combos like _“jazz-house,” “folk EDM,” “punk meets classical”_) and expect v4.5 to honor both elements more faithfully than before.
+
+**Richer Tempo Descriptors** – The **`[tempo:...]`** tag became more nuanced in v4.5. While it still doesn’t support exact BPM numbers, it now understands descriptive tempo phrases much better. In v4.0 one might only use simple terms (`[tempo: slow]` or `fast`), but v4.5 can parse complex inputs like _“mid-tempo 90s hip-hop swing”_ or _“steady 4/4, 120bpm feel”_ embedded in a tempo tag. The engine won’t lock to an exact BPM, but it will interpret **relative tempo and rhythmic feel** from natural language. Essentially, v4.5’s broader language comprehension lets you be more specific in tempo/mood tags (e.g. “slow-burning waltz tempo”) and get a correspondingly specific output, which was less true in earlier versions.
+
+**More Expressive Vocal Tags** – Tags controlling vocal style/timbre respond more deeply in v4.5. The model now differentiates subtle vocal instructions: for instance, `[vocal-style: whispered, airy]` or `[vocals: nasal, twangy tone]` will noticeably affect the performance. In v4.0, many such modifiers were ignored unless they were very common adjectives. Now, however, v4.5 was tuned for emotional and tonal nuance – users report that specifying a singer’s tone (raspy, operatic, whispered, etc.) yields a clear change in the output. Even without a dedicated tag, putting a descriptor in brackets (e.g. `[whisper voice]`) can work, but the recommended approach is to use the proper tag syntax (like `vocal-style` or include it in a `[vocals: ...]` list). **Result:** a richer palette of vocal textures – from smooth crooning to rough growls – can be invoked via tags in v4.5, whereas previously the model often defaulted to a generic voice.
+
+**Strict Instrumental Tag Adherence** – The `[instrumental]` tag (to generate music with **no vocals**) is honored more reliably post-v4.5. In v4.0 the “instrumental” tag sometimes wasn’t 100% respected (users occasionally heard stray humming or ooohs). In v4.5, by contrast, if you start your lyrics with **`[instrumental]`**, the model will produce a purely instrumental track almost every time. The upgrade in prompt fidelity means the system correctly silences vocals when asked. Users have also learned they can combine this tag with a brief style hint (e.g. `[instrumental: lo-fi hip hop beat]`) to guide the instrumental’s genre. This stricter obedience to the instrumental directive is a quality-of-life improvement noted by many after the v4.5 update.
+
+**Longer Structures Now Possible** – With v4.5’s extended max song length (~8 minutes), the classic structure tags like `[Verse]`, `[Chorus]`, `[Bridge]`, etc., can be used in _more repeated sections_ without being dropped. Previously, a very long prompt with many sections might see later tags get ignored as the model ran out of time/attention (v4.0 often wouldn’t reliably include a 3rd or 4th verse). Now, **v4.5 can execute a full song structure end-to-end** with multiple verses, choruses, a bridge, even multiple themes, and an outro. Community feedback around the v4.5+ release confirmed that the model maintains coherence over longer sequences, so tags defining, say, Verse 4 or a second Bridge actually produce those sections. Essentially, _the tags themselves haven’t changed_, but the **song-length limit increase and better coherence** mean you can structure a song with many tagged sections (intro through outro) and expect v4.5 to follow through. (As a side note, the formerly used `[extend-style]` tag for continuing songs is less needed now, since the base model can generate extended compositions without a separate extend prompt.)
+
+**Improved Tag Prompt Parsing** – Suno v4.5 introduced a smarter prompt parser, which affects how tags are interpreted within more natural sentences. Users have noticed that they can **embed tags in a descriptive sentence** and v4.5 still gets it – something v4.0 struggled with. For example: _“The \[chorus\] should explode with \[anthemic\] harmonies and big drums.”_ In v4.0, that may have confused the model or caused it to sing the words, but v4.5 correctly reads those as tags (Chorus section; anthemic style). The outcome is that you don’t have to list tags stiffly on separate lines; you can mix them into a narrative prompt. The model’s better natural-language understanding means **tags can carry more context**. A Reddit user noted that steering the song with style tags _“is a lot better now \[in 4.5\]”_ and you can use more natural phrasing around them. This update doesn’t introduce new tags per se, but it _expands the way existing tags can be used_, allowing for creative prompt-writing that still yields the desired structured result.
+
+**“Control” Meta-Tag Enhancements** – The special `[control: ...]` tag (which sets high-level guidance) gained new community uses in v4.5. It’s not a new tag, but users started leveraging it for things like preventing repetition or encouraging experimental outputs. For example, Suno experts suggest using **`[control: hallucinatory]`** to coax the model into more free-form, improvised vocals/instrumentation (useful for ambient or avant-garde pieces where _“vocal hallucinations”_ and non-lexical vocals are desired). Another trick is **`[control: no-repeat]`**, which some have placed at the top of a prompt to tell v4.5 not to repeat sections or lines excessively. Similarly, values like _“dynamic transitions”_ or _“instrumental”_ can be put in the control tag to influence the overall composition (e.g. `[control: instrumental, no-repeat, dynamic transitions]`). These were not documented in older reference material, but after v4.5 users discovered the model does respond to certain keywords in a control tag. In short, **v4.5 expanded the _impact_ of the `[control:]` tag**, making it a catch-all for high-level directives (from structure handling to creative “weirdness”). This goes hand-in-hand with using descriptive style tags – v4.5’s tolerance for abstract or compound instructions opened up new possibilities to guide the AI with tags like **hallucinatory, surreal, cinematic, no-repeat**, etc., under the `[control]` umbrella.
 
 ---
 

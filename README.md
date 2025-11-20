@@ -12,7 +12,7 @@ The meta-tags reference is compiled by studying Suno users' public posts and com
 
 Latest documents update: November 20, 2025: tag-reference
 
-Last changes: added tags bleep, field-recording, loop-friendly, narrator, siren, vocoder,  whispers
+Last changes: added tags bleep, field-recording, loop-friendly, narrator, siren, vocoder,  whispers; track container meta-tag and pipe notation.
 
 Latest news: Suno, model v5.0
 
